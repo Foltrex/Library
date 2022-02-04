@@ -1,9 +1,9 @@
 CREATE DATABASE library;
 USE library;
 
-CREATE TABLE categories (
-    category_id INT PRIMARY KEY AUTO_INCREMENT,
-    category_name VARCHAR(70) NOT NULL
+CREATE TABLE genres (
+    genre_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(70) NOT NULL
 );
 
 CREATE TABLE authors (
@@ -20,7 +20,7 @@ CREATE TABLE books (
     stock INT NOT NULL DEFAULT 0,
     category_id INT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES authors (author_id),
-    FOREIGN KEY (category_id) REFERENCES categories (category_id)
+    FOREIGN KEY (genre_id) REFERENCES genres (genre_id)
 );
 
 CREATE TABLE users (
