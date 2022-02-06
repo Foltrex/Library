@@ -8,9 +8,9 @@ public class User {
     private String login;
     private String password;
     private Role role;
-    private String subscriptionNumber;
 
-    public User(int id, String name, String surname, String phoneNumber, String login, String password, Role role, String subscriptionNumber) {
+
+    public User(int id, String name, String surname, String phoneNumber, String login, String password, Role role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -18,8 +18,8 @@ public class User {
         this.login = login;
         this.password = password;
         this.role = role;
-        this.subscriptionNumber = subscriptionNumber;
     }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -27,14 +27,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getSubscriptionNumber() {
-        return subscriptionNumber;
-    }
-
-    public void setSubscriptionNumber(String subscriptionNumber) {
-        this.subscriptionNumber = subscriptionNumber;
     }
 
     public int getId() {

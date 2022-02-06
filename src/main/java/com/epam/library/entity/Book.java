@@ -1,15 +1,18 @@
 package com.epam.library.entity;
 
+import java.util.List;
+
 public class Book {
     private int id;
     private String title;
-    private Author author;
+    private List<Author> authors;
     private int stock;
     private Genre genre;
 
-    public Book(String title, Author author, int stock, Genre genre) {
+    public Book(int id, String title, List<Author> authors, int stock, Genre genre) {
+        this.id = id;
         this.title = title;
-        this.author = author;
+        this.authors = authors;
         this.stock = stock;
         this.genre = genre;
     }
@@ -22,12 +25,20 @@ public class Book {
         this.title = title;
     }
 
-    public Author getAuthor() {
-        return author;
+    public int getId() {
+        return id;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     public int getStock() {
