@@ -7,8 +7,6 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class LoginLogic {
@@ -20,15 +18,16 @@ public class LoginLogic {
 
 
     public boolean checkLogin(String enterLogin, String enterPass, String gRecaptchaResponse) {
-        return ADMIN_LOGIN.equals(enterLogin) && ADMIN_PASS.equals(enterPass) && verify(gRecaptchaResponse);
+        return ADMIN_LOGIN.equals(enterLogin) && ADMIN_PASS.equals(enterPass) && verifyReCaptcha(gRecaptchaResponse);
     }
 
-    private boolean verify(String gRecaptchaResponse) {
-        if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
+    private boolean verifyReCaptcha(String gRecaptchaResponse) {
+        if (gRecaptchaResponse == null || gRecaptchaResponse.isEmpty()) {
             return false;
         }
 
         boolean result = false;
+        JsonReader jsonReader = null;
         try {
             URL verifyUrl = new URL(SITE_VERIFY_URL);
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) verifyUrl.openConnection();
@@ -38,8 +37,7 @@ public class LoginLogic {
             httpsURLConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             httpsURLConnection.setDoOutput(true);
 
-            String postParams = "secret=" + SECRET_KEY + "&response=" + gRecaptchaResponse;
-
+            String postParams = String.format("%s%s%s%s", "secret=", SECRET_KEY, "&response=", gRecaptchaResponse);
 
             OutputStream outStream = httpsURLConnection.getOutputStream();
             outStream.write(postParams.getBytes());
@@ -48,14 +46,17 @@ public class LoginLogic {
             outStream.close();
 
             InputStream inputStream = httpsURLConnection.getInputStream();
-            JsonReader jsonReader = Json.createReader(inputStream);
+            jsonReader = Json.createReader(inputStream);
             JsonObject jsonObject = jsonReader.readObject();
 
             result = jsonObject.getBoolean("success");
 
-            jsonReader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (jsonReader != null) {
+                jsonReader.close();
+            }
         }
 
         return result;
