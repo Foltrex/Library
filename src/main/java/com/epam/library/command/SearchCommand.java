@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public class SearchCommand implements Command {
     @Override
