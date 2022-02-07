@@ -1,16 +1,15 @@
-package com.epam.library.entity;
+package com.epam.library.models;
 
 import java.util.List;
 
-public class Book {
-    private int id;
+public class Book extends Entity {
     private String title;
     private List<Author> authors;
     private int stock;
     private Genre genre;
 
     public Book(int id, String title, List<Author> authors, int stock, Genre genre) {
-        this.id = id;
+        super(id);
         this.title = title;
         this.authors = authors;
         this.stock = stock;
@@ -23,14 +22,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<Author> getAuthors() {

@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.logic.LoginLogic;
+import com.epam.library.logic.login.LoginLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

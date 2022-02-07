@@ -1,4 +1,4 @@
-package com.epam.library.logic;
+package com.epam.library.logic.login;
 
 import javax.json.Json;
 import javax.json.JsonObject;

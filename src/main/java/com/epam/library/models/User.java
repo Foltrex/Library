@@ -1,7 +1,6 @@
-package com.epam.library.entity;
+package com.epam.library.models;
 
-public class User {
-    private int id;
+public class User extends Entity {
     private String name;
     private String surname;
     private String phoneNumber;
@@ -11,7 +10,7 @@ public class User {
 
 
     public User(int id, String name, String surname, String phoneNumber, String login, String password, Role role) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -27,14 +26,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -1,22 +1,13 @@
-package com.epam.library.entity;
+package com.epam.library.models;
 
-public class Author {
-    private int id;
+public class Author extends Entity {
     private String name;
     private String surname;
 
     public Author(int id, String name, String surname) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.surname = surname;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
