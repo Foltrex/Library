@@ -11,6 +11,7 @@ import java.io.IOException;
 public class SecurityFilter implements Filter {
 
     private static final String LOGIN_PAGE = "/";
+    private static final String ACCESS_DENIED_PAGE = "/jsp/accessDeniedView.jsp";
 
     private final SecurityChecker securityChecker;
 
@@ -31,32 +32,19 @@ public class SecurityFilter implements Filter {
         }
 
         HttpSession httpSession = request.getSession();
-        User loginedUser = (User) httpSession.getAttribute("user");
-        HttpServletRequest wrapRequest = request;
 
-        if (loginedUser != null) {
-            String userLogin = loginedUser.getLogin();
-            String role = String.valueOf(loginedUser.getRole());
-
-            wrapRequest = new UserRoleRequestWrapper(request, userLogin, role);
+        if (!securityChecker.isUserHasPermissionToPage(request)) {
+            ServletContext servletContext = request.getServletContext();
+            RequestDispatcher dispatcher = servletContext.getRequestDispatcher(ACCESS_DENIED_PAGE);
+            dispatcher.forward(request, response);
+            return;
         }
 
-        if (securityChecker.isSecurityPage(request)) {
-            if (!securityChecker.hasPermission(wrapRequest)) {
-
-                ServletContext servletContext = request.getServletContext();
-                RequestDispatcher dispatcher = servletContext.getRequestDispatcher("WEB-INF/jsp/accessDeniedView.jsp");
-                dispatcher.forward(request, response);
-                return;
-            }
-        }
-
-        chain.doFilter(wrapRequest, response);
+        chain.doFilter(request, response);
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

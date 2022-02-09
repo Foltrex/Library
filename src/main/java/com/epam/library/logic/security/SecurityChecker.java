@@ -15,20 +15,7 @@ public class SecurityChecker {
         this.urlPattern = urlPattern;
     }
 
-    public boolean isSecurityPage(HttpServletRequest request) {
-        String pageUrlPattern = urlPattern.getUrlPattern(request);
-
-        for (Role role : Role.values()) {
-            List<String> allowedPagesForRole = securityConfig.getAllowedPagesForRole(role);
-            if (allowedPagesForRole != null && allowedPagesForRole.contains(pageUrlPattern)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean hasPermission(HttpServletRequest request) {
+    public boolean isUserHasPermissionToPage(HttpServletRequest request) {
         String pageUrlPattern = urlPattern.getUrlPattern(request);
 
         for (Role role : Role.values()) {

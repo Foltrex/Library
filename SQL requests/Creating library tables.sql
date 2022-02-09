@@ -34,7 +34,7 @@ CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
-    login VARCHAR(50) NOT NULL,
+    login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(32) NOT NULL,
     role enum ('admin', 'librarian', 'reader') NOT NULL
 );

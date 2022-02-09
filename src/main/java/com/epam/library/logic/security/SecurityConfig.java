@@ -15,9 +15,9 @@ public class SecurityConfig {
 
     // TODO: add allowed sites for every role
     private final Map<Role, List<String>> allowedPages = ImmutableMap.of(
-            Role.ADMIN,     Arrays.asList("SomeStrings"),
-            Role.LIBRARIAN, Arrays.asList("Some"),
-            Role.READER,    Arrays.asList("sdf")
+            Role.ADMIN,     Arrays.asList("index.jsp"),
+            Role.LIBRARIAN, Arrays.asList("index.jsp"),
+            Role.READER,    Arrays.asList("index.jsp")
     );
 
     private SecurityConfig() {

@@ -1,5 +1,7 @@
 package com.epam.library.logic.login;
 
+import com.epam.library.models.User;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -10,15 +12,26 @@ import java.io.OutputStream;
 import java.net.URL;
 
 public class LoginLogic {
-    private final static String ADMIN_LOGIN = "admin";
-    private final static String ADMIN_PASS = "admin";
+    private final User user;
 
-    private static final String SECRET_KEY = "6LdNP18eAAAAAKBbUyBYyocuoqhizVQlu8M4A55V";
-    private static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+    private static final String RECAPTCHA_SECRET_KEY = "6LdNP18eAAAAAKBbUyBYyocuoqhizVQlu8M4A55V";
+    private static final String RECAPTCHA_SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+
+    public LoginLogic(User user) {
+        this.user = user;
+    }
 
 
     public boolean checkLogin(String enterLogin, String enterPass, String gRecaptchaResponse) {
-        return ADMIN_LOGIN.equals(enterLogin) && ADMIN_PASS.equals(enterPass) && verifyReCaptcha(gRecaptchaResponse);
+        if (user == null) {
+            return false;
+        }
+
+        // we do not need to check the login again, because the search for this user was performed by login, but :)
+        String userLogin = user.getLogin();
+        String userPassword = user.getPassword();
+
+        return userLogin.equals(enterLogin) && userPassword.equals(enterPass) && verifyReCaptcha(gRecaptchaResponse);
     }
 
     private boolean verifyReCaptcha(String gRecaptchaResponse) {
@@ -29,7 +42,7 @@ public class LoginLogic {
         boolean result = false;
         JsonReader jsonReader = null;
         try {
-            URL verifyUrl = new URL(SITE_VERIFY_URL);
+            URL verifyUrl = new URL(RECAPTCHA_SITE_VERIFY_URL);
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) verifyUrl.openConnection();
 
             httpsURLConnection.setRequestMethod("POST");
@@ -37,7 +50,7 @@ public class LoginLogic {
             httpsURLConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             httpsURLConnection.setDoOutput(true);
 
-            String postParams = String.format("%s%s%s%s", "secret=", SECRET_KEY, "&response=", gRecaptchaResponse);
+            String postParams = String.format("%s%s%s%s", "secret=", RECAPTCHA_SECRET_KEY, "&response=", gRecaptchaResponse);
 
             OutputStream outStream = httpsURLConnection.getOutputStream();
             outStream.write(postParams.getBytes());

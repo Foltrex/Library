@@ -3,6 +3,7 @@ package com.epam.library.data.dao;
 import com.epam.library.models.Entity;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -21,10 +22,14 @@ public abstract class AbstractDAO <T extends Entity> {
     public abstract boolean delete(T entity);
     public abstract boolean create(T entity);
     public abstract T update(T entity);
-    public void close(Statement st) {
+    public void close(Statement statement, Connection connection) {
         try {
-            if (st != null) {
-                st.close();
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (connection != null) {
+                connection.close();
             }
 
         } catch (SQLException e) {
