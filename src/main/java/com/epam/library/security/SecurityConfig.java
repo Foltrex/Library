@@ -1,4 +1,4 @@
-package com.epam.library.logic.security;
+package com.epam.library.security;
 
 import com.epam.library.entity.Role;
 import com.google.common.collect.ImmutableMap;

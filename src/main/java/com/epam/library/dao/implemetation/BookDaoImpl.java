@@ -4,32 +4,26 @@ import com.epam.library.dao.AbstractDao;
 import com.epam.library.entity.Book;
 
 import java.sql.Connection;
-import java.util.List;
-import java.util.Optional;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class BookDao extends AbstractDao<Book> {
+public class BookDaoImpl extends AbstractDao<Book> {
 
-    public BookDao(Connection connection) {
+    private static final String SAVE_BOOK = "INSERT INTO books(title, stock, genre_id) VALUES(?,?,?);";
+
+    public BookDaoImpl(Connection connection) {
         super(connection);
     }
 
     @Override
+    public void save(Book item) throws SQLException {
+        PreparedStatement statement = createStatement(SAVE_BOOK, item.getTitle(), item.getStock(), item.getGenreId());
+        statement.executeUpdate();
+    }
+
+    @Override
     protected String getTableName() {
-        return null;
+        return Book.TABLE;
     }
 
-    @Override
-    public Optional<Book> getById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void save(Book item) {
-
-    }
-
-    @Override
-    public void removeById(Long id) {
-
-    }
 }

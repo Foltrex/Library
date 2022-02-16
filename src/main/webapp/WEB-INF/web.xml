@@ -19,7 +19,7 @@
 
 <!--  <filter>-->
 <!--    <filter-name>securityFilter</filter-name>-->
-<!--    <filter-class>com.epam.library.logic.security.SecurityFilter</filter-class>-->
+<!--    <filter-class>SecurityFilter</filter-class>-->
 <!--  </filter>-->
 
 <!--  <filter-mapping>-->

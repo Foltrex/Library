@@ -4,32 +4,26 @@ import com.epam.library.dao.AbstractDao;
 import com.epam.library.entity.Genre;
 
 import java.sql.Connection;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Optional;
 
-public class GenreDao extends AbstractDao<Genre> {
+public class GenreDaoImpl extends AbstractDao<Genre> {
 
-    public GenreDao(Connection connection) {
+    private static final String SAVE_GENRE = "INSERT INTO genres(name) VALUES(?)";
+
+    public GenreDaoImpl(Connection connection) {
         super(connection);
     }
 
     @Override
+    public void save(Genre item) throws SQLException {
+        PreparedStatement statement = createStatement(SAVE_GENRE, item.getName());
+        statement.executeUpdate();
+    }
+
+    @Override
     protected String getTableName() {
-        return null;
-    }
-
-    @Override
-    public Optional<Genre> getById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void save(Genre item) {
-
-    }
-
-    @Override
-    public void removeById(Long id) {
-
+        return Genre.TABLE;
     }
 }

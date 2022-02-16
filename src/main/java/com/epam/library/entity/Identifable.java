@@ -1,2 +1,6 @@
-package com.epam.library.entity;public interface Identifable {
+package com.epam.library.entity;
+
+public interface Identifable {
+
+    long getId();
 }

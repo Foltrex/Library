@@ -1,21 +1,19 @@
-package com.epam.library.dao;
+package com.epam.library.dao.implemetation;
 
-import com.epam.library.entity.Role;
+import com.epam.library.dao.AbstractDao;
+import com.epam.library.dao.UserDao;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
-import com.epam.library.mapper.RowMapper;
 import com.epam.library.mapper.UserRowMapper;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    public static final String SELECT_ALL_USERS = "SELECT * FROM users";
-    public static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id=?";
-    public static final String SELECT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE login=? and password=?";
+    private static final String SELECT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE login= ? AND password = MD5(?)";
+    private static final String SAVE_USER = "INSERT INTO users(name,surname,phone_number,login,password,role)" +
+            "VALUES(?,?,?,?,?,?);";
 
     public UserDaoImpl(Connection connection) {
         super(connection);
@@ -27,37 +25,15 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
                 SELECT_BY_LOGIN_AND_PASSWORD,
                 new UserRowMapper(),
                 login,
-                password);
+                password
+        );
     }
 
     @Override
-    protected List<User> executeQuery(String query, RowMapper<User> mapper, Object... params) throws DaoException {
-        return super.executeQuery(query, mapper, params);
-    }
-
-    @Override
-    public Optional<User> getById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<User> getAll() throws DaoException {
-        return executeQuery(SELECT_ALL_USERS, new UserRowMapper());
-    }
-
-    @Override
-    public void save(User item) {
-
-    }
-
-    @Override
-    public void removeById(Long id) {
-
-    }
-
-    @Override
-    protected Optional<User> executeForSingleResult(String query, RowMapper<User> mapper, Object... params) throws DaoException {
-        return super.executeForSingleResult(query, mapper, params);
+    public void save(User item) throws SQLException {
+        PreparedStatement statement = createStatement(SAVE_USER, item.getName(), item.getSurname(),
+                item.getPhoneNumber(), item.getLogin(), item.getPassword(), item.getRole());
+        statement.executeUpdate();
     }
 
     @Override

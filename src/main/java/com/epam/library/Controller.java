@@ -1,7 +1,7 @@
 package com.epam.library;
 
 import com.epam.library.command.Command;
-import com.epam.library.command.factory.CommandFactory;
+import com.epam.library.command.CommandFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +23,13 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         CommandFactory client = new CommandFactory();
         String commandLine = req.getParameter("command");
-        Command command = client.defineCommand(commandLine);
-        String page = command.execute(req);
-        req.getRequestDispatcher(page).forward(req, resp);
+        try {
+            Command command = client.defineCommand(commandLine);
+            String page = command.execute(req);
+            req.getRequestDispatcher(page).forward(req, resp);
+        } catch (Exception e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/errorPage.jsp").forward(req, resp);
+        }
     }
 }

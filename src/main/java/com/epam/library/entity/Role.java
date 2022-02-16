@@ -1,4 +1,4 @@
-package com.epam.library.models;
+package com.epam.library.entity;
 
 public enum Role {
     ADMIN, LIBRARIAN, READER
