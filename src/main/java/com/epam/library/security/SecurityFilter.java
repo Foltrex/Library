@@ -1,6 +1,6 @@
 package com.epam.library.logic.security;
 
-import com.epam.library.models.User;
+import com.epam.library.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class SecurityFilter implements Filter {
 
-    private static final String LOGIN_PAGE = "/";
+    private static final String LOGIN_PAGE = "login";
     private static final String ACCESS_DENIED_PAGE = "/jsp/accessDeniedView.jsp";
 
     private final SecurityChecker securityChecker;
@@ -19,21 +19,21 @@ public class SecurityFilter implements Filter {
         this.securityChecker = securityChecker;
     }
 
-    // TODO: write comments
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        String servletPath = request.getServletPath();
-        if (servletPath.equals(LOGIN_PAGE)) {
+        String commandLine = request.getParameter("command");
+        if (commandLine.equals(LOGIN_PAGE)) {
             chain.doFilter(request, response);
             return;
         }
 
-        HttpSession httpSession = request.getSession();
-
-        if (!securityChecker.isUserHasPermissionToPage(request)) {
+        HttpSession session = request.getSession();
+        User loginedUser = (User) session.getAttribute("user");
+        if (!securityChecker.isUserHasPermissionToPage(request, loginedUser)) {
             ServletContext servletContext = request.getServletContext();
             RequestDispatcher dispatcher = servletContext.getRequestDispatcher(ACCESS_DENIED_PAGE);
             dispatcher.forward(request, response);

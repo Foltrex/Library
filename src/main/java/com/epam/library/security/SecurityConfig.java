@@ -1,6 +1,6 @@
 package com.epam.library.logic.security;
 
-import com.epam.library.models.Role;
+import com.epam.library.entity.Role;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.Arrays;
