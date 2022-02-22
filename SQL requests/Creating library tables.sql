@@ -18,14 +18,7 @@ CREATE TABLE books (
     author_id INT NOT NULL,
     stock INT NOT NULL DEFAULT 0,
     genre_id INT NOT NULL,
-    FOREIGN KEY (genre_id) REFERENCES genres (id)
-);
-
-create table book_authors (
-    book_id INT NOT NULL,
-    author_id INT NOT NULL,
-    PRIMARY KEY(book_id, author_id),
-    FOREIGN KEY (book_id) REFERENCES books (id),
+    FOREIGN KEY (genre_id) REFERENCES genres (id),
     FOREIGN KEY (author_id) REFERENCES authors (id)
 );
 

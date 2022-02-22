@@ -14,7 +14,7 @@ public interface Dao<T extends Identifable> {
 
     List<T> getAll() throws DaoException;
 
-    void save(T item) throws SQLException;
+    void save(T item) throws SQLException, DaoException;
 
     void removeById(Long id) throws SQLException;
 }

@@ -5,5 +5,5 @@ import com.epam.library.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 
 public interface Command {
-    String execute(HttpServletRequest req) throws ServiceException;
+    CommandResult execute(HttpServletRequest req) throws ServiceException;
 }

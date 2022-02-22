@@ -2,17 +2,24 @@ package com.epam.library.entity;
 
 public class Book extends Entity {
     private String title;
-    //private List<Author> authors;
+    private Long authorId;
     private int stock;
     private long genreId;
 
-    public static final String TABLE = "books";
-
-    public Book(long id, String title, int stock, long genreId) {
+    public Book(Long id, String title, Long authorId, int stock, long genreId) {
         super(id);
         this.title = title;
+        this.authorId = authorId;
         this.stock = stock;
         this.genreId = genreId;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public String getTitle() {

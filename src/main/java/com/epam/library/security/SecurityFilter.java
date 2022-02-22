@@ -1,5 +1,6 @@
 package com.epam.library.security;
 
+import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 
 import javax.servlet.*;
@@ -32,8 +33,8 @@ public class SecurityFilter implements Filter {
         }
 
         HttpSession session = request.getSession();
-        User loginedUser = (User) session.getAttribute("user");
-        if (!securityChecker.isUserHasPermissionToPage(request, loginedUser)) {
+        Role userRole = (Role) session.getAttribute("userRole");
+        if (!securityChecker.isUserHasPermissionToPage(request, userRole)) {
             ServletContext servletContext = request.getServletContext();
             RequestDispatcher dispatcher = servletContext.getRequestDispatcher(ACCESS_DENIED_PAGE);
             dispatcher.forward(request, response);

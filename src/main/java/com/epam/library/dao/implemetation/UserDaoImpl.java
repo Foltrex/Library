@@ -5,18 +5,26 @@ import com.epam.library.dao.UserDao;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.UserRowMapper;
+import com.google.common.collect.ImmutableMap;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
-import java.util.Optional;
+import java.util.*;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+    public static final String TABLE = "users";
+
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+    public static final String PHONE_NUMBER = "phone_number";
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
+    public static final String ROLE = "role";
 
     private static final String SELECT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE login= ? AND password = MD5(?)";
-    private static final String SAVE_USER = "INSERT INTO users(name,surname,phone_number,login,password,role)" +
-            "VALUES(?,?,?,?,?,?);";
 
     public UserDaoImpl(Connection connection) {
-        super(connection);
+        super(connection, new UserRowMapper(), TABLE);
     }
 
     @Override
@@ -29,15 +37,17 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         );
     }
 
+    // about saving the password during registration ?
     @Override
-    public void save(User item) throws SQLException {
-        PreparedStatement statement = createStatement(SAVE_USER, item.getName(), item.getSurname(),
-                item.getPhoneNumber(), item.getLogin(), item.getPassword(), item.getRole());
-        statement.executeUpdate();
-    }
-
-    @Override
-    protected String getTableName() {
-        return User.TABLE;
+    protected Map<String, Object> extractFields(User item) {
+        return ImmutableMap.of(
+                ID,             item.getId(),
+                NAME,           item.getName(),
+                SURNAME,        item.getSurname(),
+                PHONE_NUMBER,   item.getPhoneNumber(),
+                LOGIN,          item.getLogin(),
+                PASSWORD,       DigestUtils.md5Hex(item.getPassword()),
+                ROLE,           item.getRole()
+        );
     }
 }

@@ -10,8 +10,6 @@
   <packaging>war</packaging>
 
   <name>library Maven Webapp</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,6 +56,13 @@
       <artifactId>guava</artifactId>
       <version>31.0.1-jre</version>
     </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.15</version>
+    </dependency>
+
 
   </dependencies>
 

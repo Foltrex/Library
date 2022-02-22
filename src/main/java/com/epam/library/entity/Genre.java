@@ -3,9 +3,7 @@ package com.epam.library.entity;
 public class Genre extends Entity {
     private String name;
 
-    public static final String TABLE = "genres";
-
-    public Genre(long id, String name) {
+    public Genre(Long id, String name) {
         super(id);
         this.name = name;
     }

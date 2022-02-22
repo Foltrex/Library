@@ -2,7 +2,9 @@ package com.epam.library;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandFactory;
+import com.epam.library.command.CommandResult;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
+
+    private static final String ERROR_PAGE = "pages/errorPage.jsp";
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -23,13 +28,24 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         CommandFactory client = new CommandFactory();
         String commandLine = req.getParameter("command");
+        Command command = client.defineCommand(commandLine);
+
         try {
-            Command command = client.defineCommand(commandLine);
-            String page = command.execute(req);
-            req.getRequestDispatcher(page).forward(req, resp);
+            CommandResult result = command.execute(req);
+            dispatch(req, resp, result);
         } catch (Exception e) {
             req.setAttribute("errorMessage", e.getMessage());
-            req.getRequestDispatcher("jsp/errorPage.jsp").forward(req, resp);
+            dispatch(req, resp, CommandResult.forward(ERROR_PAGE));
+        }
+    }
+
+    private void dispatch(HttpServletRequest req, HttpServletResponse resp, CommandResult result) throws ServletException, IOException {
+        String page = result.getPage();
+        if (!result.isRedirect()) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            dispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect(page);
         }
     }
 }

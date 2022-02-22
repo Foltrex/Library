@@ -8,11 +8,10 @@ import java.util.List;
 
 public class SecurityChecker {
 
-    public boolean isUserHasPermissionToPage(HttpServletRequest request, User user) {
+    public boolean isUserHasPermissionToPage(HttpServletRequest request, Role userRole) {
         String currentPage = getCurrentPage(request);
         SecurityConfig securityConfig = SecurityConfig.getInstance();
-
-        Role userRole = user.getRole();
+;
         List<String> allowedPagesForUser = securityConfig.getAllowedPagesForRole(userRole);
 
         return allowedPagesForUser.contains(currentPage);

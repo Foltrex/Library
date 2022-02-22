@@ -17,12 +17,12 @@ import java.net.URL;
 import java.util.Optional;
 
 public class LoginCommand implements Command {
-    private static final String PARAM_NAME_LOGIN = "login";
-    private static final String PARAM_NAME_PASSWORD = "password";
 
-    private static final String RE_CAPTCHA = "g-recaptcha-response";
     private static final String RECAPTCHA_SECRET_KEY = "6LdNP18eAAAAAKBbUyBYyocuoqhizVQlu8M4A55V";
     private static final String RECAPTCHA_SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+
+    private static final String MAIN_PAGE = "controller?command=main";
+    private static final String LOGIN_PAGE = "index.jsp";
 
     private UserServiceImpl service;
 
@@ -31,24 +31,27 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws ServiceException {
-        String login = request.getParameter(PARAM_NAME_LOGIN);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
-        String gReCaptchaResponse = request.getParameter(RE_CAPTCHA);
+    public CommandResult execute(HttpServletRequest request) throws ServiceException {
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String gReCaptchaResponse = request.getParameter("g-recaptcha-response");
 
         Optional<User> user = service.login(login, password);
 
-        String page = null;
+        CommandResult result;
         if (user.isPresent() && verifyReCaptcha(gReCaptchaResponse)) {
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("user", user.get());
-            page = "jsp/main.jsp";
+
+            User registeredUser = user.get();
+            httpSession.setAttribute("userId", registeredUser.getId());
+            httpSession.setAttribute("userRole", registeredUser.getRole());
+            result = CommandResult.redirect(MAIN_PAGE);
         } else {
             request.setAttribute("errorLoginPassMessage", "Invalid credentials or you're a robot");
-            page = "index.jsp";
+            result = CommandResult.forward(LOGIN_PAGE);
         }
 
-        return page;
+        return result;
     }
 
 
