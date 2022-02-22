@@ -18,7 +18,7 @@ public class ConnectionFactory {
 
     private static final String CONTEXT_PATH = "java:comp/env/jdbc/library";
 
-    public ProxyConnection create(ConnectionPool pool) throws DaoException {
+    public ProxyConnection create(ConnectionPool pool) {
         List<ProxyConnection> proxyConnections = create(pool, 1);
         return proxyConnections.get(0);
     }
