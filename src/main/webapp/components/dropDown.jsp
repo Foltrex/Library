@@ -1,4 +1,3 @@
-<link href="CSS/dropDown.css" rel="stylesheet" type="text/css"/>
 <div class="dropdown">
     <button class="dropbtn">
       <i class="fa fa-globe fa-lg"></i>

@@ -9,18 +9,22 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="CSS/main.css">
-
-    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <script type="text/javascript" src="../js/main.js"></script>
+    <link href="../CSS/header.css" rel="stylesheet" type="text/css"/>
+    <link href="../CSS/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="../CSS/dropDown.css" rel="stylesheet" type="text/css"/>
+    <link href="../CSS/sidebar.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
-<!-- Sidebar -->
-<jsp:include page="../components/sidebar.jsp" />
 
 <!-- Header -->
 <jsp:include page="../components/header.jsp" />
 
+
+<!-- Sidebar -->
+<jsp:include page="../components/sidebar.jsp" />
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -32,11 +36,6 @@
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal">Heading</h1>
       <p>Some text about book</p>
-    </div>
-    <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
-    </div>
   </div>
 
   <div class="w3-row">
@@ -45,9 +44,6 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
-    <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
     </div>
   </div>
 
@@ -56,10 +52,6 @@
       <h1 class="w3-text-teal">Heading</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
     </div>
   </div>
 

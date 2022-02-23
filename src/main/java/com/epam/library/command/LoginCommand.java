@@ -21,7 +21,7 @@ public class LoginCommand implements Command {
     private static final String RECAPTCHA_SECRET_KEY = "6LdNP18eAAAAAKBbUyBYyocuoqhizVQlu8M4A55V";
     private static final String RECAPTCHA_SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
-    private static final String MAIN_PAGE = "controller?command=main";
+    private static final String MAIN_PAGE = "pages/main.jsp";
     private static final String LOGIN_PAGE = "index.jsp";
 
     private UserServiceImpl service;

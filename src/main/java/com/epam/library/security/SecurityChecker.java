@@ -5,8 +5,12 @@ import com.epam.library.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SecurityChecker {
+
+    private static final String PAGE_REGEX = "(?<=\\\\)\\w+\\.jsp";
 
     public boolean isUserHasPermissionToPage(HttpServletRequest request, Role userRole) {
         String currentPage = getCurrentPage(request);
@@ -14,15 +18,13 @@ public class SecurityChecker {
 ;
         List<String> allowedPagesForUser = securityConfig.getAllowedPagesForRole(userRole);
 
-        return allowedPagesForUser.contains(currentPage);
+        return currentPage != null && allowedPagesForUser.contains(currentPage);
     }
 
     private String getCurrentPage(HttpServletRequest request) {
-        String[] list = request.getRequestURI().split("/");
-        String page = null;
-        if (list[list.length - 1].indexOf(".jsp") > 0) {
-            page = list[list.length - 1];
-        }
-        return page;
+        Pattern pattern = Pattern.compile(PAGE_REGEX);
+        Matcher matcher = pattern.matcher(request.getRequestURI());
+
+        return matcher.find() ? matcher.group() : null;
     }
 }

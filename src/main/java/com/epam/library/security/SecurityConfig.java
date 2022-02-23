@@ -13,11 +13,20 @@ public class SecurityConfig {
     private static SecurityConfig instance;
     private static final Lock LOCK = new ReentrantLock();
 
-    // TODO: add allowed sites for every role
+    // pages
+    private final String LOGIN = "index.jsp";
+    private final String CATALOG = "catalog.jsp";
+    private final String CHANGING_BOOK = "changing-book.jsp";
+    private final String READERS = "readers.jsp";
+    private final String LIBRARIANS = "librarians.jsp";
+    private final String BOOK = "book.jsp";
+    private final String LOANS = "loans.jsp";
+
+
     private final Map<Role, List<String>> allowedPages = ImmutableMap.of(
-            Role.ADMIN,     Arrays.asList("index.jsp"),
-            Role.LIBRARIAN, Arrays.asList("index.jsp"),
-            Role.READER,    Arrays.asList("index.jsp")
+            Role.ADMIN,     Arrays.asList(LOGIN, CATALOG, CHANGING_BOOK, READERS, LIBRARIANS, BOOK),
+            Role.LIBRARIAN, Arrays.asList(LOGIN, CATALOG, CHANGING_BOOK, BOOK, LOANS),
+            Role.READER,    Arrays.asList(LOGIN, CATALOG, BOOK, LOANS)
     );
 
     private SecurityConfig() {

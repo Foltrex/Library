@@ -1,6 +1,5 @@
 package com.epam.library.dao;
 
-import com.epam.library.entity.Entity;
 import com.epam.library.entity.Identifable;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.RowMapper;
@@ -68,7 +67,7 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
     }
 
     @Override
-    public void save(T item) throws SQLException, DaoException {
+    public void save(T item) throws DaoException {
         Map<String, Object> fields = extractFields(item);
         String query = (item.getId() == null) ? generateInsertQuery(fields.keySet()) : generateUpdateQuery(fields.keySet());
         executeUpdate(query, fields.values());
