@@ -2,7 +2,7 @@ package com.epam.library.command;
 
 import com.epam.library.exception.ServiceException;
 import com.epam.library.entity.User;
-import com.epam.library.service.UserServiceImpl;
+import com.epam.library.service.UserService;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -22,11 +22,11 @@ public class LoginCommand implements Command {
     private static final String RECAPTCHA_SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
     private static final String MAIN_PAGE = "pages/main.jsp";
-    private static final String LOGIN_PAGE = "index.jsp";
+    private static final String LOGIN_PAGE = "/index.jsp";
 
-    private UserServiceImpl service;
+    private final UserService service;
 
-    public LoginCommand(UserServiceImpl service) {
+    public LoginCommand(UserService service) {
         this.service = service;
     }
 

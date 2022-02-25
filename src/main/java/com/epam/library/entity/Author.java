@@ -1,6 +1,11 @@
 package com.epam.library.entity;
 
 public class Author extends Entity {
+    public static final String TABLE = "authors";
+
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+
     private String name;
     private String surname;
 

@@ -1,6 +1,14 @@
 package com.epam.library.entity;
 
 public class Book extends Entity {
+
+    public static final String TABLE = "books";
+
+    public static final String TITLE = "title";
+    public static final String AUTHOR_ID = "author_id";
+    public static final String STOCK = "stock";
+    public static final String GENRE_ID = "genre_id";
+
     private String title;
     private Long authorId;
     private int stock;

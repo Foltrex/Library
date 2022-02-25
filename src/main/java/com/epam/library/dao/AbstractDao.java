@@ -9,8 +9,6 @@ import java.util.*;
 
 public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
 
-    public static final String ID = "id";
-
     private final Connection connection;
     private final RowMapper<T> rowMapper;
 

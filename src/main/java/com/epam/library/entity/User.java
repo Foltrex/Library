@@ -1,6 +1,14 @@
 package com.epam.library.entity;
 
 public class User extends Entity {
+    public static final String TABLE = "users";
+
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+    public static final String PHONE_NUMBER = "phone_number";
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
+    public static final String ROLE = "role";
 
     private String name;
     private String surname;

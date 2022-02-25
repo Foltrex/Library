@@ -1,5 +1,9 @@
 package com.epam.library.connection;
 
+import com.epam.library.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
@@ -7,6 +11,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private static ConnectionPool instance;
 
     private static final Lock LOCK = new ReentrantLock();
@@ -55,8 +61,9 @@ public class ConnectionPool {
 
     public ProxyConnection getConnection() {
         connectionsLock.lock();
-        ProxyConnection proxyConnection;
+        ProxyConnection proxyConnection = null;
         try {
+            // fixed pool size
             if (availableConnections.size() == 0) {
                 List<ProxyConnection> newProxyConnections =
                         connectionFactory.create(instance, NUMBER_OF_ADDED_PROXY_CONNECTIONS);
@@ -65,6 +72,8 @@ public class ConnectionPool {
 
             proxyConnection =  availableConnections.poll();
             connectionsInUse.add(proxyConnection);
+        } catch (DaoException e) {
+            LOGGER.error(e.getMessage(), e);
         } finally {
             connectionsLock.unlock();
         }

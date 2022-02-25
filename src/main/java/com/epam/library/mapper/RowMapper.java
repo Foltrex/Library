@@ -1,9 +1,9 @@
 package com.epam.library.mapper;
 
-import com.epam.library.dao.implemetation.AuthorDaoImpl;
-import com.epam.library.dao.implemetation.BookDaoImpl;
-import com.epam.library.dao.implemetation.GenreDaoImpl;
-import com.epam.library.dao.implemetation.UserDaoImpl;
+import com.epam.library.dao.implementation.AuthorDaoImpl;
+import com.epam.library.dao.implementation.BookDaoImpl;
+import com.epam.library.dao.implementation.GenreDaoImpl;
+import com.epam.library.dao.implementation.UserDaoImpl;
 import com.epam.library.entity.*;
 
 import java.sql.ResultSet;
@@ -15,13 +15,13 @@ public interface RowMapper<T extends Identifable> {
 
     static RowMapper<? extends Identifable> create(String table) {
         switch (table) {
-            case UserDaoImpl.TABLE:
+            case User.TABLE:
                 return new UserRowMapper();
-            case BookDaoImpl.TABLE:
+            case Book.TABLE:
                 return new BookRowMapper();
-            case AuthorDaoImpl.TABLE:
+            case Author.TABLE:
                 return new AuthorRowMapper();
-            case GenreDaoImpl.TABLE:
+            case Genre.TABLE:
                 return new GenreRowMapper();
             default:
                 throw new IllegalArgumentException("Unknown table = " + table);

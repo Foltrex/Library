@@ -1,4 +1,4 @@
-package com.epam.library.service;
+package com.epam.library.service.implementation;
 
 import com.epam.library.dao.DaoHelper;
 import com.epam.library.dao.DaoHelperFactory;
@@ -6,17 +6,19 @@ import com.epam.library.dao.UserDao;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.service.UserService;
 
 import java.util.Optional;
 
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
-    private DaoHelperFactory daoHelperFactory;
+    private final DaoHelperFactory daoHelperFactory;
 
     public UserServiceImpl(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
     }
 
+    @Override
     public Optional<User> login(String login, String password) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

@@ -6,41 +6,60 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String CONTEXT_PATH = "java:comp/env/jdbc/library";
+    private static final String DATABASE_PROPERTIES = "resources/database.properties";
 
-    public ProxyConnection create(ConnectionPool pool) {
+    private static final String SQL_DRIVER = "com.mysql.cj.jdbc.Driver";
+
+    public ProxyConnection create(ConnectionPool pool) throws DaoException {
         List<ProxyConnection> proxyConnections = create(pool, 1);
         return proxyConnections.get(0);
     }
 
-    public List<ProxyConnection> create(ConnectionPool pool, int count) {
+    public List<ProxyConnection> create(ConnectionPool pool, int count) throws DaoException {
         List<ProxyConnection> proxyConnections = new ArrayList<>(count);
         try {
             for (int i = 0; i < count; ++i) {
-                proxyConnections.add(new ProxyConnection(createConnection(CONTEXT_PATH), pool));
+                proxyConnections.add(new ProxyConnection(createConnection(SQL_DRIVER), pool));
             }
-        } catch (NamingException | SQLException e) {
-            throw new RuntimeException("Exception while connecting to SQL Server", e);
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            throw new DaoException("Exception while connecting to SQL Server", e);
         }
 
         return proxyConnections;
     }
 
-    private Connection createConnection(String contextPath) throws NamingException, SQLException {
-        Context context = new InitialContext();
-        DataSource dataSource = (DataSource) context.lookup(contextPath);
-        Connection connection = dataSource.getConnection();
+    private Connection createConnection(String driver) throws ClassNotFoundException, IOException, SQLException {
+        // ?autoReconnect=true
+        Class.forName(driver);
+//
+//        Properties props = new Properties();
+//        try(InputStream inputStream = Files.newInputStream(Paths.get(DATABASE_PROPERTIES))) {
+//            props.load(inputStream);
+//        }
+//
+//        String url = props.getProperty("url");
+//        String username = props.getProperty("username");
+//        String password = props.getProperty("password");
 
-        return connection;
+
+        String url = "jdbc:mysql://localhost:3306/library";
+        String username = "root";
+        String password = "994499_ma";
+
+        return DriverManager.getConnection(url, username, password);
     }
 }

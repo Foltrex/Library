@@ -2,7 +2,14 @@ package com.epam.library.dao;
 
 import com.epam.library.connection.ConnectionPool;
 import com.epam.library.connection.ProxyConnection;
-import com.epam.library.dao.implemetation.UserDaoImpl;
+import com.epam.library.dao.implementation.AuthorDaoImpl;
+import com.epam.library.dao.implementation.BookDaoImpl;
+import com.epam.library.dao.implementation.GenreDaoImpl;
+import com.epam.library.dao.implementation.UserDaoImpl;
+import com.epam.library.entity.Author;
+import com.epam.library.entity.Book;
+import com.epam.library.entity.Genre;
+import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 
 import java.sql.SQLException;
@@ -15,9 +22,28 @@ public class DaoHelper implements AutoCloseable {
         this.connection = pool.getConnection();
     }
 
+
     public UserDao createUserDao() {
         return new UserDaoImpl(connection);
     }
+
+    public UserRoleDao createUserRoleDao() {
+        return new UserDaoImpl(connection);
+    }
+
+
+    public AbstractDao<Author> createAuthorDaoImpl() {
+        return new AuthorDaoImpl(connection);
+    }
+
+    public AbstractDao<Book> createBookDaoImpl() {
+        return new BookDaoImpl(connection);
+    }
+
+    public AbstractDao<Genre> createGenreBookDaoImpl() {
+        return new GenreDaoImpl(connection);
+    }
+
 
     @Override
     public void close() {

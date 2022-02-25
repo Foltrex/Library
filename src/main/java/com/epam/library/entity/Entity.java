@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 public abstract class Entity implements Serializable, Identifable {
 
+    public static final String ID = "id";
+
     private Long id;
 
-    // TODO: make all classes serialiazable
     public Entity() {
     }
 

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
-    private static final String ERROR_PAGE = "pages/errorPage.jsp";
+    private static final String ERROR_PAGE = "/pages/errorPage.jsp";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
