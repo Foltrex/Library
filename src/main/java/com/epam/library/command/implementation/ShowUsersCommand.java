@@ -15,8 +15,8 @@ import java.util.List;
 
 public class ShowUsersCommand implements Command {
 
-    private static final String READER_PAGE = "/pages/readers.jsp";
-    private static final String LIBRARIAN_PAGE = "/pages/librarians.jsp";
+    private static final String READERS_PAGE = "/pages/readers.jsp";
+    private static final String LIBRARIANS_PAGE = "/pages/librarians.jsp";
 
     private final AdminService adminService;
     private final Role showingUsersRole;
@@ -33,12 +33,11 @@ public class ShowUsersCommand implements Command {
 
         switch (showingUsersRole) {
             case LIBRARIAN:
-                return CommandResult.forward(LIBRARIAN_PAGE);
+                return CommandResult.forward(LIBRARIANS_PAGE);
             case READER:
-                return CommandResult.forward(READER_PAGE);
+                return CommandResult.forward(READERS_PAGE);
             default:
                 throw new PageCommandException("Wrong role to show");
         }
     }
-
 }
