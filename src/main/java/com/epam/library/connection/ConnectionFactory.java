@@ -1,11 +1,13 @@
 package com.epam.library.connection;
 
 import com.epam.library.exception.DaoException;
+import com.epam.library.exception.PageCommandException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -20,7 +22,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String DATABASE_PROPERTIES = "resources/database.properties";
+    private static final String DATABASE_PROPERTIES = "/database.properties";
 
     private static final String SQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 
@@ -45,20 +47,16 @@ public class ConnectionFactory {
     private Connection createConnection(String driver) throws ClassNotFoundException, IOException, SQLException {
         // ?autoReconnect=true
         Class.forName(driver);
-//
-//        Properties props = new Properties();
-//        try(InputStream inputStream = Files.newInputStream(Paths.get(DATABASE_PROPERTIES))) {
-//            props.load(inputStream);
-//        }
-//
-//        String url = props.getProperty("url");
-//        String username = props.getProperty("username");
-//        String password = props.getProperty("password");
 
+        Properties props = new Properties();
+        try(InputStream inputStream
+                    = ConnectionFactory.class.getClassLoader().getResourceAsStream(DATABASE_PROPERTIES)) {
+            props.load(inputStream);
+        }
 
-        String url = "jdbc:mysql://localhost:3306/library";
-        String username = "root";
-        String password = "994499_ma";
+        String url = props.getProperty("url");
+        String username = props.getProperty("username");
+        String password = props.getProperty("password");
 
         return DriverManager.getConnection(url, username, password);
     }

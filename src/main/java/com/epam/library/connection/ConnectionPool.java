@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -17,12 +18,13 @@ public class ConnectionPool {
 
     private static final Lock LOCK = new ReentrantLock();
 
-    private final Lock connectionsLock = new ReentrantLock();
+    private static final int INITIAL_PROXY_POOL_SIZE = 10;
 
-    private static final int INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS = 10;
-    private static final int NUMBER_OF_ADDED_PROXY_CONNECTIONS = 5;
-    private final Queue<ProxyConnection> availableConnections = new ArrayDeque<>(INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS);
-    private final Queue<ProxyConnection> connectionsInUse = new ArrayDeque<>(INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS);
+    private final Lock connectionsLock = new ReentrantLock();
+    private final Semaphore semaphore = new Semaphore(INITIAL_PROXY_POOL_SIZE, true);
+
+    private final Queue<ProxyConnection> availableConnections = new ArrayDeque<>(INITIAL_PROXY_POOL_SIZE);
+    private final Queue<ProxyConnection> connectionsInUse = new ArrayDeque<>(INITIAL_PROXY_POOL_SIZE);
 
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
@@ -38,7 +40,12 @@ public class ConnectionPool {
                 if (localInstance == null) {
                     localInstance = new ConnectionPool();
                     instance = localInstance;
+                    List<ProxyConnection> newProxyConnections =
+                            instance.connectionFactory.create(instance, INITIAL_PROXY_POOL_SIZE);
+                    instance.availableConnections.addAll(newProxyConnections);
                 }
+            } catch (DaoException e) {
+                LOGGER.error(e.getMessage(), e);
             } finally {
                 LOCK.unlock();
             }
@@ -53,6 +60,7 @@ public class ConnectionPool {
             if (connectionsInUse.contains(proxyConnection)) {
                 availableConnections.offer(proxyConnection);
                 connectionsInUse.remove(proxyConnection);
+                semaphore.release();
             }
         } finally {
             connectionsLock.unlock();
@@ -63,17 +71,12 @@ public class ConnectionPool {
         connectionsLock.lock();
         ProxyConnection proxyConnection = null;
         try {
-            // fixed pool size
-            if (availableConnections.size() == 0) {
-                List<ProxyConnection> newProxyConnections =
-                        connectionFactory.create(instance, NUMBER_OF_ADDED_PROXY_CONNECTIONS);
-                availableConnections.addAll(newProxyConnections);
-            }
-
+            // TODO: acquire of tryAcquire ?
+            semaphore.acquire();
             proxyConnection =  availableConnections.poll();
             connectionsInUse.add(proxyConnection);
-        } catch (DaoException e) {
-            LOGGER.error(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            LOGGER.error("Сonnection getting error", e);
         } finally {
             connectionsLock.unlock();
         }

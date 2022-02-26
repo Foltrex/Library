@@ -1,4 +1,7 @@
-package com.epam.library.command;
+package com.epam.library.command.implementation;
+
+import com.epam.library.command.Command;
+import com.epam.library.command.CommandResult;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,8 +1,10 @@
-package com.epam.library.command;
+package com.epam.library.command.implementation;
 
 import javax.servlet.http.HttpServletRequest;
 
 
+import com.epam.library.command.Command;
+import com.epam.library.command.CommandResult;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
