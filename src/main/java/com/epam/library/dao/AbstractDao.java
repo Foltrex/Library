@@ -20,12 +20,12 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
         this.table = table;
     }
 
-    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... params) throws DaoException {
+    protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params)) {
             ResultSet resultSet = statement.executeQuery();
             List<T> entities = new ArrayList<>();
             while (resultSet.next()) {
-                T entity = mapper.map(resultSet);
+                T entity = rowMapper.map(resultSet);
                 entities.add(entity);
             }
 
@@ -37,24 +37,24 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
 
     @Override
     public Optional<T> getById(long id) throws DaoException {
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        String query = "SELECT * FROM " + table + " WHERE id=?;";
-        return executeForSingleResult(query, mapper, id);
+        String query = String.format("SELECT * FROM %s WHERE id=?;", table);
+        return executeForSingleResult(query, id);
     }
 
     public List<T> getAll() throws DaoException {
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        return executeQuery("SELECT * FROM " + table + ";", mapper);
+        String query = String.format("SELECT * FROM %s;", table);
+        return executeQuery(query);
     }
 
     @Override
     public void removeById(Long id) throws SQLException {
-        PreparedStatement statement = createStatement("DELETE FROM " + table + " WHERE id=?;", id);
+        String query = String.format("DELETE FROM %s WHERE id=?;", table);
+        PreparedStatement statement = createStatement(query, id);
         statement.executeUpdate();
     }
 
-    protected Optional<T> executeForSingleResult(String query, RowMapper<T> mapper, Object... params) throws DaoException {
-        List<T> items = executeQuery(query, mapper, params);
+    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
+        List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             return Optional.of(items.get(0));
         } else if (items.size() > 1) {

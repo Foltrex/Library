@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.entity.Book;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
@@ -18,6 +19,7 @@ public class ShowUsersCommand implements Command {
     private static final String READERS_PAGE = "/pages/readers.jsp";
     private static final String LIBRARIANS_PAGE = "/pages/librarians.jsp";
 
+
     private final AdminService adminService;
     private final Role showingUsersRole;
 
@@ -28,6 +30,7 @@ public class ShowUsersCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
+
         List<User> users = adminService.getUsers(showingUsersRole);
         req.setAttribute("users", users.toArray());
 

@@ -25,7 +25,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
     public Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException {
         return executeForSingleResult(
                 SELECT_BY_LOGIN_AND_PASSWORD,
-                new UserRowMapper(),
                 login,
                 password
         );
@@ -35,12 +34,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
     public List<User> findUsersByRole(Role role) throws DaoException {
         return executeQuery(
                 SELECT_BY_ROLE,
-                new UserRowMapper(),
                 role.getRoleName()
         );
     }
 
-    // about saving the password during registration ?
     @Override
     protected Map<String, Object> extractFields(User item) {
         // ImmutableMap.of (...) is more beautiful :(
