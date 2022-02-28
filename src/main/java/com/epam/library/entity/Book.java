@@ -6,28 +6,23 @@ public class Book extends Entity {
 
     public static final String TITLE = "title";
     public static final String AUTHOR_ID = "author_id";
+    public static final String AUTHOR_NAME = "author_name";
+    public static final String AUTHOR_SURNAME = "author_surname";
     public static final String STOCK = "stock";
     public static final String GENRE_ID = "genre_id";
+    public static final String GENRE_NAME = "genre_name";
 
     private String title;
-    private Long authorId;
+    private Author author;
     private int stock;
-    private long genreId;
+    private Genre genre;
 
-    public Book(Long id, String title, Long authorId, int stock, long genreId) {
+    public Book(Long id, String title, Author author, int stock, Genre genre) {
         super(id);
         this.title = title;
-        this.authorId = authorId;
+        this.author = author;
         this.stock = stock;
-        this.genreId = genreId;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+        this.genre = genre;
     }
 
     public String getTitle() {
@@ -46,11 +41,19 @@ public class Book extends Entity {
         this.stock = stock;
     }
 
-    public long getGenreId() {
-        return genreId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setGenreId(long genreId) {
-        this.genreId = genreId;
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 }

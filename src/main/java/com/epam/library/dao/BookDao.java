@@ -11,4 +11,6 @@ public interface BookDao {
     List<Book> getBooks() throws DaoException;
 
     Optional<Book> findBookById(long id) throws DaoException;
+
+    void saveBook(Book book) throws DaoException;
 }

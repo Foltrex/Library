@@ -64,26 +64,30 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
         }
     }
 
+
     @Override
     public void save(T item) throws DaoException {
         Map<String, Object> fields = extractFields(item);
-        String query = (item.getId() == null) ? generateInsertQuery(fields.keySet()) : generateUpdateQuery(fields.keySet());
-        executeUpdate(query, fields.values());
+        String query = (item.getId() == null)
+                ? generateInsertQuery(fields.keySet())
+                : generateUpdateQuery(fields.keySet(), item.getId());
+        executeUpdate(query, fields.values().toArray());
     }
 
     protected abstract Map<String, Object> extractFields(T item);
 
     private String generateInsertQuery(Collection<String> fields) {
-        return String.format("INSERT INTO %s(%s) VALUES (%s);",
+        return String.format("INSERT INTO %s (%s) VALUES (%s);",
                 table,
                 String.join(", ", fields),
                 String.join(", ", Collections.nCopies(fields.size(), "?"))
                 );
     }
 
-    private String generateUpdateQuery(Collection<String> fields) {
-        String updatePrefix = "UPDATE " + table;
-        StringJoiner updateQuery = new StringJoiner(", ", updatePrefix, ";");
+    private String generateUpdateQuery(Collection<String> fields, Long id) {
+        String updatePrefix = String.format("UPDATE %s SET ", table);
+        String updateSuffix = String.format(" WHERE id=%d;", id);
+        StringJoiner updateQuery = new StringJoiner(", ", updatePrefix, updateSuffix);
         for (String field: fields) {
             updateQuery.add(field + " = ?");
         }
@@ -101,8 +105,12 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
 
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
-        for (int i = 1; i <= params.length; i++) {
-            statement.setObject(i, params[i - 1]);
+        try {
+            for (int i = 1; i <= params.length; i++) {
+                statement.setObject(i, params[i - 1]);
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e);
         }
 
         return statement;

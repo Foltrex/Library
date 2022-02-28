@@ -6,11 +6,17 @@ public class Genre extends Entity {
 
     public static final String NAME = "name";
 
+
     private String name;
 
     public Genre(Long id, String name) {
         super(id);
         this.name = name;
+    }
+
+    public Genre(Long id) {
+        super(id);
+        this.name = "";
     }
 
     public String getName() {

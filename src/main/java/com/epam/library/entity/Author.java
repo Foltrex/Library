@@ -15,6 +15,13 @@ public class Author extends Entity {
         this.surname = surname;
     }
 
+
+    public Author(Long id) {
+        super(id);
+        this.name = "";
+        this.surname = "";
+    }
+
     public String getName() {
         return name;
     }

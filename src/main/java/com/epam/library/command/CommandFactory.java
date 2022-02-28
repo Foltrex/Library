@@ -1,12 +1,9 @@
 package com.epam.library.command;
 
 import com.epam.library.command.implementation.*;
-import com.epam.library.dao.Dao;
 import com.epam.library.dao.DaoHelperFactory;
 import com.epam.library.entity.Role;
-import com.epam.library.service.implementation.AdminServiceImpl;
-import com.epam.library.service.implementation.BookServiceImpl;
-import com.epam.library.service.implementation.UserServiceImpl;
+import com.epam.library.service.implementation.*;
 
 public class CommandFactory {
 
@@ -19,9 +16,12 @@ public class CommandFactory {
             case "logout":
                 return new LogoutCommand();
             case "show_book_details":
-                return new ShowBookDetailsCommand(new BookServiceImpl(factory));
+                return new ShowBookDetailsCommand
+                        (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
             case "show_books":
                 return new ShowBooksCommand(new BookServiceImpl(factory));
+            case "save_book_to_database":
+                return new SaveBookToDatabaseCommand(new BookServiceImpl(factory));
             case "show_readers":
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.READER);
             case "show_librarians":

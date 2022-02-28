@@ -1,5 +1,6 @@
 package com.epam.library.entity;
 
+
 import java.io.Serializable;
 
 public abstract class Entity implements Serializable, Identifable {
@@ -7,9 +8,6 @@ public abstract class Entity implements Serializable, Identifable {
     public static final String ID = "id";
 
     private Long id;
-
-    public Entity() {
-    }
 
     public Entity(Long id) {
         this.id = id;

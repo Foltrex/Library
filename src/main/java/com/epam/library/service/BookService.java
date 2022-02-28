@@ -10,4 +10,6 @@ public interface BookService {
     List<Book> getBooks() throws ServiceException;
 
     Optional<Book> getBook(long id) throws ServiceException;
+
+    void saveBook(Book book) throws ServiceException;
 }

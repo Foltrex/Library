@@ -35,16 +35,11 @@ public class DaoHelper implements AutoCloseable {
         return new BookDaoImpl(connection);
     }
 
-
-    public AbstractDao<Author> createAuthorDaoImpl() {
+    public AuthorDao createAuthorDao() {
         return new AuthorDaoImpl(connection);
     }
 
-    public AbstractDao<Book> createBookDaoImpl() {
-        return new BookDaoImpl(connection);
-    }
-
-    public AbstractDao<Genre> createGenreBookDaoImpl() {
+    public GenreDao createGenreDao() {
         return new GenreDaoImpl(connection);
     }
 

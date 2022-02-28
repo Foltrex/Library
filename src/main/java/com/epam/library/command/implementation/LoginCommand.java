@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private static final String MAIN_PAGE = "pages/main.jsp";
+    private static final String MAIN_PAGE_COMMAND = "/controller?command=show_books";
     private static final String LOGIN_PAGE = "/index.jsp";
 
     private final ReCaptchaChecker checker = new ReCaptchaChecker();
@@ -39,7 +39,7 @@ public class LoginCommand implements Command {
             User registeredUser = user.get();
             httpSession.setAttribute("userId", registeredUser.getId());
             httpSession.setAttribute("userRole", registeredUser.getRole());
-            result = CommandResult.redirect(MAIN_PAGE);
+            result = CommandResult.redirect(request.getContextPath() + MAIN_PAGE_COMMAND);
         } else {
             request.setAttribute("errorLoginPassMessage", "Invalid credentials or you're a robot");
             result = CommandResult.forward(LOGIN_PAGE);

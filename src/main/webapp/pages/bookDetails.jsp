@@ -1,28 +1,27 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="${pageContext.request.contextPath}/CSS/bookDetails.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/bookForm.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/sidebar.css" rel="stylesheet" type="text/css"/>
+    <script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
 </head>
   <body>
-    <h2>Books</h2>
-    <table style="width:100%">
-        <tr>
-            <th>Title:</th>
-            <td>${book.title}</td>
-        </tr>
-        <tr>
-            <th>AuthorId:</th>
-            <td>${book.authorId}</td>
-        </tr>
-        <tr>
-            <th>Stock:</th>
-            <td>${book.stock}</td>
-        </tr>
-        <tr>
-            <th>GenreId:</th>
-            <td>${book.genreId}</td>
-        </tr>
-      </table>
+    <!-- Header -->
+    <jsp:include page="../components/header.jsp" />
+
+    <!-- Sidebar -->
+    <jsp:include page="../components/sidebar.jsp" />
+
+    <h2>Book</h2>
+    <jsp:include page="../components/bookForm.jsp" />
+
+    <!-- Footer -->
+    <jsp:include page="../components/footer.jsp" />
+    
   </body>
 </html>

@@ -42,4 +42,16 @@ public class BookServiceImpl implements BookService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void saveBook(Book book) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookDao dao = helper.createBookDao();
+            dao.saveBook(book);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
