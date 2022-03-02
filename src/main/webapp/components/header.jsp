@@ -6,12 +6,16 @@
     <jsp:include page="./dropDown.jsp" />
 </div> -->
 <div class="top_navbar">
-    <div class="logo">Foolish Dev</div>
+    <div class="logo">
+        <a href="${pageContext.request.contextPath}/controller?command=show_books">Library</a>
+    </div>
+
     <div class="menu">
         <div class="hamburger">
             <i class="fas fa-bars"></i>
         </div>
-
+        
+        <jsp:include page="./dropDown.jsp" />
     </div>
 </div>
 	

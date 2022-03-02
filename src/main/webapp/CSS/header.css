@@ -3,18 +3,11 @@
   background-color: #333;
 }
 
-.navbar a {
-  float: left;
-  font-size: 25px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
 
 .library {
   text-align: center;
 } */
+
 
 .top_navbar{
 	top: 0;
@@ -25,6 +18,13 @@
 	box-shadow: 1px 0 2px rgba(0,0,0,0.125);
 	display: flex;
 	align-items: center;
+}
+
+.logo a:active,
+.logo a:hover,
+.logo a {
+  text-decoration: none;
+  color: white;
 }
 
 .top_navbar .logo{

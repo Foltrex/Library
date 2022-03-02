@@ -15,6 +15,8 @@ public class CommandFactory {
                 return new LoginCommand(new UserServiceImpl(factory));
             case "logout":
                 return new LogoutCommand();
+            case "change_language":
+                return new ChangeLocaleCommand();
             case "show_book_details":
                 return new ShowBookDetailsCommand
                         (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));

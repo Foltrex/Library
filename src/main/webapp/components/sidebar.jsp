@@ -18,39 +18,39 @@
     <li>
       <a href="#">
         <span class="icon"><i class="fa fa-qrcode"></i></span>
-        <span class="text">Dashboard</span>
+        <span class="text">Orders</span>
       </a>
     </li>
+
     <li>
-      <a href="#">
-        <span class="icon"><i class="fa fa-link"></i></span>
-        <span class="text">Shortcuts</span>
+      <a href="${pageContext.request.contextPath}/controller?command=show_readers">
+        <span class="icon"><i class="fas fa-user-alt"></i></span>
+        <span class="text">Readers</span>
       </a>
     </li>
+
     <li>
-      <a href="#">
-        <span class="icon"><i class="fa fa-eye"></i></span>
-        <span class="text">Overview</span>
+      <a href="${pageContext.request.contextPath}/controller?command=show_librarians">
+        <span class="icon"><i class="fas fa-user-alt"></i></span>
+        <span class="text">Librarians</span>
       </a>
     </li>
+
     <li>
-      <a href="#">
+      <a href="${pageContext.request.contextPath}/controller?command=show_books">
         <span class="icon"><i class="fa fa-book"></i></span>
-        <span class="text">Event</span>
+        <span class="text">Books</span>
       </a>
     </li>
+
     <li>
       <a href="#">
         <span class="icon"><i class="fa fa-question-circle"></i></span>
         <span class="text">About</span>
       </a>
     </li>
-    <li>
-      <a href="#">
-        <span class="icon"><i class="fa fa-pen"></i></span>
-        <span class="text">Service</span>
-      </a>
-    </li>
+
+    <!-- author contacts -->
     <li>
       <a href="#">
         <span class="icon"><i class="fa fa-id-card"></i></span>
