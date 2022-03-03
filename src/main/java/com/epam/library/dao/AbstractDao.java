@@ -46,10 +46,14 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
     }
 
     @Override
-    public void removeById(Long id) throws SQLException {
-        String query = String.format("DELETE FROM %s WHERE id=?;", table);
-        PreparedStatement statement = createStatement(query, id);
-        statement.executeUpdate();
+    public void removeById(Long id) throws DaoException {
+        try {
+            String query = String.format("DELETE FROM %s WHERE id=?;", table);
+            PreparedStatement statement = createStatement(query, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {

@@ -21,7 +21,7 @@
               <td>
                 <form method="post" action="controller?command=change_rental">
                     <input type="hidden" name="bookRentalId" value="${rental.id}">
-                    <button type="submit">Cancel</button>
+                    <button type="submit">Change</button>
                 </form>
               </td>
           </tr>

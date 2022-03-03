@@ -16,5 +16,5 @@ public interface Dao<T extends Identifable> {
 
     void save(T item) throws SQLException, DaoException;
 
-    void removeById(Long id) throws SQLException;
+    void removeById(Long id) throws SQLException, DaoException;
 }

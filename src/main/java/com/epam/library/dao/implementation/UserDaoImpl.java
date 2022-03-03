@@ -47,7 +47,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
            put(User.PHONE_NUMBER, item.getPhoneNumber());
            put(User.LOGIN, item.getLogin());
            put(User.PASSWORD, DigestUtils.md5Hex(item.getPassword()));
-           put(User.ROLE, item.getRole());
+           put(User.ROLE, item.getRole().getRoleName());
         }};
     }
 }

@@ -10,9 +10,9 @@ public interface BookRentalDao {
 
     List<BookRental> getBooksRentals() throws DaoException;
 
-    void deleteBookRental(long id);
+    void deleteBookRental(long id) throws DaoException;
 
-    void saveBookRental(BookRental bookRental);
+    void saveBookRental(BookRental bookRental) throws DaoException;
 
-    Optional<BookRental> findBookRentalById(long id);
+    Optional<BookRental> findBookRentalById(long id) throws DaoException;
 }
