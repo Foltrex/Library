@@ -483,4 +483,3 @@ window.FontAwesomeKitConfig = {
         console.error("".concat("Font Awesome Kit:", " ").concat(t))
     }
 }));
-

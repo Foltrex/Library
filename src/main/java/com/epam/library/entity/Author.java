@@ -15,6 +15,9 @@ public class Author extends Entity {
         this.surname = surname;
     }
 
+    public static Author createAuthorWithOnlyIDField(Long id) {
+        return new Author(id, null, null);
+    }
 
     public Author(Long id) {
         super(id);

@@ -2,15 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/header.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/footer.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/dropDown.css" rel="stylesheet" type="text/css"/>
-        <script src="js/layout.js"></script>
+        <link href="${pageContext.request.contextPath}/CSS/style.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
+        <script src="${pageContext.request.contextPath}/js/layout.js"></script>
+        <script src="${pageContext.request.contextPath}/js/changeLang.js"></script>
     </head>
     <body>
         <jsp:include page="components/header.jsp" />
@@ -22,3 +21,4 @@
         
     </body>
 </html>
+

@@ -15,9 +15,10 @@ import java.util.Optional;
 
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
-    private static final String SELECT_BOOKS = String.format("%s %s %s %s ",
+    private static final String SELECT_BOOKS = String.format("%s %s %s %s %s ",
             "SELECT books.id, title, author_id, authors.name AS author_name, surname AS author_surname,",
-            "stock, genre_id, genres.name AS genre_name FROM books",
+            "stock, genre_id, genres.name AS genre_name",
+            "FROM books",
             "INNER JOIN authors ON author_id = authors.id",
             "INNER JOIN genres ON genre_id = genres.id");
 
@@ -48,7 +49,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     protected Map<String, Object> extractFields(Book item) {
         // ImmutableMap.of (...) is more beautiful :(
         return new LinkedHashMap<String, Object>() {{
-            //TODO: put(Book.ID, item.getId());
             put(Book.TITLE, item.getTitle());
             put(Book.AUTHOR_ID, item.getAuthor().getId());
             put(Book.STOCK, item.getStock());

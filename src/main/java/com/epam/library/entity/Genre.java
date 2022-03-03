@@ -14,9 +14,8 @@ public class Genre extends Entity {
         this.name = name;
     }
 
-    public Genre(Long id) {
-        super(id);
-        this.name = "";
+    public static Genre createGenreWithOnlyIDField(Long id) {
+        return new Genre(id, null);
     }
 
     public String getName() {

@@ -21,7 +21,6 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao {
     protected Map<String, Object> extractFields(Genre item) {
         // ImmutableMap.of (...) is more beautiful :(
         return new LinkedHashMap<String, Object>() {{
-            // TODO: put(Genre.ID, item.getId());
             put(Genre.NAME, item.getName());
         }};
     }

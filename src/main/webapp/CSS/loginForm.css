@@ -14,7 +14,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-button {
+.container button {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;

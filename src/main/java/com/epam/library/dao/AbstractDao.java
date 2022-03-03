@@ -11,7 +11,6 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
 
     private final Connection connection;
     private final RowMapper<T> rowMapper;
-
     private final String table;
 
     protected AbstractDao(Connection connection, RowMapper<T> rowMapper, String table) {

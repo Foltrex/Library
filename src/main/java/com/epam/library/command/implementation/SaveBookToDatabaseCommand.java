@@ -38,8 +38,8 @@ public class SaveBookToDatabaseCommand implements Command {
         int bookStock = Integer.parseInt(req.getParameter("bookStock"));
         Long bookGenreId = Long.valueOf(req.getParameter("bookGenre"));
 
-        Author partiallyInitializedAuthor = new Author(bookAuthorId);
-        Genre partiallyInitializedGenre = new Genre(bookGenreId);
+        Author partiallyInitializedAuthor = Author.createAuthorWithOnlyIDField(bookAuthorId);
+        Genre partiallyInitializedGenre = Genre.createGenreWithOnlyIDField(bookGenreId);
         return new Book(bookId, bookTitle, partiallyInitializedAuthor, bookStock, partiallyInitializedGenre);
     }
 }

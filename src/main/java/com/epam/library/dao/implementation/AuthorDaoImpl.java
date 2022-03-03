@@ -21,7 +21,6 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
     protected Map<String, Object> extractFields(Author item) {
         // ImmutableMap.of (...) is more beautiful :(
         return new LinkedHashMap<String, Object>() {{
-            //TODO: put(Author.ID, item.getId());
             put(Author.NAME, item.getName());
             put(Author.SURNAME, item.getSurname());
         }};

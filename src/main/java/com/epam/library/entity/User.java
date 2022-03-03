@@ -29,6 +29,11 @@ public class User extends Entity {
     }
 
 
+    public static User createUserWithIDAndLogin(Long id, String login) {
+        return new User(id, null, null, null, login, null, Role.READER);
+    }
+
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
