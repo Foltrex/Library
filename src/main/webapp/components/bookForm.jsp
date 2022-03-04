@@ -20,12 +20,14 @@
       <div class="col-75">
         <select id="author" name="bookAuthor">
             <c:forEach var="author" items="${authors}">
-                <c:if test="${author.id == book.author.id }">
+              <c:choose>
+                <c:when test="${ not empty book && not empty book.author && not empty book.author.id  && author.id == book.author.id }">
                   <option value="${author.id}" selected>${author.name} ${author.surname}</option>
-                </c:if>
-                <c:if test="${author.id != book.author.id}">
+                </c:when>
+                <c:otherwise>
                   <option value="${author.id}">${author.name} ${author.surname}</option>
-                </c:if>
+                </c:otherwise>
+              </c:choose>
             </c:forEach>
         </select>
       </div>
@@ -47,12 +49,14 @@
         <div class="col-75">
           <select id="genre" name="bookGenre">
               <c:forEach var="genre" items="${genres}">
-                <c:if test="${genre.id == book.genre.id}">
-                  <option value="${genre.id}" selected>${genre.name}</option>
-                </c:if>
-                <c:if test="${genre.id != book.genre.id}">
-                  <option value="${genre.id}">${genre.name}</option>
-                </c:if>
+                <c:choose>
+                  <c:when test="${ not empty book && not empty book.genre && genre.id == book.genre.id}">
+                    <option value="${genre.id}" selected>${genre.name}</option>
+                  </c:when>
+                  <c:otherwise>
+                    <option value="${genre.id}">${genre.name}</option>
+                  </c:otherwise>
+                </c:choose>
               </c:forEach>
           </select>
         </div>

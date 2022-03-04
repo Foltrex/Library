@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Style the search field */
+  form.bookSearch input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 70%;
+    background: #f1f1f1;
+  }
+  
+  /* Style the submit button */
+  form.bookSearch button {
+    float: left;
+    width: 10%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  
+  form.bookSearch button:hover {
+    background: #0b7dda;
+  }
+  
+  /* Clear floats */
+  form.bookSearch::after {
+    content: "";
+    clear: both;
+    display: table;
+  }

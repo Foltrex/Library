@@ -22,6 +22,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
             "INNER JOIN authors ON author_id = authors.id",
             "INNER JOIN genres ON genre_id = genres.id");
 
+    private static final String SELECT_BOOKS_BY_TITLE = String.format("%s %s", SELECT_BOOKS, "WHERE title=?");
+
 
     public BookDaoImpl(Connection connection) {
         super(connection, new BookRowMapper(), Book.TABLE);
@@ -41,6 +43,12 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     @Override
     public void saveBook(Book book) throws DaoException {
         save(book);
+    }
+
+    @Override
+    public List<Book> searchBookByTitle(String title) throws DaoException {
+        return title != null && !title.isEmpty() ? executeQuery(SELECT_BOOKS_BY_TITLE, title)
+                                                 : executeQuery(SELECT_BOOKS);
     }
 
 

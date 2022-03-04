@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
+    List<Book> searchByTitle(String title) throws ServiceException;
+
     List<Book> getBooks() throws ServiceException;
 
     Optional<Book> getBook(long id) throws ServiceException;

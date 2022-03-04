@@ -36,7 +36,7 @@ public class ShowBookDetailsCommand implements Command {
 
         Optional<Book> optionalBook = bookService.getBook(id);
 
-        // for full list of authors
+        // for full list of authors and genres
         List<Author> authors = authorService.getAuthors();
         List<Genre> genres = genreService.getGenres();
 

@@ -18,6 +18,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> searchByTitle(String title) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookDao dao = helper.createBookDao();
+            List<Book> books = dao.searchBookByTitle(title);
+            helper.endTransaction();
+            return books;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Book> getBooks() throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

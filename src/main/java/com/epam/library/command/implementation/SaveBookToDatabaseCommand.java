@@ -32,7 +32,8 @@ public class SaveBookToDatabaseCommand implements Command {
     }
 
     private Book extractBookFromRequest(HttpServletRequest req) {
-        Long bookId = Long.valueOf(req.getParameter("bookId"));
+        String bookIdParam = req.getParameter("bookId");
+        Long bookId = bookIdParam != null && !bookIdParam.isEmpty() ? Long.valueOf(bookIdParam) : null;
         String bookTitle = req.getParameter("bookTitle");
         Long bookAuthorId = Long.valueOf(req.getParameter("bookAuthor"));
         int bookStock = Integer.parseInt(req.getParameter("bookStock"));

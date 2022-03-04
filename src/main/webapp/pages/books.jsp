@@ -12,6 +12,7 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${pageContext.request.contextPath}/CSS/searchBar.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/booksTable.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/books.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
@@ -33,6 +34,14 @@
     
     <div class="books">
       <h2><fmt:message key="books.title" /></h2>
+      <jsp:include page="../components/searchBar.jsp" />
+      <c:if test="${ userRole.roleName == 'admin' }">
+        <form method="post" action="controller?command=add_book">
+          <button type="submit">
+            <i class="fa fa-plus" style="font-size:36px"></i>
+          </button>
+        </form>
+      </c:if>
       <jsp:include page="../components/booksTable.jsp" />
     </div>
 
