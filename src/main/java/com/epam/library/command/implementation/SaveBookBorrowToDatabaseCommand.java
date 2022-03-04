@@ -4,15 +4,15 @@ import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.BookRentalService;
+import com.epam.library.service.BookBorrowService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SaveBookRentalToDatabaseCommand implements Command {
+public class SaveBookBorrowToDatabaseCommand implements Command {
 
-    private final BookRentalService bookRentalService;
+    private final BookBorrowService bookRentalService;
 
-    public SaveBookRentalToDatabaseCommand(BookRentalService bookRentalService) {
+    public SaveBookBorrowToDatabaseCommand(BookBorrowService bookRentalService) {
         this.bookRentalService = bookRentalService;
     }
 

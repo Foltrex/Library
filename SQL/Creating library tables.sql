@@ -32,7 +32,7 @@ CREATE TABLE users (
     role enum ('admin', 'librarian', 'reader') NOT NULL
 );
 
-CREATE TABLE rentals (
+CREATE TABLE borrows (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     book_id INT NOT NULL,

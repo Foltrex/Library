@@ -9,11 +9,20 @@
         <p>Author surname: ${book.author.surname}</p>
         <p>Stock: ${book.stock}</p>
         <p>Genre: ${book.genre.name}</p>
-        <form method="post" action="controller?command=show_book_details">
-          <input type="hidden" name="id" value="${book.id}">
-          <button type="submit">Change book</button>
-        </form>
-        <!-- add dropdown for ordering or changing -->
+
+        <c:if test="${ userRole.roleName == 'reader' }">
+          <form method="post" action="controller?command=borrow_book">
+            <input type="hidden" name="id" value="${book.id}">
+            <button type="submit">Borrow book</button>
+          </form>
+        </c:if>
+
+        <c:if test="${ userRole.roleName == 'admin'}">
+          <form method="post" action="controller?command=show_book_details">
+            <input type="hidden" name="id" value="${book.id}">
+            <button type="submit">Change book</button>
+          </form>
+        </c:if>
       </li>
       <hr>
     </c:forEach>

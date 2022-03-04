@@ -17,9 +17,9 @@
   <div class="sidebar_inner">
     <ul>
       <li>
-        <a href="${pageContext.request.contextPath}/controller?command=show_rentals">
+        <a href="${pageContext.request.contextPath}/controller?command=show_borrows">
           <span class="icon"><i class="fa fa-qrcode"></i></span>
-          <span class="text">Orders</span>
+          <span class="text">Borrows</span>
         </a>
       </li>
   

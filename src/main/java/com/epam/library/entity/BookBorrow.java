@@ -2,9 +2,9 @@ package com.epam.library.entity;
 
 import java.util.Date;
 
-public class BookRental extends Entity {
+public class BookBorrow extends Entity {
 
-    public static final String TABLE = "rentals";
+    public static final String TABLE = "borrows";
 
     public static final String USER_ID = "user_id";
     public static final String USER_LOGIN = "user_login";
@@ -18,15 +18,15 @@ public class BookRental extends Entity {
     private Book rentedBook;
     private Date borrowDate;
     private Date returnDate;
-    private RentalStatus rentalStatus;
+    private BorrowStatus borrowStatus;
 
-    public BookRental(Long id, User user, Book rentedBook, Date borrowDate, Date returnDate, RentalStatus rentalStatus) {
+    public BookBorrow(Long id, User user, Book rentedBook, Date borrowDate, Date returnDate, BorrowStatus borrowStatus) {
         super(id);
         this.user = user;
         this.rentedBook = rentedBook;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
-        this.rentalStatus = rentalStatus;
+        this.borrowStatus = borrowStatus;
     }
 
     public User getUser() {
@@ -61,11 +61,11 @@ public class BookRental extends Entity {
         this.returnDate = returnDate;
     }
 
-    public RentalStatus getRentalStatus() {
-        return rentalStatus;
+    public BorrowStatus getBorrowStatus() {
+        return borrowStatus;
     }
 
-    public void setRentalStatus(RentalStatus rentalStatus) {
-        this.rentalStatus = rentalStatus;
+    public void setBorrowStatus(BorrowStatus borrowStatus) {
+        this.borrowStatus = borrowStatus;
     }
 }

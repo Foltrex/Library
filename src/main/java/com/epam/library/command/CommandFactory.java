@@ -17,19 +17,21 @@ public class CommandFactory {
                 return new LogoutCommand();
             case "change_language":
                 return new ChangeLocaleCommand();
-            case "show_rentals":
-                return new ShowBookRentalsListCommand(new BookRentalServiceImpl(factory));
-            case "change_rental":
-                return new ChangeRentalCommand(new BookRentalServiceImpl(factory));
-            case "delete_rental":
-                return new DeleteRentalCommand(new BookRentalServiceImpl(factory));
-            case "save_rental":
-                return new SaveBookRentalToDatabaseCommand(new BookRentalServiceImpl(factory));
+            case "show_borrows":
+                return new ShowBookBorrowsListCommand(new BookBorrowServiceImpl(factory));
+            case "change_borrow":
+                return new ChangeBorrowCommand(new BookBorrowServiceImpl(factory));
+            case "delete_borrow":
+                return new DeleteBorrowCommand(new BookBorrowServiceImpl(factory));
+            case "save_borrow":
+                return new SaveBookBorrowToDatabaseCommand(new BookBorrowServiceImpl(factory));
             case "show_book_details":
                 return new ShowBookDetailsCommand
                         (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
             case "show_books":
                 return new ShowBooksCommand(new BookServiceImpl(factory));
+            case "borrow_book":
+                return new BorrowBookCommand(new BookBorrowServiceImpl(factory));
             case "save_book_to_database":
                 return new SaveBookToDatabaseCommand(new BookServiceImpl(factory));
             case "show_readers":

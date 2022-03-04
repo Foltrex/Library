@@ -2,7 +2,7 @@ package com.epam.library.entity;
 
 import java.io.Serializable;
 
-public enum RentalStatus implements Serializable {
+public enum BorrowStatus implements Serializable {
     WAITING_FOR_ISSUANCE("waiting for issuance"),
     ISSUED_TO_THE_READING_ROOM("issued to the reading room"),
     ISSUED_FOR_SUBSCRIPTION("issued for subscription"),
@@ -13,13 +13,13 @@ public enum RentalStatus implements Serializable {
     private static final String SPACE = " ";
     private static final String UNDERSCORE = "_";
 
-    RentalStatus(String status) {
+    BorrowStatus(String status) {
         this.status = status;
     }
 
-    public static RentalStatus valueOfStatus(String status) {
+    public static BorrowStatus valueOfStatus(String status) {
         status = status.toUpperCase().replaceAll(SPACE, UNDERSCORE);
-        return RentalStatus.valueOf(status);
+        return BorrowStatus.valueOf(status);
     }
 
     public String getStatusName() {
