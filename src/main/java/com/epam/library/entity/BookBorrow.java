@@ -29,6 +29,10 @@ public class BookBorrow extends Entity {
         this.borrowStatus = borrowStatus;
     }
 
+    public static BookBorrow borrow(User user, Book book) {
+        return new BookBorrow(null, user, book, null, null, BorrowStatus.WAITING_FOR_ISSUANCE);
+    }
+
     public User getUser() {
         return user;
     }

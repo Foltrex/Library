@@ -26,7 +26,7 @@ public class BookBorrowDaoImpl extends AbstractDao<BookBorrow> implements BookBo
         super(connection, new BookBorrowRowMapper(), BookBorrow.TABLE);
     }
 
-    // TODO: implementation
+
     @Override
     protected Map<String, Object> extractFields(BookBorrow item) {
         // ImmutableMap.of (...) is more beautiful :(

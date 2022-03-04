@@ -1,19 +1,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <form method="post" action="controller?command=save_borrow">
-
       <input type="hidden" name="bookBorrowId" value="${bookBorrow.id}">
+      <input type="hidden" name="userId" value="${bookBorrow.user.id}">
 
       <div class="row">
         <div class="col-25">
           <label for="user">User:</label>
         </div>
         <div class="col-75">
-          <input type="text" id="user-id" name="user" value="${bookBorrow.user.login}" readonly>
+          <input type="text" id="user-login" name="userLogin" value="${bookBorrow.user.login}" readonly>
         </div>
       </div>
 
-      
+      <input type="hidden" name="bookId" value="${bookBorrow.rentedBook.id}">
+
+      <div class="row">
+        <div class="col-25">
+          <label for="user">Book:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="user-title" name="bookTitle" value="${bookBorrow.rentedBook.title}" readonly>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-25">

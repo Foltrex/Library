@@ -22,7 +22,6 @@ public class ShowBooksCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        // TODO: about offset and booksCount
         List<Book> books = bookService.getBooks();
         req.setAttribute("books", books);
         return CommandResult.forward(BOOKS_PAGE);

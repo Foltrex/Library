@@ -25,6 +25,10 @@ public class Book extends Entity {
         this.genre = genre;
     }
 
+    public static Book createBookWithOnlyId(Long id) {
+        return new Book(id, null, null,0, null);
+    }
+
     public static Book createBookWithIDAndTitle(Long id, String title) {
         return new Book(id, title, null, 0, null);
     }

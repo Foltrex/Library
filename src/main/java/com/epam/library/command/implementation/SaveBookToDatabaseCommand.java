@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SaveBookToDatabaseCommand implements Command {
 
-    private static final String BOOKS_PAGE = "/pages/books.jsp";
+    private static final String MAIN_PAGE = "/pages/books.jsp";
 
     private final BookService service;
 
@@ -28,7 +28,7 @@ public class SaveBookToDatabaseCommand implements Command {
         service.saveBook(book);
         List<Book> books = service.getBooks();
         req.setAttribute("books", books);
-        return CommandResult.forward(BOOKS_PAGE);
+        return CommandResult.forward(MAIN_PAGE);
     }
 
     private Book extractBookFromRequest(HttpServletRequest req) {

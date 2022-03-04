@@ -19,7 +19,7 @@
               <td>${borrow.returnDate}</td>
               <td>${borrow.borrowStatus.statusName}</td>
               <td>
-                <c:if test="${ userRole.roleName == 'admin' }">
+                <c:if test="${ userRole.roleName == 'librarian' }">
                   <form method="post" action="controller?command=change_borrow">
                       <input type="hidden" name="bookBorrowId" value="${borrow.id}">
                       <button type="submit">Change</button>

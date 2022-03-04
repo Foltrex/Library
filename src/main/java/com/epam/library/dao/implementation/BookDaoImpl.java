@@ -43,7 +43,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
         save(book);
     }
 
-    // TODO: change author saving in table
 
     @Override
     protected Map<String, Object> extractFields(Book item) {

@@ -71,7 +71,6 @@ public class ConnectionPool {
         connectionsLock.lock();
         ProxyConnection proxyConnection = null;
         try {
-            // TODO: acquire of tryAcquire ?
             semaphore.acquire();
             proxyConnection =  availableConnections.poll();
             connectionsInUse.add(proxyConnection);

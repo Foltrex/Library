@@ -36,8 +36,8 @@ CREATE TABLE borrows (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     book_id INT NOT NULL,
-    borrow_date DATE NOT NULL,
-    return_date DATE NOT NULL,
+    borrow_date DATE,
+    return_date DATE,
     status enum ('waiting for issuance', 'issued to the reading room', 'issued for subscription', 'returned') NOT NULL,
     FOREIGN KEY (book_id) REFERENCES books (id),
     FOREIGN KEY (user_id) REFERENCES users (id)

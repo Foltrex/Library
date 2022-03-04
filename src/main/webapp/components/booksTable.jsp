@@ -12,7 +12,8 @@
 
         <c:if test="${ userRole.roleName == 'reader' }">
           <form method="post" action="controller?command=borrow_book">
-            <input type="hidden" name="id" value="${book.id}">
+            <input type="hidden" name="userId" value="${userId}">
+            <input type="hidden" name="bookId" value="${book.id}">
             <button type="submit">Borrow book</button>
           </form>
         </c:if>
@@ -23,6 +24,7 @@
             <button type="submit">Change book</button>
           </form>
         </c:if>
+
       </li>
       <hr>
     </c:forEach>

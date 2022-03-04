@@ -14,16 +14,16 @@ public class ShowBookBorrowsListCommand implements Command {
 
     private static final String BORROWS_PAGE = "/pages/booksBorrows.jsp";
 
-    private final BookBorrowService rentalService;
+    private final BookBorrowService borrowService;
 
 
     public ShowBookBorrowsListCommand(BookBorrowService borrowService) {
-        this.rentalService = borrowService;
+        this.borrowService = borrowService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        List<BookBorrow> borrows = rentalService.getBorrows();
+        List<BookBorrow> borrows = borrowService.getBorrows();
         req.setAttribute("borrows", borrows);
         return CommandResult.forward(BORROWS_PAGE);
     }

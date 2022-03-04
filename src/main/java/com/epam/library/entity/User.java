@@ -28,6 +28,9 @@ public class User extends Entity {
         this.role = role;
     }
 
+    public static User createUserWithOnlyId(Long id) {
+        return new User(id, null, null, null, null, null, Role.READER);
+    }
 
     public static User createUserWithIDAndLogin(Long id, String login) {
         return new User(id, null, null, null, login, null, Role.READER);
