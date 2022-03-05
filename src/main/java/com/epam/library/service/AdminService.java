@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface AdminService {
     List<User> getUsers(Role role) throws ServiceException;
+
+    void changeUserBlocking(Long id, Boolean isBanned) throws ServiceException;
 }

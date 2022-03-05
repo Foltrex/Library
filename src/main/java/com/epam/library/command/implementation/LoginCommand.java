@@ -33,13 +33,16 @@ public class LoginCommand implements Command {
         Optional<User> user = service.login(login, password);
 
         CommandResult result;
-        if (user.isPresent() && checker.verify(gReCaptchaResponse)) {
+        if (user.isPresent() && !user.get().isBanned() && checker.verify(gReCaptchaResponse)) {
             HttpSession httpSession = request.getSession();
 
             User registeredUser = user.get();
             httpSession.setAttribute("userId", registeredUser.getId());
             httpSession.setAttribute("userRole", registeredUser.getRole());
             result = CommandResult.redirect(request.getContextPath() + MAIN_PAGE_COMMAND);
+        } else if (user.isPresent() && user.get().isBanned()) {
+            request.setAttribute("errorLoginPassMessage", "You was banned by admin");
+            result = CommandResult.forward(LOGIN_PAGE);
         } else {
             request.setAttribute("errorLoginPassMessage", "Invalid credentials or you're a robot");
             result = CommandResult.forward(LOGIN_PAGE);

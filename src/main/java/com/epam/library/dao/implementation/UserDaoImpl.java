@@ -17,6 +17,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
     private static final String SELECT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE login = ? AND password = MD5(?)";
     private static final String SELECT_BY_ROLE = "SELECT * FROM users WHERE role = ?";
 
+    private static final String UPDATE_USER_BLOCKING = "UPDATE users SET is_banned = ? WHERE id = ?";
+
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), User.TABLE);
     }
@@ -28,6 +30,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
                 login,
                 password
         );
+    }
+
+    @Override
+    public void updateUserBlockingById(Long id, Boolean isBanned) throws DaoException {
+        executeUpdate(UPDATE_USER_BLOCKING, isBanned, id);
     }
 
     @Override
@@ -48,6 +55,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
            put(User.LOGIN, item.getLogin());
            put(User.PASSWORD, DigestUtils.md5Hex(item.getPassword()));
            put(User.ROLE, item.getRole().getRoleName());
+           put(User.IS_BANNED, item.isBanned());
         }};
     }
 }

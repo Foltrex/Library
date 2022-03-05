@@ -1,39 +1,40 @@
 package com.epam.library.command.implementation;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
-import com.epam.library.entity.Role;
-import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AdminService;
+import com.epam.library.entity.Role;
+import com.epam.library.entity.User;
 
-import java.util.List;
-
-public class ShowUsersCommand implements Command {
+public class ChangeUserBlockingCommand implements Command {
 
     private static final String READERS_PAGE = "/pages/readers.jsp";
     private static final String LIBRARIANS_PAGE = "/pages/librarians.jsp";
 
-
     private final AdminService adminService;
-    private final Role showingUsersRole;
 
-    public ShowUsersCommand(AdminService adminService, Role role) {
+    public ChangeUserBlockingCommand(AdminService adminService) {
         this.adminService = adminService;
-        this.showingUsersRole = role;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
+        Long bannedUserId = Long.valueOf(req.getParameter("userId"));
+        Role bannedUserRole = Role.valueOf(req.getParameter("userRole"));
+        Boolean isBanned = Boolean.valueOf(req.getParameter("userBlocking"));
 
-        List<User> users = adminService.getUsers(showingUsersRole);
-        req.setAttribute("users", users.toArray());
+        adminService.changeUserBlocking(bannedUserId, isBanned);
 
-        switch (showingUsersRole) {
+        List<User> users = adminService.getUsers(bannedUserRole);
+        req.setAttribute("users", users);
+
+        switch (bannedUserRole) {
             case LIBRARIAN:
                 return CommandResult.forward(LIBRARIANS_PAGE);
             case READER:
@@ -42,4 +43,5 @@ public class ShowUsersCommand implements Command {
                 throw new PageCommandException("Wrong role to show");
         }
     }
+    
 }

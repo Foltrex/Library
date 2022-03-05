@@ -9,6 +9,7 @@ public class User extends Entity {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String ROLE = "role";
+    public static final String IS_BANNED = "is_banned";
 
     private String name;
     private String surname;
@@ -16,9 +17,11 @@ public class User extends Entity {
     private String login;
     private String password;
     private Role role;
+    private boolean isBanned;
 
 
-    public User(Long id, String name, String surname, String phoneNumber, String login, String password, Role role) {
+    public User(Long id, String name, String surname, String phoneNumber,
+                String login, String password, Role role, boolean isBanned) {
         super(id);
         this.name = name;
         this.surname = surname;
@@ -26,14 +29,25 @@ public class User extends Entity {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.isBanned = isBanned;
     }
 
     public static User createUserWithOnlyId(Long id) {
-        return new User(id, null, null, null, null, null, Role.READER);
+        return new User(id, null, null, null,
+                    null, null, Role.READER, false);
+    }
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
     }
 
     public static User createUserWithIDAndLogin(Long id, String login) {
-        return new User(id, null, null, null, login, null, Role.READER);
+        return new User(id, null, null, null,
+                        login, null, Role.READER, false);
     }
 
 

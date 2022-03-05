@@ -24,6 +24,7 @@ public class CommandFactory {
     private static final String SAVE_BOOK_TO_DATABASE_COMMAND = "save_book_to_database";
     private static final String ADD_BOOK_COMMAND = "add_book";
 
+    private static final String BAN_USER_COMMAND = "change_user_blocking";
     private static final String SHOW_READERS_COMMAND = "show_readers";
     private static final String SHOW_LIBRARIANS_COMMAND = "show_librarians";
 
@@ -64,6 +65,8 @@ public class CommandFactory {
                 return new SaveBookToDatabaseCommand(new BookServiceImpl(factory));
             case ADD_BOOK_COMMAND:
                 return new AddBookCommand(new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
+            case BAN_USER_COMMAND:
+                return new ChangeUserBlockingCommand(new AdminServiceImpl(factory));
             case SHOW_READERS_COMMAND:
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.READER);
             case SHOW_LIBRARIANS_COMMAND:

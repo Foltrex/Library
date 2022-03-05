@@ -30,4 +30,16 @@ public class AdminServiceImpl implements AdminService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void changeUserBlocking(Long id, Boolean isBanned) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            dao.updateUserBlockingById(id, isBanned);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
