@@ -23,22 +23,6 @@
         </a>
       </li>
   
-      <c:if test="${userRole.roleName == 'admin'}">
-        <li>
-          <a href="${pageContext.request.contextPath}/controller?command=show_readers">
-            <span class="icon"><i class="fas fa-user-alt"></i></span>
-            <span class="text">Readers</span>
-          </a>
-        </li>
-    
-        <li>
-          <a href="${pageContext.request.contextPath}/controller?command=show_librarians">
-            <span class="icon"><i class="fas fa-user-alt"></i></span>
-            <span class="text">Librarians</span>
-          </a>
-        </li>
-      </c:if>
-  
       <li>
         <a href="${pageContext.request.contextPath}/controller?command=show_books">
           <span class="icon"><i class="fa fa-book"></i></span>
@@ -46,12 +30,23 @@
         </a>
       </li>
   
-      <li>
-        <a href="#">
-          <span class="icon"><i class="fa fa-question-circle"></i></span>
-          <span class="text">About</span>
-        </a>
-      </li>
+      <c:if test="${userRole.roleName == 'admin'}">
+        <li>
+          <button class="dropdown-btn">
+            <span class="icon"><i class="fas fa-user-alt"></i></span>
+            <span class="text">Users</span>
+            <span class="icon arrow"><i class="fa fa-caret-down"></i></span>
+          </button>
+          <div class="dropdown-container">
+            <a href="${pageContext.request.contextPath}/controller?command=show_librarians">
+              <span class="sub-element">Librarians</span>
+            </a>
+            <a href="${pageContext.request.contextPath}/controller?command=show_readers">
+              <span class="sub-element">Readers</span>
+            </a>
+          </div>
+        </li>
+      </c:if>
     </ul>
   </div>
 </div>

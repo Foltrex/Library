@@ -1,10 +1,4 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="navbar">
-    <div class="library">
-        <a href="${pageContext.request.contextPath}/controller?command=show_books">Library</a>
-    </div>
-    <jsp:include page="./dropDown.jsp" />
-</div> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="top_navbar">
     <div class="logo">
         <a href="${pageContext.request.contextPath}/controller?command=show_books">Library</a>
@@ -16,6 +10,14 @@
         </div>
         
         <jsp:include page="./dropDown.jsp" />
+        
+        <c:if test="${ not empty userId }">
+            <form action="controller?command=logout" method="post">
+                <button>
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </form>
+        </c:if>
     </div>
 </div>
 	
