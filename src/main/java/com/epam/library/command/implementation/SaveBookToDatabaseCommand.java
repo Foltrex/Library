@@ -16,6 +16,8 @@ public class SaveBookToDatabaseCommand implements Command {
 
     private static final String MAIN_PAGE = "/pages/books.jsp";
 
+    private static final int RECORDS_PER_PAGE = 3;
+
     private final BookService service;
 
     public SaveBookToDatabaseCommand(BookService service) {
@@ -26,8 +28,17 @@ public class SaveBookToDatabaseCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         Book book = extractBookFromRequest(req);
         service.saveBook(book);
-        List<Book> books = service.getBooks();
+
+        int currentPage = 1;
+        List<Book> books = service.findPartOfBooks(currentPage, RECORDS_PER_PAGE);
+        int totalRows = service.calculateBooksNumber();
+
+        int numberOfPages = (int) Math.ceil(totalRows * 1.0 / RECORDS_PER_PAGE);
+
         req.setAttribute("books", books);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("numberOfPages", numberOfPages);
+
         return CommandResult.forward(MAIN_PAGE);
     }
 

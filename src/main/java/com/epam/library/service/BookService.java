@@ -18,4 +18,8 @@ public interface BookService {
     Optional<Book> searchBookById(long id) throws ServiceException;
 
     void saveBook(Book book) throws ServiceException;
+
+    List<Book> findPartOfBooks(int currentPage, int recordsPerPage) throws ServiceException;
+
+    int calculateBooksNumber() throws ServiceException;
 }

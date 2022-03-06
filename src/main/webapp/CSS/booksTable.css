@@ -3,3 +3,11 @@ ol li {
   padding:5px;
   margin:2px;
 }
+
+h2.title {
+  display: flex;
+}
+
+button.icon {
+  margin-right: 10px;
+}

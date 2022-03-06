@@ -18,4 +18,8 @@ public interface BookDao {
     void saveBook(Book book) throws DaoException;
 
     List<Book> searchBooksByTitle(String title) throws DaoException;
+
+    int calculateBooksNumber() throws DaoException;
+
+    List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException;
 }

@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://kit.fontawesome.com/1f4939e33e.js" crossorigin="anonymous"></script>
 
 <c:if test="${sessionScope.locale == null}">
     <c:set var="locale" value="en_US" scope="session"/>
@@ -19,6 +20,7 @@
     <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/sidebar.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/pagination.css" rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/js/layout.js"></script>
     <script src="${pageContext.request.contextPath}/js/changeLang.js"></script>
     <script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
@@ -41,15 +43,20 @@
           (${genre.name})
         </c:if>
       </h2>
-      <jsp:include page="../components/searchBar.jsp" />
-      <c:if test="${ userRole.roleName == 'admin' }">
-        <form method="post" action="controller?command=add_book">
-          <button type="submit">
-            <i class="fa fa-plus" style="font-size:36px"></i>
-          </button>
-        </form>
-      </c:if>
+      <div class="tool_panel">
+        <jsp:include page="../components/searchBar.jsp" />
+        <c:if test="${ userRole.roleName == 'admin' }">
+          <form method="post" action="controller?command=add_book">
+            <button type="submit">
+              <i class="fa fa-plus" style="font-size:36px"></i>
+            </button>
+          </form>
+        </c:if>
+      </div>
+
       <jsp:include page="../components/booksTable.jsp" />
+
+      <jsp:include page="../components/pagination.jsp" />
     </div>
 
     <!-- Footer -->

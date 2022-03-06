@@ -6,8 +6,8 @@ import com.epam.library.entity.Book;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.BookRowMapper;
 
-import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +35,12 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
+    public List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
+        String query = SELECT_BOOKS + " LIMIT ?, ?";
+        return executeQuery(query, startingPosition, recordsPerPage);
+    }
+
+    @Override
     public Optional<Book> searchBookById(long id) throws DaoException {
         String condition = String.format("WHERE %s.id = ?", Book.TABLE);
         return executeForSingleResult(SELECT_BOOKS + condition, id);
@@ -59,10 +65,13 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
     @Override
     public List<Book> searchBooksByTitle(String title) throws DaoException {
-        return title != null && !title.isEmpty() ? executeQuery(SELECT_BOOKS_BY_TITLE, title)
-                                                 : executeQuery(SELECT_BOOKS);
+        return executeQuery(SELECT_BOOKS_BY_TITLE, title);
     }
 
+    @Override
+    public int calculateBooksNumber() throws DaoException {
+        return calculateNumberOfRows();
+    }
 
     @Override
     protected Map<String, Object> extractFields(Book item) {

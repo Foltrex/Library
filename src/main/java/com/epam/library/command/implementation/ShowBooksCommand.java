@@ -14,6 +14,8 @@ public class ShowBooksCommand implements Command {
 
     private static final String BOOKS_PAGE = "/pages/books.jsp";
 
+    private static final int RECORDS_PER_PAGE = 3;
+
     private final BookService bookService;
 
     public ShowBooksCommand(BookService bookService) {
@@ -22,8 +24,22 @@ public class ShowBooksCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        List<Book> books = bookService.getBooks();
+        int currentPage;
+        if (req.getParameter("currentPage") != null) {
+            currentPage = Integer.parseInt(req.getParameter("currentPage"));
+        } else {
+            currentPage = 1;
+        }
+
+        List<Book> books = bookService.findPartOfBooks(currentPage, RECORDS_PER_PAGE);
+        int totalRows = bookService.calculateBooksNumber();
+
+        int numberOfPages = (int) Math.ceil(totalRows * 1.0 / RECORDS_PER_PAGE);
+
         req.setAttribute("books", books);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("numberOfPages", numberOfPages);
+
         return CommandResult.forward(BOOKS_PAGE);
     }
 }

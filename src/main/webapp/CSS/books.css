@@ -2,3 +2,16 @@
 .books {
 	margin: 0 0 0 90px;
 }
+
+.tool_panel {
+    display: inline-flex;
+    width: 1000px;
+    justify-content: space-between;
+	align-items: center;
+    /* margin: 0 90px 0 0; */
+}
+
+form.bookSearch {
+    margin-right: 20px;
+    width: 1000px;
+}

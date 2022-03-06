@@ -93,4 +93,31 @@ public class BookServiceImpl implements BookService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<Book> findPartOfBooks(int currentPage, int recordsPerPage) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookDao dao = helper.createBookDao();
+            int startingPosition = currentPage * recordsPerPage - recordsPerPage;
+            List<Book> books = dao.getBooksFromPosition(startingPosition, recordsPerPage);
+            helper.endTransaction();
+            return books;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int calculateBooksNumber() throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookDao dao = helper.createBookDao();
+            int numberOfRows = dao.calculateBooksNumber();
+            helper.endTransaction();
+            return numberOfRows;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

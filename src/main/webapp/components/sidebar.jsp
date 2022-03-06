@@ -12,6 +12,7 @@
 
 <div class="closeNav" onclick="closeNav()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://kit.fontawesome.com/1f4939e33e.js" crossorigin="anonymous"></script>
 
 <div class="sidebar">
   <div class="sidebar_inner">
@@ -25,7 +26,7 @@
   
       <li>
         <a href="${pageContext.request.contextPath}/controller?command=show_authors">
-          <span class="icon"><i class="fas fa-user-alt"></i></span>
+          <span class="icon"><i class="fa-solid fa-feather-pointed"></i></i></span>
           <span class="text">Authors</span>
         </a>
       </li>

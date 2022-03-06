@@ -40,9 +40,29 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T> {
         return executeForSingleResult(query, id);
     }
 
+    public int calculateNumberOfRows() throws DaoException {
+        try {
+            Statement statement = connection.createStatement();
+
+            String columnName = "rows_number";
+            String query = String.format("SELECT COUNT(id) AS %s FROM %s", columnName, table);
+            ResultSet rs = statement.executeQuery(query);
+
+            return rs.next() ? rs.getInt(columnName) : 0;
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     public List<T> getAll() throws DaoException {
         String query = String.format("SELECT * FROM %s;", table);
         return executeQuery(query);
+    }
+
+    public List<T> getFixedNumberOfRecordsFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
+        String query = String.format("SELECT * FROM %s LIMIT ?, ?", table);
+        return executeQuery(query,startingPosition, recordsPerPage);
     }
 
     @Override
