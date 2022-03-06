@@ -29,7 +29,8 @@ CREATE TABLE users (
     phone_number VARCHAR(15) NOT NULL,
     login VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(32) NOT NULL,
-    role enum ('admin', 'librarian', 'reader') NOT NULL
+    role enum ('admin', 'librarian', 'reader') NOT NULL,
+    is_banned BOOLEAN NOT NULL DEFAULT FALSE;
 );
 
 CREATE TABLE borrows (
