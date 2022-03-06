@@ -29,4 +29,9 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao {
     public List<Genre> getGenres() throws DaoException {
         return getAll();
     }
+
+    @Override
+    public void saveGenre(Genre genre) throws DaoException {
+        save(genre);
+    }
 }

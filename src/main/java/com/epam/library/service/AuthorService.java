@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AuthorService {
     List<Author> getAuthors() throws ServiceException;
+
+    void saveAuthor(Author author) throws ServiceException;
 }

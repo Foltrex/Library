@@ -11,4 +11,6 @@ public interface GenreService {
 
     List<Genre> getGenres() throws ServiceException;
 
+    void saveGenre(Genre genre) throws ServiceException;
+
 }

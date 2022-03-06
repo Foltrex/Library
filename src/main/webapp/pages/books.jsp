@@ -33,7 +33,14 @@
     </div>
     
     <div class="books">
-      <h2><fmt:message key="books.title" /></h2>
+      <h2><fmt:message key="books.title"/>
+        <c:if test="${not empty author}">
+          (${author.name} ${author.surname})
+        </c:if>
+        <c:if test="${not empty genre}">
+          (${genre.name})
+        </c:if>
+      </h2>
       <jsp:include page="../components/searchBar.jsp" />
       <c:if test="${ userRole.roleName == 'admin' }">
         <form method="post" action="controller?command=add_book">

@@ -24,6 +24,20 @@
       </li>
   
       <li>
+        <a href="${pageContext.request.contextPath}/controller?command=show_authors">
+          <span class="icon"><i class="fas fa-user-alt"></i></span>
+          <span class="text">Authors</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="${pageContext.request.contextPath}/controller?command=show_genres">
+          <span class="icon"><i class='fas fa-layer-group'></i></span>
+          <span class="text">Genres</span>
+        </a>
+      </li>
+
+      <li>
         <a href="${pageContext.request.contextPath}/controller?command=show_books">
           <span class="icon"><i class="fa fa-book"></i></span>
           <span class="text">Books</span>

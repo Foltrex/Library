@@ -29,4 +29,16 @@ public class GenreServiceImpl implements GenreService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void saveGenre(Genre genre) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            GenreDao dao = helper.createGenreDao();
+            dao.saveGenre(genre);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

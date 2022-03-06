@@ -9,4 +9,6 @@ import java.util.List;
 public interface AuthorDao {
 
     List<Author> getAuthors() throws DaoException;
+
+    void saveAuthor(Author author) throws DaoException;
 }

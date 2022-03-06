@@ -34,7 +34,7 @@ public class ShowBookDetailsCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         long id = Long.parseLong(req.getParameter("id"));
 
-        Optional<Book> optionalBook = bookService.getBook(id);
+        Optional<Book> optionalBook = bookService.searchBookById(id);
 
         // for full list of authors and genres
         List<Author> authors = authorService.getAuthors();

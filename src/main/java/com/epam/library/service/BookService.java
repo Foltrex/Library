@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
-    List<Book> searchByTitle(String title) throws ServiceException;
+    List<Book> searchBooksByTitle(String title) throws ServiceException;
+
+    List<Book> searchBooksByAuthorId(Long id) throws ServiceException;
+
+    List<Book> searchBooksByGenreId(Long id) throws ServiceException;
 
     List<Book> getBooks() throws ServiceException;
 
-    Optional<Book> getBook(long id) throws ServiceException;
+    Optional<Book> searchBookById(long id) throws ServiceException;
 
     void saveBook(Book book) throws ServiceException;
 }

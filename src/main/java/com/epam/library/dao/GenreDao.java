@@ -9,4 +9,6 @@ import java.util.List;
 public interface GenreDao {
 
     List<Genre> getGenres() throws DaoException;
+
+    void saveGenre(Genre genre) throws DaoException;
 }

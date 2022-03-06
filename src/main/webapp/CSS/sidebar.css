@@ -56,7 +56,7 @@
 	width: 220px;
 	height: 100%;
 	background: #042331;
-
+  z-index: 10;
 }
 
 .sidebar ul li a{
@@ -70,10 +70,9 @@
 
 .sidebar ul li a .icon,
 .sidebar ul li button .icon {
-	font-size: 18px;
-  color: white;
-	vertical-align: middle;
-
+	  font-size: 18px;
+    color: white;
+	  vertical-align: middle;
 }
 
 .sidebar ul li a .text,

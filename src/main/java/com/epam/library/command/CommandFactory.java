@@ -28,10 +28,13 @@ public class CommandFactory {
     private static final String SHOW_READERS_COMMAND = "show_readers";
     private static final String SHOW_LIBRARIANS_COMMAND = "show_librarians";
 
-    // TODO: the following commands to do through the dropdown menu
-    private static final String ADD_AUTHORS_COMMAND = "add_author";
-    private static final String ADD_GENRES_COMMAND = "add_genre";
+    private static final String SHOW_AUTHORS_COMMAND = "show_authors";
+    private static final String ADD_AUTHOR_COMMAND = "add_author";
+    private static final String SHOW_AUTHOR_BOOKS_COMMAND = "show_author_books";
 
+    private static final String SHOW_GENRES_COMMAND = "show_genres";
+    private static final String ADD_GENRE_COMMAND = "add_genre";
+    private static final String SHOW_GENRE_BOOKS_COMMAND = "show_genre_books";
 
     private final DaoHelperFactory factory = new DaoHelperFactory();
 
@@ -71,6 +74,18 @@ public class CommandFactory {
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.READER);
             case SHOW_LIBRARIANS_COMMAND:
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.LIBRARIAN);
+            case SHOW_AUTHORS_COMMAND:
+                return new ShowAuthorsCommand(new AuthorServiceImpl(factory));
+            case ADD_AUTHOR_COMMAND:
+                return new AddAuthorCommand(new AuthorServiceImpl(factory));
+            case SHOW_AUTHOR_BOOKS_COMMAND:
+                return new ShowAuthorBooksCommand(new BookServiceImpl(factory));
+            case SHOW_GENRES_COMMAND:
+                return new ShowGenresCommand(new GenreServiceImpl(factory));
+            case ADD_GENRE_COMMAND:
+                return new AddGenreCommand(new GenreServiceImpl(factory));
+            case SHOW_GENRE_BOOKS_COMMAND:
+                return new ShowGenreBooksCommand(new BookServiceImpl(factory));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

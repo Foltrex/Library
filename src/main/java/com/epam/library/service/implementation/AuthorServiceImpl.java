@@ -33,4 +33,16 @@ public class AuthorServiceImpl implements AuthorService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void saveAuthor(Author author) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            AuthorDao dao = helper.createAuthorDao();
+            dao.saveAuthor(author);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

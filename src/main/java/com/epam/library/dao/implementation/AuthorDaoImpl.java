@@ -30,4 +30,9 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
     public List<Author> getAuthors() throws DaoException {
         return getAll();
     }
+
+    @Override
+    public void saveAuthor(Author author) throws DaoException {
+        save(author);
+    }
 }

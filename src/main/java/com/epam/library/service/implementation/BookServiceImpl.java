@@ -18,16 +18,42 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> searchByTitle(String title) throws ServiceException {
+    public List<Book> searchBooksByTitle(String title) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             BookDao dao = helper.createBookDao();
-            List<Book> books = dao.searchBookByTitle(title);
+            List<Book> books = dao.searchBooksByTitle(title);
             helper.endTransaction();
             return books;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public List<Book> searchBooksByAuthorId(Long id) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookDao dao = helper.createBookDao();
+            List<Book> authorBooks = dao.searchBooksByAuthorId(id);
+            helper.endTransaction();
+            return authorBooks;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Book> searchBooksByGenreId(Long id) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+        helper.startTransaction();
+        BookDao dao = helper.createBookDao();
+        List<Book> genreBooks = dao.searchBooksByGenreId(id);
+        helper.endTransaction();
+        return genreBooks;
+    } catch (DaoException e) {
+        throw new ServiceException(e);
+    }
     }
 
     @Override
@@ -44,11 +70,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> getBook(long id) throws ServiceException {
+    public Optional<Book> searchBookById(long id) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             BookDao dao = helper.createBookDao();
-            Optional<Book> book = dao.findBookById(id);
+            Optional<Book> book = dao.searchBookById(id);
             helper.endTransaction();
             return book;
         } catch (DaoException e) {

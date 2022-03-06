@@ -9,9 +9,13 @@ import java.util.Optional;
 public interface BookDao {
     List<Book> getBooks() throws DaoException;
 
-    Optional<Book> findBookById(long id) throws DaoException;
+    Optional<Book> searchBookById(long id) throws DaoException;
+
+    List<Book> searchBooksByAuthorId(long id) throws DaoException;
+
+    List<Book> searchBooksByGenreId(Long id) throws DaoException;
 
     void saveBook(Book book) throws DaoException;
 
-    List<Book> searchBookByTitle(String title) throws DaoException;
+    List<Book> searchBooksByTitle(String title) throws DaoException;
 }
