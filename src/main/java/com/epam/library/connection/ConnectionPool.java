@@ -71,6 +71,7 @@ public class ConnectionPool {
         connectionsLock.lock();
         ProxyConnection proxyConnection = null;
         try {
+            // if the pool is empty, then wait for at least one connection to become free
             semaphore.acquire();
             proxyConnection =  availableConnections.poll();
             connectionsInUse.add(proxyConnection);

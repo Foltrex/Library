@@ -32,7 +32,7 @@
     </div>
     
     <div class="books">
-      <h2><fmt:message key="borrows.title" /></h2>
+      <h2><fmt:message key="rental.title" /></h2>
       <jsp:include page="../components/borrowsTable.jsp" />
     </div>
 

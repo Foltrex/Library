@@ -7,84 +7,57 @@ import com.epam.library.service.implementation.*;
 
 public class CommandFactory {
 
-    private static final String LOGIN_COMMAND = "login";
-    private static final String LOGOUT_COMMAND = "logout";
-
-    private static final String CHANGE_LOCALE_COMMAND = "change_language";
-
-    private static final String SHOW_BORROWS_COMMAND = "show_borrows";
-    private static final String CHANGE_BORROW_COMMAND = "change_borrow";
-    private static final String DELETE_BORROW_COMMAND = "delete_borrow";
-    private static final String SAVE_BORROW_COMMAND = "save_borrow";
-    private static final String SHOW_BOOKS_COMMAND = "show_books";
-    private static final String BORROW_BOOK_COMMAND = "borrow_book";
-    private static final String SEARCH_BOOK_COMMAND = "search_book";
-
-    private static final String SHOW_BOOK_DETAILS_COMMAND = "show_book_details";
-    private static final String SAVE_BOOK_TO_DATABASE_COMMAND = "save_book_to_database";
-    private static final String ADD_BOOK_COMMAND = "add_book";
-
-    private static final String BAN_USER_COMMAND = "change_user_blocking";
-    private static final String SHOW_READERS_COMMAND = "show_readers";
-    private static final String SHOW_LIBRARIANS_COMMAND = "show_librarians";
-
-    private static final String SHOW_AUTHORS_COMMAND = "show_authors";
-    private static final String ADD_AUTHOR_COMMAND = "add_author";
-    private static final String SHOW_AUTHOR_BOOKS_COMMAND = "show_author_books";
-
-    private static final String SHOW_GENRES_COMMAND = "show_genres";
-    private static final String ADD_GENRE_COMMAND = "add_genre";
-    private static final String SHOW_GENRE_BOOKS_COMMAND = "show_genre_books";
-
     private final DaoHelperFactory factory = new DaoHelperFactory();
 
 
     public Command defineCommand(String command) {
-        switch (command) {
-            case LOGIN_COMMAND:
+        CommandName commandName = CommandName.valueOfName(command);
+
+        switch (commandName) {
+            case LOGIN:
                 return new LoginCommand(new UserServiceImpl(factory));
-            case LOGOUT_COMMAND:
+            case LOGOUT:
                 return new LogoutCommand();
-            case CHANGE_LOCALE_COMMAND:
+            case CHANGE_LANGUAGE:
                 return new ChangeLocaleCommand();
-            case SHOW_BORROWS_COMMAND:
+            case SHOW_BORROWS:
                 return new ShowBookBorrowsListCommand(new BookBorrowServiceImpl(factory));
-            case CHANGE_BORROW_COMMAND:
+            case CHANGE_BORROW:
                 return new ChangeBorrowCommand(new BookBorrowServiceImpl(factory));
-            case DELETE_BORROW_COMMAND:
+            case DELETE_BORROW:
                 return new DeleteBorrowCommand(new BookBorrowServiceImpl(factory));
-            case SAVE_BORROW_COMMAND:
+            case SAVE_BORROW:
                 return new SaveBookBorrowToDatabaseCommand(new BookBorrowServiceImpl(factory));
-            case SHOW_BOOK_DETAILS_COMMAND:
+            case SHOW_BOOK_DETAILS:
                 return new ShowBookDetailsCommand
                         (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
-            case SHOW_BOOKS_COMMAND:
+            case SHOW_BOOKS:
                 return new ShowBooksCommand(new BookServiceImpl(factory));
-            case BORROW_BOOK_COMMAND:
+            case BORROW_BOOK:
                 return new BorrowBookCommand(new BookBorrowServiceImpl(factory));
-            case SEARCH_BOOK_COMMAND:
+            case SEARCH_BOOK:
                 return new SearchBookCommand(new BookServiceImpl(factory));
-            case SAVE_BOOK_TO_DATABASE_COMMAND:
+            case SAVE_BOOK:
                 return new SaveBookToDatabaseCommand(new BookServiceImpl(factory));
-            case ADD_BOOK_COMMAND:
+            case ADD_BOOK:
                 return new AddBookCommand(new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
-            case BAN_USER_COMMAND:
+            case CHANGE_USER_BLOCKING:
                 return new ChangeUserBlockingCommand(new AdminServiceImpl(factory));
-            case SHOW_READERS_COMMAND:
+            case SHOW_READERS:
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.READER);
-            case SHOW_LIBRARIANS_COMMAND:
+            case SHOW_LIBRARIANS:
                 return new ShowUsersCommand(new AdminServiceImpl(factory), Role.LIBRARIAN);
-            case SHOW_AUTHORS_COMMAND:
+            case SHOW_AUTHORS:
                 return new ShowAuthorsCommand(new AuthorServiceImpl(factory));
-            case ADD_AUTHOR_COMMAND:
+            case ADD_AUTHOR:
                 return new AddAuthorCommand(new AuthorServiceImpl(factory));
-            case SHOW_AUTHOR_BOOKS_COMMAND:
+            case SHOW_AUTHOR_BOOKS:
                 return new ShowAuthorBooksCommand(new BookServiceImpl(factory));
-            case SHOW_GENRES_COMMAND:
+            case SHOW_GENRES:
                 return new ShowGenresCommand(new GenreServiceImpl(factory));
-            case ADD_GENRE_COMMAND:
+            case ADD_GENRE:
                 return new AddGenreCommand(new GenreServiceImpl(factory));
-            case SHOW_GENRE_BOOKS_COMMAND:
+            case SHOW_GENRE_BOOKS:
                 return new ShowGenreBooksCommand(new BookServiceImpl(factory));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);

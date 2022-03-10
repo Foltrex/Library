@@ -2,6 +2,7 @@ package com.epam.library.command.implementation;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.command.Page;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -11,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ShowBooksCommand implements Command {
-
-    private static final String BOOKS_PAGE = "/pages/books.jsp";
 
     private static final int RECORDS_PER_PAGE = 3;
 
@@ -40,6 +39,6 @@ public class ShowBooksCommand implements Command {
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("numberOfPages", numberOfPages);
 
-        return CommandResult.forward(BOOKS_PAGE);
+        return CommandResult.forward(Page.BOOKS.getName());
     }
 }

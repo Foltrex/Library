@@ -3,7 +3,7 @@ package com.epam.library.service.implementation;
 import com.epam.library.dao.BookBorrowDao;
 import com.epam.library.dao.DaoHelper;
 import com.epam.library.dao.DaoHelperFactory;
-import com.epam.library.entity.BookBorrow;
+import com.epam.library.entity.BookRental;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookBorrowService;
@@ -21,11 +21,11 @@ public class BookBorrowServiceImpl implements BookBorrowService {
 
 
     @Override
-    public List<BookBorrow> getBorrows() throws ServiceException {
+    public List<BookRental> getBorrows() throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             BookBorrowDao dao = helper.createBookBorrowDao();
-            List<BookBorrow> booksRentals = dao.getBooksBorrows();
+            List<BookRental> booksRentals = dao.getBooksBorrows();
             helper.endTransaction();
             return booksRentals;
         } catch (DaoException e) {
@@ -34,11 +34,11 @@ public class BookBorrowServiceImpl implements BookBorrowService {
     }
 
     @Override
-    public Optional<BookBorrow> getBorrow(long id) throws ServiceException {
+    public Optional<BookRental> getBorrow(long id) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             BookBorrowDao dao = helper.createBookBorrowDao();
-            Optional<BookBorrow> book = dao.findBookBorrowById(id);
+            Optional<BookRental> book = dao.findBookBorrowById(id);
             helper.endTransaction();
             return book;
         } catch (DaoException e) {
@@ -47,7 +47,7 @@ public class BookBorrowServiceImpl implements BookBorrowService {
     }
 
     @Override
-    public void saveBookBorrow(BookBorrow bookBorrow) throws ServiceException {
+    public void saveBookBorrow(BookRental bookBorrow) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             BookBorrowDao dao = helper.createBookBorrowDao();

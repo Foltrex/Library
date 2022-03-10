@@ -1,12 +1,19 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sessionScope.locale == null}">
+    <c:set var="locale" value="en_US" scope="session"/>
+</c:if>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
 <div class="usersTable">
     <table>
       <tr>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Phone Number</th>
-        <th>Login</th>
-        <th>Role</th>
+        <th><fmt:message key="users.table.user.name"/></th>
+        <th><fmt:message key="users.table.user.surname"/></th>
+        <th><fmt:message key="users.table.user.phone.number"/></th>
+        <th><fmt:message key="users.table.user.login"/></th>
+        <th><fmt:message key="users.table.user.role"/></th>
       </tr>
 
 

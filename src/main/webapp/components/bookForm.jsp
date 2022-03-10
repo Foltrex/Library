@@ -7,7 +7,7 @@
 <fmt:setBundle basename="locale"/>
 
 <div class="container">
-    <form method="post" action="controller?command=save_book_to_database">
+    <form method="post" action="controller?command=save_book">
 
     <input type="hidden" name="bookId" value="${book.id}">
 

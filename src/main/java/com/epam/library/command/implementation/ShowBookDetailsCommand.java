@@ -2,6 +2,7 @@ package com.epam.library.command.implementation;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.command.Page;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
@@ -16,9 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShowBookDetailsCommand implements Command {
-
-    private static final String BOOK_PAGE = "/pages/bookDetails.jsp";
-    private static final String ERROR_PAGE = "/pages/errorPage.jsp";
 
     private final BookService bookService;
     private final AuthorService authorService;
@@ -48,10 +46,10 @@ public class ShowBookDetailsCommand implements Command {
             req.setAttribute("book", book);
             req.setAttribute("authors", authors);
             req.setAttribute("genres", genres);
-            result = CommandResult.forward(BOOK_PAGE);
+            result = CommandResult.forward(Page.BOOK_DETAILS.getName());
         } else {
             req.setAttribute("errorMessage", "Book doesn't found");
-            result = CommandResult.forward(ERROR_PAGE);
+            result = CommandResult.forward(Page.ERROR.getName());
         }
 
         return result;

@@ -1,5 +1,7 @@
 package com.epam.library.entity;
 
+import java.util.Objects;
+
 public class Author extends Entity {
     public static final String TABLE = "authors";
 
@@ -19,11 +21,6 @@ public class Author extends Entity {
         return new Author(id, null, null);
     }
 
-    public Author(Long id) {
-        super(id);
-        this.name = "";
-        this.surname = "";
-    }
 
     public String getName() {
         return name;
@@ -39,5 +36,33 @@ public class Author extends Entity {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Author)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Author author = (Author) o;
+        return Objects.equals(name, author.name) && Objects.equals(surname, author.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, surname);
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

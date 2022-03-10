@@ -1,5 +1,7 @@
 package com.epam.library.entity;
 
+import java.util.Objects;
+
 public class Book extends Entity {
 
     public static final String TABLE = "books";
@@ -64,5 +66,38 @@ public class Book extends Entity {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Book)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Book book = (Book) o;
+        return stock == book.stock &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(genre, book.genre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), title, author, stock, genre);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author=" + author +
+                ", stock=" + stock +
+                ", genre=" + genre +
+                '}';
     }
 }

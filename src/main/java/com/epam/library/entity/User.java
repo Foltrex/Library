@@ -1,5 +1,7 @@
 package com.epam.library.entity;
 
+import java.util.Objects;
+
 public class User extends Entity {
     public static final String TABLE = "users";
 
@@ -37,6 +39,13 @@ public class User extends Entity {
                     null, null, Role.READER, false);
     }
 
+
+    public static User createUserWithIDAndLogin(Long id, String login) {
+        return new User(id, null, null, null,
+                login, null, Role.READER, false);
+    }
+
+
     public boolean isBanned() {
         return isBanned;
     }
@@ -44,12 +53,6 @@ public class User extends Entity {
     public void setBanned(boolean banned) {
         isBanned = banned;
     }
-
-    public static User createUserWithIDAndLogin(Long id, String login) {
-        return new User(id, null, null, null,
-                        login, null, Role.READER, false);
-    }
-
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -93,5 +96,46 @@ public class User extends Entity {
 
     public Role getRole() {
         return role;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        User user = (User) o;
+        return isBanned == user.isBanned &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname) &&
+                Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, surname, phoneNumber, login, password, role, isBanned);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", isBanned=" + isBanned +
+                '}';
     }
 }

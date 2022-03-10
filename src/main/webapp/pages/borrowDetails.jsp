@@ -1,7 +1,15 @@
 
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sessionScope.locale == null}">
+    <c:set var="locale" value="en_US" scope="session"/>
+</c:if>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
+<html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/CSS/bookBorrowForm.css" rel="stylesheet" type="text/css"/>
@@ -22,7 +30,7 @@
         <jsp:include page="../components/sidebar.jsp" />
     </div>
       
-    <h2>Book</h2>
+    <h2><fmt:message key="borrow.details.title"/></h2>
     <jsp:include page="../components/bookBorrowForm.jsp" />
 
     <!-- Footer -->

@@ -1,8 +1,6 @@
 package com.epam.library.command.implementation;
 
-import com.epam.library.command.Command;
-import com.epam.library.command.CommandResult;
-import com.epam.library.command.ReCaptchaChecker;
+import com.epam.library.command.*;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.entity.User;
 import com.epam.library.service.UserService;
@@ -13,8 +11,7 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private static final String MAIN_PAGE_COMMAND = "/controller?command=show_books";
-    private static final String LOGIN_PAGE = "/index.jsp";
+    private static final String MAIN_PAGE_COMMAND = CommandName.SHOW_BOOKS.getServletCommand("controller");
 
     private final ReCaptchaChecker checker = new ReCaptchaChecker();
 
@@ -42,10 +39,10 @@ public class LoginCommand implements Command {
             result = CommandResult.redirect(request.getContextPath() + MAIN_PAGE_COMMAND);
         } else if (user.isPresent() && user.get().isBanned()) {
             request.setAttribute("errorLoginPassMessage", "You was banned by admin");
-            result = CommandResult.forward(LOGIN_PAGE);
+            result = CommandResult.forward(Page.LOGIN.getName());
         } else {
             request.setAttribute("errorLoginPassMessage", "Invalid credentials or you're a robot");
-            result = CommandResult.forward(LOGIN_PAGE);
+            result = CommandResult.forward(Page.LOGIN.getName());
         }
 
         return result;

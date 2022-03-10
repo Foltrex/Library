@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
+
+<c:if test="${sessionScope.locale == null}">
+    <c:set var="locale" value="en_US" scope="session"/>
+</c:if>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
+<html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/CSS/genresList.css" rel="stylesheet" type="text/css"/>
@@ -25,18 +33,18 @@
     </div>
 
     <div class="genres">
-      <h2>Genres</h2>
+      <h2><fmt:message key="genres.title"/></h2>
       <c:if test="${ userRole.roleName == 'admin' }">
-        <button class="open-button" onclick="openForm()">Add Genre</button>
+        <button class="open-button" onclick="openForm()"><fmt:message key="genres.button.open"/></button>
 
         <div class="form-popup" id="genreForm">
           <form action="controller?command=add_genre" method="post" class="form-container">
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button type="button" class="btn cancel" onclick="closeForm()"><fmt:message key="genres.button.close"/></button>
 
-            <label for="genre"><b>Name</b></label>
-            <input type="text" placeholder="Enter Genre" name="genreName" required>
+            <label for="genre"><b><fmt:message key="genres.form.name.label"/></b></label>
+            <input type="text" placeholder="<fmt:message key="genres.form.name.placeholder"/>" name="genreName" required>
 
-            <button type="submit" class="btn">Add</button>
+            <button type="submit" class="btn"><fmt:message key="genres.button.add"/></button>
           </form>
         </div>
       </c:if>

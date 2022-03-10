@@ -2,9 +2,10 @@ package com.epam.library.command.implementation;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.command.Page;
 import com.epam.library.entity.Book;
-import com.epam.library.entity.BookBorrow;
-import com.epam.library.entity.BorrowStatus;
+import com.epam.library.entity.BookRental;
+import com.epam.library.entity.RentalStatus;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -18,8 +19,6 @@ import java.util.List;
 
 public class SaveBookBorrowToDatabaseCommand implements Command {
 
-    private static final String BORROWS_PAGE = "/pages/booksBorrows.jsp";
-
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private final BookBorrowService bookBorrowService;
@@ -30,14 +29,14 @@ public class SaveBookBorrowToDatabaseCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        BookBorrow bookBorrow = extractBookBorrowFromRequest(req);
+        BookRental bookBorrow = extractBookBorrowFromRequest(req);
         bookBorrowService.saveBookBorrow(bookBorrow);
-        List<BookBorrow> bookBorrows = bookBorrowService.getBorrows();
+        List<BookRental> bookBorrows = bookBorrowService.getBorrows();
         req.setAttribute("borrows", bookBorrows);
-        return CommandResult.forward(BORROWS_PAGE);
+        return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }
 
-    private BookBorrow extractBookBorrowFromRequest(HttpServletRequest req) throws PageCommandException {
+    private BookRental extractBookBorrowFromRequest(HttpServletRequest req) throws PageCommandException {
         Long id = Long.valueOf(req.getParameter("bookBorrowId"));
 
         Long userId = Long.valueOf(req.getParameter("userId"));
@@ -61,8 +60,8 @@ public class SaveBookBorrowToDatabaseCommand implements Command {
         }
 
         String borrowStatusString =  req.getParameter("borrowStatus");
-        BorrowStatus status = BorrowStatus.valueOfStatus(borrowStatusString);
+        RentalStatus status = RentalStatus.valueOfStatus(borrowStatusString);
 
-        return new BookBorrow(id, user, book, borrowDate, returnDate, status);
+        return new BookRental(id, user, book, borrowDate, returnDate, status);
     }
 }

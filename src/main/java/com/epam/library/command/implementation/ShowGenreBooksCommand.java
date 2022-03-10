@@ -2,6 +2,7 @@ package com.epam.library.command.implementation;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.command.Page;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
@@ -13,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ShowGenreBooksCommand implements Command {
-
-    private static final String BOOKS_PAGE = "/pages/books.jsp";
 
     private final BookService bookService;
 
@@ -30,7 +29,7 @@ public class ShowGenreBooksCommand implements Command {
         req.setAttribute("books", genreBooks);
         req.setAttribute("genre", genre);
 
-        return CommandResult.forward(BOOKS_PAGE);
+        return CommandResult.forward(Page.BOOKS.getName());
     }
 
     private Genre extractGenreFromRequest(HttpServletRequest req) {

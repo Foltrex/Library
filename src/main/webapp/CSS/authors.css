@@ -7,7 +7,9 @@
 }
 
 
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+  font-family: "Times New Roman", Times, serif;
+}
 * {box-sizing: border-box;}
 
 /* Button used to open the contact form - fixed at the bottom of the page */

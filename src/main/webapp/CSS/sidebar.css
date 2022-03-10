@@ -53,7 +53,7 @@
 	position: fixed;
 	top: 60px;
 	left: 0;
-	width: 220px;
+	width: 260px;
 	height: 100%;
 	background: #042331;
   z-index: 10;
@@ -89,15 +89,15 @@
 	color: #fff;
 }
 
+
 * {
-  font-family: 'Baloo Paaji 2', cursive;
+  font-family: "Times New Roman", Times, serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
 }
-
 
 /* Style the sidenav links and the dropdown button */
 .dropdown-btn {

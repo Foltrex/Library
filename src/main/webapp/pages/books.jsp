@@ -46,6 +46,7 @@
       <div class="tool_panel">
         <jsp:include page="../components/searchBar.jsp" />
         <c:if test="${ userRole.roleName == 'admin' }">
+          <!-- rename and change to get method -->
           <form method="post" action="controller?command=add_book">
             <button type="submit">
               <i class="fa fa-plus" style="font-size:36px"></i>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
+
+<c:if test="${sessionScope.locale == null}">
+    <c:set var="locale" value="en_US" scope="session"/>
+</c:if>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
+<html lang="${sessionScope.locale}">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="${pageContext.request.contextPath}/CSS/usersTable.css" rel="stylesheet" type="text/css"/>
@@ -22,7 +31,7 @@
             <jsp:include page="../components/sidebar.jsp" />
           </div>
 
-        <h2>Librarians:</h2>
+        <h2><fmt:message key="librarians.title"/>:</h2>
         <jsp:include page="../components/usersTable.jsp" />
 
         <!-- Footer -->
