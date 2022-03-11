@@ -4,6 +4,9 @@ import com.epam.library.command.Command;
 import com.epam.library.command.CommandFactory;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
+import com.epam.library.connection.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,6 +41,7 @@ public class Controller extends HttpServlet {
             CommandResult result = command.execute(req);
             dispatch(req, resp, result);
         } catch (Exception e) {
+            LOGGER.warn(e);
             req.setAttribute("errorMessage", e.getMessage());
             dispatch(req, resp, CommandResult.forward(Page.ERROR.getName()));
         }

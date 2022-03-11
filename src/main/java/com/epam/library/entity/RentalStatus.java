@@ -1,8 +1,6 @@
 package com.epam.library.entity;
 
-import java.io.Serializable;
-
-public enum RentalStatus implements Serializable {
+public enum RentalStatus {
     WAITING_FOR_ISSUANCE("waiting for issuance"),
     ISSUED_TO_THE_READING_ROOM("issued to the reading room"),
     ISSUED_FOR_SUBSCRIPTION("issued for subscription"),

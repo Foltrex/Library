@@ -15,6 +15,7 @@
     <link href="${pageContext.request.contextPath}/CSS/bookBorrowForm.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/form.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/sidebar.css" rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/js/layout.js"></script>
@@ -30,8 +31,10 @@
         <jsp:include page="../components/sidebar.jsp" />
     </div>
       
-    <h2><fmt:message key="borrow.details.title"/></h2>
-    <jsp:include page="../components/bookBorrowForm.jsp" />
+    <div class="form-class">
+      <h2><fmt:message key="borrow.details.title"/></h2>
+      <jsp:include page="../components/bookBorrowForm.jsp" />
+    </div>
 
     <!-- Footer -->
     <jsp:include page="../components/footer.jsp" />

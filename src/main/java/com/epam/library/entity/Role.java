@@ -1,9 +1,7 @@
 package com.epam.library.entity;
 
 
-import java.io.Serializable;
-
-public enum Role implements Serializable {
+public enum Role {
     ADMIN("admin"),
     LIBRARIAN("librarian"),
     READER("reader");

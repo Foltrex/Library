@@ -45,7 +45,6 @@ public class ConnectionFactory {
     }
 
     private Connection createConnection(String driver) throws ClassNotFoundException, IOException, SQLException {
-        // ?autoReconnect=true
         Class.forName(driver);
 
         Properties props = new Properties();

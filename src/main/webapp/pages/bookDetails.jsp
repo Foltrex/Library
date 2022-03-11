@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/CSS/bookForm.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/form.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/sidebar.css" rel="stylesheet" type="text/css"/>
@@ -29,8 +30,10 @@
       <jsp:include page="../components/sidebar.jsp" />
     </div>
     
-    <h2><fmt:message key="book.details.title"/></h2>
-    <jsp:include page="../components/bookForm.jsp" />
+    <div class="form-class">
+      <h2><fmt:message key="book.details.title"/></h2>
+      <jsp:include page="../components/bookForm.jsp" />
+    </div>
 
     <!-- Footer -->
     <jsp:include page="../components/footer.jsp" />

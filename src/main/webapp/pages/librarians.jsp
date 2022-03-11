@@ -13,6 +13,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="${pageContext.request.contextPath}/CSS/usersTable.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/CSS/table.css" rel="stylesheet" type="text/css"/>
         <script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
         <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
         <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
@@ -29,10 +30,12 @@
       
             <!-- Sidebar -->
             <jsp:include page="../components/sidebar.jsp" />
-          </div>
+        </div>
 
-        <h2><fmt:message key="librarians.title"/>:</h2>
-        <jsp:include page="../components/usersTable.jsp" />
+        <div class="table-class">
+            <h2><fmt:message key="librarians.title"/>:</h2>
+            <jsp:include page="../components/usersTable.jsp" />
+        </div>
 
         <!-- Footer -->
         <jsp:include page="../components/footer.jsp" />
