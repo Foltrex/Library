@@ -1,5 +1,9 @@
 package com.epam.library.command;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum CommandName {
     LOGIN("login"),
     LOGOUT("logout"),
@@ -26,13 +30,22 @@ public enum CommandName {
 
     private final String name;
 
+    private static final Map<String, CommandName> ELEMENTS = new HashMap<>();
+    static {
+        for (CommandName commandName: CommandName.values()) {
+            ELEMENTS.put(commandName.name, commandName);
+        }
+    }
+
     CommandName(String name) {
         this.name = name;
     }
 
     public static CommandName valueOfName(String commandName) {
-        commandName = commandName.toUpperCase();
-        return CommandName.valueOf(commandName);
+//        commandName = commandName.toUpperCase();
+//        CommandName.values()
+//        return commandNames.contains() CommandName.valueOf(commandName);
+        return ELEMENTS.get(commandName);
     }
 
     public String getCommandName() {

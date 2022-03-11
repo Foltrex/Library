@@ -6,39 +6,35 @@ import com.epam.library.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SecurityChecker {
 
-    private static final String PAGE_REGEX = "(?<=/)\\w+\\.jsp";
+    private static final String PNG_EXTENSION = ".png";
+    private static final String CSS_EXTENSION = ".css";
+    private static final String JS_EXTENSION = ".js";
 
-    private static final String CORRECT_PAGES_REGEX = "/library/controller\\?command=[\\p{L}_]+";
-
-    public boolean isUserHasPermissionToPage(HttpServletRequest request, Role userRole) {
-        String currentPage = getCurrentPage(request);
-        String requestParameter = getRequestParameter(request);
-        CommandName requestCommand = CommandName.valueOfName(requestParameter);
-        SecurityConfig securityConfig = SecurityConfig.getInstance();
-
-        List<String> allowedPagesForUser = securityConfig.getAllowedPagesForRole(userRole);
-        List<CommandName> allowedCommandForUser = securityConfig.getAllowedCommandsForRole(userRole);
-
-        return allowedPagesForUser.contains(currentPage) || allowedCommandForUser.contains(requestCommand);
+    public boolean isUserHasPermissionToContent(HttpServletRequest request, Role userRole) {
+        return isUserHasPermissionToFile(request) || isUserHasPermissionToCommand(request, userRole);
     }
 
-    private String getCurrentPage(HttpServletRequest request) {
-        Pattern pattern = Pattern.compile(PAGE_REGEX);
-        Matcher matcher = pattern.matcher(request.getRequestURI());
+    private boolean isUserHasPermissionToCommand(HttpServletRequest request, Role userRole) {
+        String commandLine = request.getParameter("command");
+        // добавить возможность команды login при отсутствии user в сессии
+        if (commandLine != null && userRole != null) {
+            SecurityConfig securityConfig = SecurityConfig.getInstance();
+            List<CommandName> allowedCommandForUser = securityConfig.getAllowedCommandsForRole(userRole);
+            CommandName requestCommand = CommandName.valueOfName(commandLine);
+            return allowedCommandForUser.contains(requestCommand);
+        }
 
-        return matcher.find() ? matcher.group() : null;
+        return false;
     }
 
-    private String getRequestParameter(HttpServletRequest request) {
-        SecurityConfig config = SecurityConfig.getInstance();
-        Pattern pattern = Pattern.compile(CORRECT_PAGES_REGEX);
-        Matcher matcher = pattern.matcher(request.getRequestURI());
-
-        return request.getParameter("command");
+    private boolean isUserHasPermissionToFile(HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        return requestURI.endsWith(PNG_EXTENSION) || requestURI.endsWith(CSS_EXTENSION) || requestURI.endsWith(JS_EXTENSION);
     }
 }
