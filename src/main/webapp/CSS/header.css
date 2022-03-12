@@ -42,6 +42,17 @@
 	margin-right: 30px;
 }
 
+.logout-button {
+  font-size: 23px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
 .top_navbar .menu{
 	width: calc(100% - 250px);
 	padding: 0 25px;

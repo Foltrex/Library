@@ -77,3 +77,7 @@ button {
 .ru {
   background-image: url('../images/flags/ru.png');
 }
+
+.lang-text {
+  margin-right: 6px;
+}

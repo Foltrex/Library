@@ -19,12 +19,16 @@
             <ul>
                 <li>
                     <button class="en lang" type="submit" name="lang" value="en_US">
-                        <fmt:message key="label.lang.en" />
+                        <span class="lang-text">
+                            <fmt:message key="label.lang.en" />
+                        </span>
                     </button>
                 </li>
                 <li>
                     <button class="ru lang" type="submit" name="lang" value="ru_RU">
-                        <fmt:message key="label.lang.ru" />
+                        <span class="lang-text">
+                            <fmt:message key="label.lang.ru" />
+                        </span>
                     </button>
                 </li>
             </ul>

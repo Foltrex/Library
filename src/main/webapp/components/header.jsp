@@ -12,7 +12,7 @@
     <div class="menu">
         <c:if test="${ not empty userId }">
             <form action="controller?command=logout" class="logout-form" method="post">
-                <button>
+                <button class="logout-button">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>

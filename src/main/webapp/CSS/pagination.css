@@ -1,18 +1,24 @@
 .pagination {
     display: inline-block;
+    margin-top: 20px;
   }
   
   .pagination a {
-    color: black;
+    /* color: black; */
+    border: 2px solid #4CAF50;
+    border-radius: 28px;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
+    margin: auto 1px auto;
   }
   
   .pagination a.active {
     background-color: #4CAF50;
-    color: white;
+    border: 2px solid #4CAF50;
+    border-radius: 28px;
+    color: black;
   }
   
   .pagination a:hover:not(.active) {background-color: #ddd;}

@@ -1,17 +1,20 @@
 
 .books {
-	margin: 0 0 0 90px;
+	margin: 0 20px 0 90px;
 }
 
 .tool_panel {
-    display: inline-flex;
-    width: 1000px;
-    justify-content: space-between;
 	align-items: center;
-    /* margin: 0 90px 0 0; */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 form.bookSearch {
-    margin-right: 20px;
-    width: 1000px;
+    margin-right: 10px;
+    width: 85%;
+}
+
+.add-book-button {
+    margin-left: 10px;
 }

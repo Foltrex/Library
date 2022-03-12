@@ -42,9 +42,6 @@ public enum CommandName {
     }
 
     public static CommandName valueOfName(String commandName) {
-//        commandName = commandName.toUpperCase();
-//        CommandName.values()
-//        return commandNames.contains() CommandName.valueOf(commandName);
         return ELEMENTS.get(commandName);
     }
 

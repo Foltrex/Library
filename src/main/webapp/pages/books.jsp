@@ -48,7 +48,7 @@
         <c:if test="${ userRole.roleName == 'admin' }">
           <!-- rename and change to get method -->
           <form method="post" action="controller?command=add_book">
-            <button type="submit">
+            <button type="submit" class="add-book-button">
               <i class="fa fa-plus" style="font-size:36px"></i>
             </button>
           </form>
