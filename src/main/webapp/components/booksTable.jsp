@@ -12,7 +12,7 @@
     <c:forEach var="book" items="${books}">
       <li>
         <h2 class="title">
-          <c:if test="${ userRole.roleName == 'reader' }">
+          <c:if test="${ userRole.roleName == 'reader' && book.stock > 0 }">
             <form method="post" action="controller?command=borrow_book">
               <input type="hidden" name="userId" value="${userId}">
               <input type="hidden" name="bookId" value="${book.id}">

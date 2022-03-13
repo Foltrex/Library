@@ -17,7 +17,7 @@ public class UserRowMapper implements RowMapper<User> {
         String password = resultSet.getString(User.PASSWORD);
 
         String roleString = resultSet.getString(User.ROLE);
-        Role role = Role.valueOf(roleString.toUpperCase());
+        Role role = Role.valueOfRoleName(roleString);
 
         boolean isBanned = resultSet.getBoolean(User.IS_BANNED);
 

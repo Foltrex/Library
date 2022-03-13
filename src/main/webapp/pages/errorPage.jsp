@@ -280,7 +280,7 @@
             <div class="col-md-6 align-self-center">
               <h1>404</h1>
               <h2><fmt:message key="error.page.title" />.</h2>
-              <p><fmt:message key="error.page.text" />.
+              <p><fmt:message key="error.page.text" />. ${errorMessage}
               </p>
               <form method="post" 
                 <c:if test="${ not empty userId }">

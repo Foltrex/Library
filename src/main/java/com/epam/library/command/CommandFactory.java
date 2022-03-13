@@ -20,25 +20,25 @@ public class CommandFactory {
                 return new LogoutCommand();
             case CHANGE_LANGUAGE:
                 return new ChangeLocaleCommand();
-            case SHOW_BORROWS:
-                return new ShowBookBorrowsListCommand(new BookBorrowServiceImpl(factory));
-            case CHANGE_BORROW:
-                return new ChangeBorrowCommand(new BookBorrowServiceImpl(factory));
-            case DELETE_BORROW:
-                return new DeleteBorrowCommand(new BookBorrowServiceImpl(factory));
-            case SAVE_BORROW:
-                return new SaveBookBorrowToDatabaseCommand(new BookBorrowServiceImpl(factory));
+            case SHOW_RENTALS:
+                return new ShowBookRentalsCommand(new BookRentalServiceImpl(factory));
+            case SHOW_BOOK_RENTAL_DETAILS:
+                return new ShowBookRentalDetailsCommand(new BookRentalServiceImpl(factory));
+            case DELETE_RENTAL:
+                return new DeleteBookRentalCommand(new BookRentalServiceImpl(factory));
+            case SAVE_RENTAL:
+                return new SaveBookRentalCommand(new BookRentalServiceImpl(factory));
             case SHOW_BOOK_DETAILS:
                 return new ShowBookDetailsCommand
                         (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
             case SHOW_BOOKS:
                 return new ShowBooksCommand(new BookServiceImpl(factory));
             case BORROW_BOOK:
-                return new BorrowBookCommand(new BookBorrowServiceImpl(factory));
+                return new BorrowBookCommand(new BookRentalServiceImpl(factory));
             case SEARCH_BOOK:
                 return new SearchBookCommand(new BookServiceImpl(factory));
             case SAVE_BOOK:
-                return new SaveBookToDatabaseCommand(new BookServiceImpl(factory));
+                return new SaveBookCommand(new BookServiceImpl(factory));
             case ADD_BOOK:
                 return new AddBookCommand(new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
             case CHANGE_USER_BLOCKING:

@@ -6,13 +6,13 @@ public enum RentalStatus {
     ISSUED_FOR_SUBSCRIPTION("issued for subscription"),
     RETURNED("returned");
 
-    private final String status;
+    private final String statusName;
 
     private static final String SPACE = " ";
     private static final String UNDERSCORE = "_";
 
-    RentalStatus(String status) {
-        this.status = status;
+    RentalStatus(String statusName) {
+        this.statusName = statusName;
     }
 
     public static RentalStatus valueOfStatus(String status) {
@@ -21,6 +21,6 @@ public enum RentalStatus {
     }
 
     public String getStatusName() {
-        return status;
+        return statusName;
     }
 }

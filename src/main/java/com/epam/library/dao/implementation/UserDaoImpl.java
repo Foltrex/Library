@@ -48,7 +48,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
     @Override
     protected Map<String, Object> extractFields(User item) {
         // ImmutableMap.of (...) is more beautiful :(
-        return new LinkedHashMap<String, Object>() {{
+        return new LinkedHashMap<>() {{
            put(User.NAME, item.getName());
            put(User.SURNAME, item.getSurname());
            put(User.PHONE_NUMBER, item.getPhoneNumber());

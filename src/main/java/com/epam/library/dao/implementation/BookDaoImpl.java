@@ -7,7 +7,6 @@ import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.BookRowMapper;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,12 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
     private static final String SELECT_BOOKS_BY_TITLE = String.format("%s %s", SELECT_BOOKS, "WHERE title=?");
 
+    private static final String UPDATE_BOOK_STOCK_DEC = String.format(
+            "UPDATE %s SET %s = %s - 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
+
+    private static final String UPDATE_BOOK_STOCK_INC = String.format(
+            "UPDATE %s SET %s = %s + 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
+
 
     public BookDaoImpl(Connection connection) {
         super(connection, new BookRowMapper(), Book.TABLE);
@@ -38,6 +43,16 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     public List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
         String query = SELECT_BOOKS + " LIMIT ?, ?";
         return executeQuery(query, startingPosition, recordsPerPage);
+    }
+
+    @Override
+    public void borrowBook(Long id) throws DaoException {
+        executeUpdate(UPDATE_BOOK_STOCK_DEC, id);
+    }
+
+    @Override
+    public void returnBook(Long id) throws DaoException {
+        executeUpdate(UPDATE_BOOK_STOCK_INC, id);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.epam.library.entity.RentalStatus;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.BookBorrowService;
+import com.epam.library.service.BookRentalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -17,27 +17,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class SaveBookBorrowToDatabaseCommand implements Command {
+public class SaveBookRentalCommand implements Command {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    private final BookBorrowService bookBorrowService;
+    private final BookRentalService bookBorrowService;
 
-    public SaveBookBorrowToDatabaseCommand(BookBorrowService bookBorrowService) {
+    public SaveBookRentalCommand(BookRentalService bookBorrowService) {
         this.bookBorrowService = bookBorrowService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        BookRental bookBorrow = extractBookBorrowFromRequest(req);
-        bookBorrowService.saveBookBorrow(bookBorrow);
-        List<BookRental> bookBorrows = bookBorrowService.getBorrows();
-        req.setAttribute("borrows", bookBorrows);
+        BookRental bookRental = extractBookRentalFromRequest(req);
+        bookBorrowService.saveBookRental(bookRental);
+        List<BookRental> bookRentals = bookBorrowService.getBookRentals();
+        req.setAttribute("rentals", bookRentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }
 
-    private BookRental extractBookBorrowFromRequest(HttpServletRequest req) throws PageCommandException {
-        Long id = Long.valueOf(req.getParameter("bookBorrowId"));
+    private BookRental extractBookRentalFromRequest(HttpServletRequest req) throws PageCommandException {
+        Long id = Long.valueOf(req.getParameter("bookRentalId"));
 
         Long userId = Long.valueOf(req.getParameter("userId"));
         User user = User.createUserWithOnlyId(userId);
@@ -59,8 +59,8 @@ public class SaveBookBorrowToDatabaseCommand implements Command {
             throw new PageCommandException("Uncorrect date format", e);
         }
 
-        String borrowStatusString =  req.getParameter("borrowStatus");
-        RentalStatus status = RentalStatus.valueOfStatus(borrowStatusString);
+        String rentalStatusString =  req.getParameter("rentalStatus");
+        RentalStatus status = RentalStatus.valueOfStatus(rentalStatusString);
 
         return new BookRental(id, user, book, borrowDate, returnDate, status);
     }

@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookBorrowRowMapper implements RowMapper<BookRental> {
+public class BookRentalRowMapper implements RowMapper<BookRental> {
     @Override
     public BookRental map(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong(BookRental.ID);

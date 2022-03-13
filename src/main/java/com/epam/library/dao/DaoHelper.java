@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
 
-    private ProxyConnection connection;
+    private final ProxyConnection connection;
 
     public DaoHelper(ConnectionPool pool) {
         this.connection = pool.getConnection();
@@ -36,8 +36,8 @@ public class DaoHelper implements AutoCloseable {
         return new GenreDaoImpl(connection);
     }
 
-    public BookBorrowDao createBookBorrowDao() {
-        return new BookBorrowDaoImpl(connection);
+    public BookRentalDao createBookRentalDao() {
+        return new BookRentalDaoImpl(connection);
     }
 
 

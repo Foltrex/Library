@@ -22,4 +22,9 @@ public interface BookDao {
     int calculateBooksNumber() throws DaoException;
 
     List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException;
+
+    // make separate interface
+    void borrowBook(Long id) throws DaoException;
+
+    void returnBook(Long id) throws DaoException;
 }

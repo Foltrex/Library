@@ -12,7 +12,7 @@
   <div class="sidebar_inner">
     <ul>
       <li>
-        <a href="${pageContext.request.contextPath}/controller?command=show_borrows">
+        <a href="${pageContext.request.contextPath}/controller?command=show_rentals">
           <span class="icon"><i class="fa fa-qrcode"></i></span>
           <span class="text"><fmt:message key="sidebar.book.rental"/></span>
         </a>
@@ -39,6 +39,15 @@
         </a>
       </li>
   
+      <c:if test="${userRole.roleName == 'librarian'}">
+        <li>
+          <a href="${pageContext.request.contextPath}/controller?command=show_readers">
+            <span class="icon"><i class="fas fa-user-alt"></i></span>
+            <span class="text"><fmt:message key="sidebar.readers"/></span>
+          </a>
+        </li>
+      </c:if>
+
       <c:if test="${userRole.roleName == 'admin'}">
         <li>
           <button class="dropdown-btn">

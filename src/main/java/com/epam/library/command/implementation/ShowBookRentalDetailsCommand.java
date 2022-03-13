@@ -7,33 +7,33 @@ import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.BookBorrowService;
+import com.epam.library.service.BookRentalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public class ChangeBorrowCommand implements Command {
+public class ShowBookRentalDetailsCommand implements Command {
 
-    private final BookBorrowService bookBorrowService;
+    private final BookRentalService bookBorrowService;
 
-    public ChangeBorrowCommand(BookBorrowService bookBorrowService) {
+    public ShowBookRentalDetailsCommand(BookRentalService bookBorrowService) {
         this.bookBorrowService = bookBorrowService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        long id = Long.parseLong(req.getParameter("bookBorrowId"));
+        long id = Long.parseLong(req.getParameter("bookRentalId"));
 
-        Optional<BookRental> optionalBookBorrow = bookBorrowService.getBorrow(id);
+        Optional<BookRental> optionalBookRental = bookBorrowService.getBookRental(id);
 
         CommandResult result;
-        if (optionalBookBorrow.isPresent()) {
-            BookRental bookBorrow = optionalBookBorrow.get();
-            req.setAttribute("bookBorrow", bookBorrow);
-            req.setAttribute("borrowStatuses", RentalStatus.values());
+        if (optionalBookRental.isPresent()) {
+            BookRental bookRental = optionalBookRental.get();
+            req.setAttribute("bookRental", bookRental);
+            req.setAttribute("rentalStatuses", RentalStatus.values());
             result = CommandResult.forward(Page.RENTAL_DETAILS.getName());
         } else {
-            req.setAttribute("errorMessage", "Book Borrows doesn't found");
+            req.setAttribute("errorMessage", "Book Rentals doesn't found");
             result = CommandResult.forward(Page.ERROR.getName());
         }
 

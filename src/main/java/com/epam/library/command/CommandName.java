@@ -8,10 +8,10 @@ public enum CommandName {
     LOGIN("login"),
     LOGOUT("logout"),
     CHANGE_LANGUAGE("change_language"),
-    SHOW_BORROWS("show_borrows"),
-    CHANGE_BORROW("change_borrow"),
-    DELETE_BORROW("delete_borrow"),
-    SAVE_BORROW("save_borrow"),
+    SHOW_RENTALS("show_rentals"),
+    SHOW_BOOK_RENTAL_DETAILS("show_book_rental_details"),
+    DELETE_RENTAL("delete_rental"),
+    SAVE_RENTAL("save_rental"),
     SHOW_BOOKS("show_books"),
     BORROW_BOOK("borrow_book"),
     SEARCH_BOOK("search_book"),
@@ -52,4 +52,6 @@ public enum CommandName {
     public String getServletCommand(String servletName) {
         return String.format("/%s?command=%s", servletName, name);
     }
+
+
 }

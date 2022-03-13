@@ -13,13 +13,13 @@ public class User extends Entity {
     public static final String ROLE = "role";
     public static final String IS_BANNED = "is_banned";
 
-    private String name;
-    private String surname;
-    private String phoneNumber;
-    private String login;
-    private String password;
-    private Role role;
-    private boolean isBanned;
+    private final String name;
+    private final String surname;
+    private final String phoneNumber;
+    private final String login;
+    private final String password;
+    private final Role role;
+    private final boolean isBanned;
 
 
     public User(Long id, String name, String surname, String phoneNumber,
@@ -50,48 +50,24 @@ public class User extends Entity {
         return isBanned;
     }
 
-    public void setBanned(boolean banned) {
-        isBanned = banned;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Role getRole() {

@@ -8,39 +8,37 @@ import com.epam.library.entity.BookRental;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.BookBorrowService;
+import com.epam.library.service.BookRentalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class BorrowBookCommand implements Command {
 
-    private final BookBorrowService service;
+    private final BookRentalService service;
 
-    public BorrowBookCommand(BookBorrowService service) {
+    public BorrowBookCommand(BookRentalService service) {
         this.service = service;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
 
-        BookRental bookBorrow = extractBookBorrowFromRequest(req);
-        service.saveBookBorrow(bookBorrow);
+        BookRental bookRental = extractBookRentalFromRequest(req);
+        service.saveBookRental(bookRental);
 
-        List<BookRental> borrows = service.getBorrows();
-        req.setAttribute("borrows", borrows);
+        List<BookRental> rentals = service.getBookRentals();
+        req.setAttribute("rentals", rentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }
 
-    private BookRental extractBookBorrowFromRequest(HttpServletRequest req) {
+    private BookRental extractBookRentalFromRequest(HttpServletRequest req) {
         long bookId = Long.parseLong(req.getParameter("bookId"));
         long userId = Long.parseLong(req.getParameter("userId"));
 
         Book bookWithOnlyId = Book.createBookWithOnlyId(bookId);
         User userWithOnlyId = User.createUserWithOnlyId(userId);
 
-        BookRental bookBorrowing = BookRental.borrow(userWithOnlyId, bookWithOnlyId);
-
-        return bookBorrowing;
+        return BookRental.borrow(userWithOnlyId, bookWithOnlyId);
     }
 }

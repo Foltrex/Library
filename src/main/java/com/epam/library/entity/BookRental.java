@@ -21,6 +21,14 @@ public class BookRental extends Entity {
     private Date returnDate;
     private RentalStatus rentalStatus;
 
+    public RentalStatus getRentalStatus() {
+        return rentalStatus;
+    }
+
+    public void setRentalStatus(RentalStatus rentalStatus) {
+        this.rentalStatus = rentalStatus;
+    }
+
     public BookRental(Long id, User user, Book rentedBook, Date borrowDate, Date returnDate, RentalStatus rentalStatus) {
         super(id);
         this.user = user;
@@ -33,6 +41,7 @@ public class BookRental extends Entity {
     public static BookRental borrow(User user, Book book) {
         return new BookRental(null, user, book, null, null, RentalStatus.WAITING_FOR_ISSUANCE);
     }
+
 
     public User getUser() {
         return user;
@@ -66,13 +75,6 @@ public class BookRental extends Entity {
         this.returnDate = returnDate;
     }
 
-    public RentalStatus getBorrowStatus() {
-        return rentalStatus;
-    }
-
-    public void setBorrowStatus(RentalStatus rentalStatus) {
-        this.rentalStatus = rentalStatus;
-    }
 
 
     @Override

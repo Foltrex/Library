@@ -12,7 +12,7 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="${pageContext.request.contextPath}/CSS/borrowsTable.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/rentalsTable.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/books.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
@@ -33,7 +33,7 @@
     
     <div class="books">
       <h2><fmt:message key="rental.title" /></h2>
-      <jsp:include page="../components/borrowsTable.jsp" />
+      <jsp:include page="../components/rentalsTable.jsp" />
     </div>
 
     <!-- Footer -->

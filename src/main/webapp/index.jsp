@@ -17,8 +17,6 @@
         <jsp:include page="components/loginForm.jsp" />
         
         <jsp:include page="components/footer.jsp" />
-
-        
     </body>
 </html>
 

@@ -13,13 +13,13 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class SaveBookToDatabaseCommand implements Command {
+public class SaveBookCommand implements Command {
 
     private static final int RECORDS_PER_PAGE = 3;
 
     private final BookService service;
 
-    public SaveBookToDatabaseCommand(BookService service) {
+    public SaveBookCommand(BookService service) {
         this.service = service;
     }
 

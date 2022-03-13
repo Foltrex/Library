@@ -3,10 +3,7 @@ package com.epam.library.security;
 import com.epam.library.command.CommandName;
 import com.epam.library.entity.Role;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -21,29 +18,31 @@ public class SecurityConfig {
     }
 
     private Map<Role, List<CommandName>> createAllowedCommands() {
+
         List<CommandName> adminCommands = Arrays.asList(
                 CommandName.LOGIN, CommandName.LOGOUT, CommandName.CHANGE_LANGUAGE,
-                CommandName.SHOW_BORROWS, CommandName.SHOW_BOOKS, CommandName.SEARCH_BOOK,
+                CommandName.SHOW_RENTALS, CommandName.SHOW_BOOKS, CommandName.SEARCH_BOOK,
                 CommandName.SHOW_BOOK_DETAILS, CommandName.SAVE_BOOK, CommandName.ADD_BOOK,
                 CommandName.CHANGE_USER_BLOCKING, CommandName.SHOW_READERS, CommandName.SHOW_LIBRARIANS,
-                CommandName.SHOW_AUTHORS, CommandName.SHOW_AUTHOR_BOOKS, CommandName.SHOW_GENRES,
-                CommandName.ADD_GENRE, CommandName.SHOW_GENRE_BOOKS
+                CommandName.SHOW_AUTHORS, CommandName.ADD_AUTHOR, CommandName.SHOW_AUTHOR_BOOKS,
+                CommandName.SHOW_GENRES, CommandName.ADD_GENRE, CommandName.SHOW_GENRE_BOOKS
         );
+        // TODO: add reader page for librarian
 
+        // TODO: dont showing borrows page for librarians
         List<CommandName> librarianCommands = Arrays.asList(
                 CommandName.LOGIN, CommandName.LOGOUT, CommandName.CHANGE_LANGUAGE,
-                CommandName.SHOW_BORROWS, CommandName.CHANGE_BORROW, CommandName.DELETE_BORROW,
-                CommandName.SAVE_BORROW, CommandName.SHOW_BOOKS, CommandName.SEARCH_BOOK,
+                CommandName.SHOW_RENTALS, CommandName.SHOW_BOOK_RENTAL_DETAILS, CommandName.DELETE_RENTAL,
+                CommandName.SAVE_RENTAL, CommandName.SHOW_BOOKS, CommandName.SEARCH_BOOK,
                 CommandName.SHOW_READERS, CommandName.SHOW_AUTHORS, CommandName.SHOW_AUTHOR_BOOKS,
                 CommandName.SHOW_GENRES, CommandName.SHOW_GENRE_BOOKS
-
         );
 
         List<CommandName> readerCommand = Arrays.asList(
                 CommandName.LOGIN, CommandName.LOGOUT, CommandName.CHANGE_LANGUAGE,
                 CommandName.SHOW_BOOKS, CommandName.BORROW_BOOK, CommandName.SEARCH_BOOK,
                 CommandName.SHOW_AUTHORS, CommandName.SHOW_AUTHOR_BOOKS, CommandName.SHOW_GENRES,
-                CommandName.SHOW_GENRE_BOOKS
+                CommandName.SHOW_GENRE_BOOKS, CommandName.SHOW_RENTALS
         );
 
         return new LinkedHashMap<>() {{

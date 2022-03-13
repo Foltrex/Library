@@ -1,10 +1,10 @@
 package com.epam.library.dao.implementation;
 
 import com.epam.library.dao.AbstractDao;
-import com.epam.library.dao.BookBorrowDao;
+import com.epam.library.dao.BookRentalDao;
 import com.epam.library.entity.BookRental;
 import com.epam.library.exception.DaoException;
-import com.epam.library.mapper.BookBorrowRowMapper;
+import com.epam.library.mapper.BookRentalRowMapper;
 
 import java.sql.Connection;
 import java.util.LinkedHashMap;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class BookBorrowDaoImpl extends AbstractDao<BookRental> implements BookBorrowDao {
+public class BookRentalDaoImpl extends AbstractDao<BookRental> implements BookRentalDao {
 
     private static final String SELECT_ORDERS = String.format("%s %s %s %s %s ",
             "SELECT borrows.id, user_id, users.login AS user_login,",
@@ -22,8 +22,8 @@ public class BookBorrowDaoImpl extends AbstractDao<BookRental> implements BookBo
             "INNER JOIN books ON book_id = books.id");
 
 
-    public BookBorrowDaoImpl(Connection connection) {
-        super(connection, new BookBorrowRowMapper(), BookRental.TABLE);
+    public BookRentalDaoImpl(Connection connection) {
+        super(connection, new BookRentalRowMapper(), BookRental.TABLE);
     }
 
 
@@ -35,27 +35,27 @@ public class BookBorrowDaoImpl extends AbstractDao<BookRental> implements BookBo
             put(BookRental.BOOK_ID, item.getRentedBook().getId());
             put(BookRental.BORROW_DATE, item.getBorrowDate());
             put(BookRental.RETURN_DATE, item.getReturnDate());
-            put(BookRental.STATUS, item.getBorrowStatus().getStatusName());
+            put(BookRental.STATUS, item.getRentalStatus().getStatusName());
         }};
     }
 
     @Override
-    public List<BookRental> getBooksBorrows() throws DaoException {
+    public List<BookRental> getBooksRentals() throws DaoException {
         return executeQuery(SELECT_ORDERS);
     }
 
     @Override
-    public void deleteBookBorrow(long id) throws DaoException {
+    public void deleteBookRental(long id) throws DaoException {
         removeById(id);
     }
 
     @Override
-    public void saveBookBorrow(BookRental bookRental) throws DaoException {
+    public void saveBookRental(BookRental bookRental) throws DaoException {
         save(bookRental);
     }
 
     @Override
-    public Optional<BookRental> findBookBorrowById(long id) throws DaoException {
+    public Optional<BookRental> findBookRentalById(long id) throws DaoException {
         String condition = String.format("WHERE %s.id = ?", BookRental.TABLE);
         return executeForSingleResult(SELECT_ORDERS + condition, id);
     }

@@ -12,7 +12,7 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="${pageContext.request.contextPath}/CSS/bookBorrowForm.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/CSS/bookRentalForm.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/form.css" rel="stylesheet" type="text/css"/>
@@ -32,8 +32,8 @@
     </div>
       
     <div class="form-class">
-      <h2><fmt:message key="borrow.details.title"/></h2>
-      <jsp:include page="../components/bookBorrowForm.jsp" />
+      <h2><fmt:message key="rental.details.title"/></h2>
+      <jsp:include page="../components/bookRentalForm.jsp" />
     </div>
 
     <!-- Footer -->

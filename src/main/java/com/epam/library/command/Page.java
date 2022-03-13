@@ -3,9 +3,9 @@ package com.epam.library.command;
 public enum Page {
     LOGIN("/index.jsp"),
     BOOK_DETAILS("/pages/bookDetails.jsp"),
-    RENTAL_DETAILS("/pages/borrowDetails.jsp"),
+    RENTAL_DETAILS("/pages/bookRentalDetails.jsp"),
     ERROR("/pages/errorPage.jsp"),
-    BOOK_RENTALS("/pages/booksBorrows.jsp"),
+    BOOK_RENTALS("/pages/booksRentals.jsp"),
     READERS("/pages/readers.jsp"),
     LIBRARIANS("/pages/librarians.jsp"),
     AUTHORS("/pages/authors.jsp"),
