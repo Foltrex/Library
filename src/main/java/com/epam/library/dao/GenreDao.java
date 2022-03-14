@@ -6,7 +6,7 @@ import com.epam.library.exception.DaoException;
 
 import java.util.List;
 
-public interface GenreDao {
+public interface GenreDao extends EntityDao {
 
     List<Genre> getGenres() throws DaoException;
 

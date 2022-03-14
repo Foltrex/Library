@@ -39,7 +39,6 @@ public class ShowBookDetailsCommand implements Command {
         List<Genre> genres = genreService.getGenres();
 
 
-        // TODO: make saving and creating book with this command
         CommandResult result;
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();

@@ -45,8 +45,6 @@ public class Controller extends HttpServlet {
             req.setAttribute("errorMessage", e.getMessage());
             dispatch(req, resp, CommandResult.forward(Page.ERROR.getName()));
         }
-
-        // TODO: add message el
     }
 
     private void dispatch(HttpServletRequest req, HttpServletResponse resp, CommandResult result) throws ServletException, IOException {

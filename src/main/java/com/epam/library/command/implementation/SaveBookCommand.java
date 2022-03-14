@@ -3,6 +3,7 @@ package com.epam.library.command.implementation;
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
+import com.epam.library.command.Paginator;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
@@ -15,12 +16,12 @@ import java.util.List;
 
 public class SaveBookCommand implements Command {
 
-    private static final int RECORDS_PER_PAGE = 3;
-
     private final BookService service;
+    private final Paginator paginator;
 
     public SaveBookCommand(BookService service) {
         this.service = service;
+        this.paginator = new Paginator(service, 4);
     }
 
     @Override
@@ -28,15 +29,10 @@ public class SaveBookCommand implements Command {
         Book book = extractBookFromRequest(req);
         service.saveBook(book);
 
-        int currentPage = 1;
-        List<Book> books = service.findPartOfBooks(currentPage, RECORDS_PER_PAGE);
-        int totalRows = service.calculateBooksNumber();
-
-        int numberOfPages = (int) Math.ceil(totalRows * 1.0 / RECORDS_PER_PAGE);
-
+        int currentPage = paginator.findPageNo(req);
+        List<Book> books = service.findPartOfBooks(currentPage, paginator.getRecordsPerPage());
+        paginator.setPaginationParameters(req);
         req.setAttribute("books", books);
-        req.setAttribute("currentPage", currentPage);
-        req.setAttribute("numberOfPages", numberOfPages);
 
         return CommandResult.forward(Page.BOOKS.getName());
     }

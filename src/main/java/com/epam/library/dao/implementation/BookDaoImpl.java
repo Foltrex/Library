@@ -2,6 +2,7 @@ package com.epam.library.dao.implementation;
 
 import com.epam.library.dao.AbstractDao;
 import com.epam.library.dao.BookDao;
+import com.epam.library.dao.SearchBookDao;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.BookRowMapper;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
+public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBookDao {
 
     private static final String SELECT_BOOKS = String.format("%s %s %s %s %s ",
             "SELECT books.id, title, author_id, authors.name AS author_name, surname AS author_surname,",
@@ -22,12 +23,16 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
             "INNER JOIN genres ON genre_id = genres.id");
 
     private static final String SELECT_BOOKS_BY_TITLE = String.format("%s %s", SELECT_BOOKS, "WHERE title=?");
+    private static final String SELECT_BOOKS_AUTHOR_ID = String.format("%s %s", SELECT_BOOKS, "WHERE author_id = ?");
+    private static final String SELECT_BOOKS_GENRE_ID = String.format("%s %s", SELECT_BOOKS, "WHERE genre)id = ?");
 
     private static final String UPDATE_BOOK_STOCK_DEC = String.format(
             "UPDATE %s SET %s = %s - 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
 
     private static final String UPDATE_BOOK_STOCK_INC = String.format(
             "UPDATE %s SET %s = %s + 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
+
+    private static final String LIMIT = " LIMIT ?, ?";
 
 
     public BookDaoImpl(Connection connection) {
@@ -41,7 +46,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
     @Override
     public List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
-        String query = SELECT_BOOKS + " LIMIT ?, ?";
+        String query = SELECT_BOOKS + LIMIT;
         return executeQuery(query, startingPosition, recordsPerPage);
     }
 
@@ -66,21 +71,37 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
         save(book);
     }
 
+    @Deprecated
     @Override
     public List<Book> searchBooksByAuthorId(long id) throws DaoException {
-        String condition = "WHERE author_id = ?";
-        return executeQuery(SELECT_BOOKS + condition, id);
+        return executeQuery(SELECT_BOOKS_AUTHOR_ID, id);
     }
 
     @Override
+    @Deprecated
     public List<Book> searchBooksByGenreId(Long id) throws DaoException {
-        String condition = "WHERE genre_id = ?";
-        return executeQuery(SELECT_BOOKS + condition, id);
+        return executeQuery(SELECT_BOOKS_GENRE_ID, id);
     }
 
     @Override
+    @Deprecated
     public List<Book> searchBooksByTitle(String title) throws DaoException {
         return executeQuery(SELECT_BOOKS_BY_TITLE, title);
+    }
+
+    @Override
+    public List<Book> searchBooksFromPositionByAuthorId(Long id, int startingPosition, int recordsPerPage) throws DaoException {
+        return executeQuery(SELECT_BOOKS_AUTHOR_ID + LIMIT, startingPosition, recordsPerPage);
+    }
+
+    @Override
+    public List<Book> searchBooksFromPositionByGenreId(Long id, int startingPosition, int recordsPerPage) throws DaoException {
+        return executeQuery(SELECT_BOOKS_GENRE_ID + LIMIT, startingPosition, recordsPerPage);
+    }
+
+    @Override
+    public List<Book> searchBooksFromPositionByBookTitle(String title, int startingPosition, int recordsPerPage) throws DaoException {
+        return executeQuery(SELECT_BOOKS_BY_TITLE + LIMIT, startingPosition, recordsPerPage);
     }
 
     @Override

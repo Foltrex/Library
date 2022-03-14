@@ -8,17 +8,16 @@ import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.service.AbstractService;
 import com.epam.library.service.BookRentalService;
 
 import java.util.List;
 import java.util.Optional;
 
-public class BookRentalServiceImpl implements BookRentalService {
-
-    private final DaoHelperFactory daoHelperFactory;
+public class BookRentalServiceImpl extends AbstractService implements BookRentalService {
 
     public BookRentalServiceImpl(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, daoHelperFactory.create().createBookRentalDao());
     }
 
 
@@ -79,7 +78,7 @@ public class BookRentalServiceImpl implements BookRentalService {
             BookDao bookDao = helper.createBookDao();
             dao.deleteBookRental(bookRental.getId());
 
-            // TODO: make to return status
+
             if (bookRental.getRentalStatus() == RentalStatus.ISSUED_FOR_SUBSCRIPTION ||
                     bookRental.getRentalStatus() == RentalStatus.ISSUED_TO_THE_READING_ROOM) {
                 bookDao.returnBook(bookRental.getRentedBook().getId());

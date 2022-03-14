@@ -5,16 +5,15 @@ import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.service.AbstractService;
 import com.epam.library.service.GenreService;
 
 import java.util.List;
 
-public class GenreServiceImpl implements GenreService {
-
-    private final DaoHelperFactory daoHelperFactory;
+public class GenreServiceImpl extends AbstractService implements GenreService {
 
     public GenreServiceImpl(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, daoHelperFactory.create().createGenreDao());
     }
 
     @Override

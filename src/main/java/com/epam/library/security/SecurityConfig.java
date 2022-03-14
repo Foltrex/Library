@@ -27,9 +27,7 @@ public class SecurityConfig {
                 CommandName.SHOW_AUTHORS, CommandName.ADD_AUTHOR, CommandName.SHOW_AUTHOR_BOOKS,
                 CommandName.SHOW_GENRES, CommandName.ADD_GENRE, CommandName.SHOW_GENRE_BOOKS
         );
-        // TODO: add reader page for librarian
 
-        // TODO: dont showing borrows page for librarians
         List<CommandName> librarianCommands = Arrays.asList(
                 CommandName.LOGIN, CommandName.LOGOUT, CommandName.CHANGE_LANGUAGE,
                 CommandName.SHOW_RENTALS, CommandName.SHOW_BOOK_RENTAL_DETAILS, CommandName.DELETE_RENTAL,

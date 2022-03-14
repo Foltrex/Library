@@ -6,6 +6,6 @@ import com.epam.library.exception.DaoException;
 
 import java.util.List;
 
-public interface UserRoleDao {
+public interface UserRoleDao extends EntityDao {
     List<User> findUsersByRole(Role role) throws DaoException;
 }

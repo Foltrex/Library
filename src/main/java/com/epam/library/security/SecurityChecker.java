@@ -39,7 +39,6 @@ public class SecurityChecker {
 
     private boolean isUserHasPermissionToCommand(HttpServletRequest request, Role userRole) {
         String commandLine = request.getParameter("command");
-        // TODO: добавить возможность команды login при отсутствии user в сессии
         if (commandLine != null && userRole != null) {
             SecurityConfig securityConfig = SecurityConfig.getInstance();
             List<CommandName> allowedCommandForUser = securityConfig.getAllowedCommandsForRole(userRole);

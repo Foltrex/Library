@@ -6,16 +6,15 @@ import com.epam.library.dao.UserDao;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.service.AbstractService;
 import com.epam.library.service.UserService;
 
 import java.util.Optional;
 
-public class UserServiceImpl implements UserService {
-
-    private final DaoHelperFactory daoHelperFactory;
+public class UserServiceImpl extends AbstractService implements UserService {
 
     public UserServiceImpl(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, daoHelperFactory.create().createUserDao());
     }
 
     @Override

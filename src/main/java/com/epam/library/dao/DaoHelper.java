@@ -28,6 +28,10 @@ public class DaoHelper implements AutoCloseable {
         return new BookDaoImpl(connection);
     }
 
+    public SearchBookDao createSearchBookDao() {
+        return new BookDaoImpl(connection);
+    }
+
     public AuthorDao createAuthorDao() {
         return new AuthorDaoImpl(connection);
     }

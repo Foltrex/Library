@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="customtags" prefix="page" %>
 
 <div class="pagination">
-    <c:if test="${currentPage gt 1}">
+    <page:htmlPage pageNo="${currentPage}" url="your_url" totalSum="${totalSum}" showPage="6" pageSize="4"/>
+    <!-- <c:if test="${currentPage gt 1}">
         <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=1">&laquo;</a>
     </c:if>
     
@@ -18,5 +20,5 @@
     
     <c:if test="${currentPage lt numberOfPages}">
         <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=${numberOfPages}">&raquo;</a>
-    </c:if>    
+    </c:if>     -->
 </div>

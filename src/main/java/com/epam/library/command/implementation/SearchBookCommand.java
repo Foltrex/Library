@@ -3,6 +3,7 @@ package com.epam.library.command.implementation;
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
+import com.epam.library.command.Paginator;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -13,38 +14,27 @@ import java.util.List;
 
 public class SearchBookCommand implements Command {
 
-    private static final int RECORDS_PER_PAGE = 3;
-
-
     private final BookService bookService;
+    private final Paginator paginator;
 
     public SearchBookCommand(BookService bookService) {
         this.bookService = bookService;
+        this.paginator = new Paginator(bookService, 4);
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         String title = req.getParameter("bookTitle");
-
-        int currentPage = 1;
+        int currentPage = paginator.findPageNo(req);
         List<Book> books;
-        int numberOfPages;
         if (title != null && !title.isEmpty()) {
-            books = bookService.searchBooksByTitle(title);
-
-            // for correct work with pagination
-            books = books.size() > RECORDS_PER_PAGE ? books.subList(0, RECORDS_PER_PAGE) : books;
-            numberOfPages = 1;
+            books = bookService.searchBooksFromPositionByBookTitle(title, currentPage, paginator.getRecordsPerPage());
         } else {
-            books = bookService.findPartOfBooks(currentPage, RECORDS_PER_PAGE);
-
-            int totalRows = bookService.calculateBooksNumber();
-            numberOfPages = (int) Math.ceil(totalRows * 1.0 / RECORDS_PER_PAGE);
+            books = bookService.findPartOfBooks(currentPage, paginator.getRecordsPerPage());
         }
-
+        paginator.setPaginationParameters(req);
         req.setAttribute("books", books);
-        req.setAttribute("currentPage", currentPage);
-        req.setAttribute("numberOfPages", numberOfPages);
+        req.setAttribute("bookTitle", title);
         return CommandResult.forward(Page.BOOKS.getName());
     }
 }

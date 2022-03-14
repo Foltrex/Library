@@ -6,7 +6,7 @@ import com.epam.library.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookRentalDao {
+public interface BookRentalDao extends EntityDao {
 
     List<BookRental> getBooksRentals() throws DaoException;
 
