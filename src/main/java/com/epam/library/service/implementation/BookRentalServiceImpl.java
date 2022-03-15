@@ -1,23 +1,21 @@
 package com.epam.library.service.implementation;
 
-import com.epam.library.dao.BookRentalDao;
-import com.epam.library.dao.BookDao;
-import com.epam.library.dao.DaoHelper;
-import com.epam.library.dao.DaoHelperFactory;
+import com.epam.library.dao.*;
 import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AbstractService;
 import com.epam.library.service.BookRentalService;
+import com.epam.library.service.EntityService;
 
 import java.util.List;
 import java.util.Optional;
 
-public class BookRentalServiceImpl extends AbstractService implements BookRentalService {
+public class BookRentalServiceImpl extends AbstractService implements BookRentalService, EntityService {
 
     public BookRentalServiceImpl(DaoHelperFactory daoHelperFactory) {
-        super(daoHelperFactory, daoHelperFactory.create().createBookRentalDao());
+        super(daoHelperFactory);
     }
 
 
@@ -85,6 +83,19 @@ public class BookRentalServiceImpl extends AbstractService implements BookRental
             }
 
             helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int calculateNumberOfRows() throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookRentalDao dao = helper.createBookRentalDao();
+            int numberOfRows = calculateNumberOfRows(dao);
+            helper.endTransaction();
+            return numberOfRows;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

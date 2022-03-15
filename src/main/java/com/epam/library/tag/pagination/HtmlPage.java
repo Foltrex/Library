@@ -8,75 +8,80 @@ public class HtmlPage extends Page {
 
     @Override
     public String pagination() {
-        StringBuilder printNo = new StringBuilder();
         //If paginated; and the number of pages is less than or equal to the number of pages to display
-        if (variablePage.totalPage > 1 && variablePage.totalPage <= variablePage.showPageNum) {
+        if (variablePage.getTotalPage() > 1 && variablePage.getTotalPage() <= variablePage.getShowPageNum()) {
             return displayAll();
             //If the number of page breaks: greater than the number of displayed pages
-        } else if (variablePage.totalPage > 1) {
-            if (variablePage.pageNo == 1) { // the current page is equal to the first page
-                return fromFirstPagePrint();
-            } else if (variablePage.pageNo == variablePage.totalPage) { // the current page is equal to the last page
-                return fromLastPagePrint();
-            } else { // if the current page is not the first page or the last page
-                if (variablePage.showPageNum % 2 == 0) { // page number can be divided equally
-                    int print$No = variablePage.showPageNum / 2;
-                    if (variablePage.pageNo >= print$No) {
-                        int indexNoInt = variablePage.pageNo - print$No;
-                        if (variablePage.pageNo + print$No >= variablePage.totalPage) {
-                            return fromLastPagePrint();
-                        } else {
-                            if (indexNoInt == 0)
-                                indexNoInt = 1;
-                            for (int i = indexNoInt; i < (variablePage.showPageNum + indexNoInt); i++) {
-                                if (i == variablePage.pageNo) { // if it is the current page: do not add connection URL
-                                    printNo.append(i).append(variablePage.split);
-                                } else {
-                                    printNo.append(buildA(variablePage, i)).append(variablePage.split);
-                                }
-                            }
-                        }
-                    } else {
-                        return fromFirstPagePrint();
-                    }
-                } else { // when the number of printed pages is not even:
-                    int printNoInt = variablePage.showPageNum / 2 + 1;
-                    if (variablePage.pageNo >= printNoInt && variablePage.pageNo + printNoInt < variablePage.totalPage) {
-                        int indexNoInt = variablePage.pageNo - printNoInt + 1;
-                        for (int i = indexNoInt; i < variablePage.showPageNum + indexNoInt; i++) {
-                            if (variablePage.pageNo == i) { // if it is the current page: do not add connection URL
-                                printNo.append(i).append(variablePage.split);
-                            } else {
-                                printNo.append(buildA(variablePage, i)).append(variablePage.split);
-                            }
-                        }
-                    } else if (variablePage.pageNo <= printNoInt) { // from page 1
-                        return fromFirstPagePrint();
-                    } else {
-                        return fromLastPagePrint();
-                    }
-                }
-            }
-
-            return (printNo.toString());
+        } else if (variablePage.getTotalPage() > 1) {
+            return displayCompositeContent(variablePage);
         } else {
             return "1";
         }
     }
 
-    public String getBackpageNum() {
-        if (variablePage.pageNo <= 1) {
-            return buildSpan("previous", variablePage);
-        } else {
-            return buildA("previous page", variablePage.url + (variablePage.pageNo - 1));
+    private String displayCompositeContent(VariablePage variablePage) {
+        if (variablePage.getPageNo() == 1) { // the current page is equal to the first page
+            return fromFirstPagePrint();
+        } else if (variablePage.getPageNo() == variablePage.getTotalPage()) { // the current page is equal to the last page
+            return fromLastPagePrint();
+        } else { // if the current page is not the first page or the last page
+            return displayCentralPages(variablePage);
         }
     }
 
-    public String getNextpageNum() {
-        if (variablePage.pageNo >= variablePage.totalPage) {
-            return buildSpan("next page", variablePage);
+    private String displayCentralPages(VariablePage variablePage) {
+        if (variablePage.getShowPageNum() % 2 == 0) {
+            // page number can be divided equally
+             return paginateOfEvenNumberOfPagesWithCutContent(variablePage);
         } else {
-            return buildA("next page", variablePage.url + (variablePage.pageNo + 1));
+            // when the number of printed pages is not even:
+             return paginateOfOddNumberOfPagesWithCutContent(variablePage);
+        }
+    }
+
+    private String paginateOfEvenNumberOfPagesWithCutContent(VariablePage variablePage) {
+        StringBuilder pagination = new StringBuilder();
+        int halfOfPrintedPaginationLinks = variablePage.getShowPageNum() / 2;
+        if (variablePage.getPageNo() >= halfOfPrintedPaginationLinks) {
+            int firstIndexOfPrintedPaginationLinks = variablePage.getPageNo() - halfOfPrintedPaginationLinks;
+            if (variablePage.getPageNo() + halfOfPrintedPaginationLinks >= variablePage.getTotalPage()) {
+                return fromLastPagePrint();
+            } else {
+                if (firstIndexOfPrintedPaginationLinks == 0) {
+                    firstIndexOfPrintedPaginationLinks = 1;
+                }
+
+                fillPaginationList(pagination, variablePage, firstIndexOfPrintedPaginationLinks);
+            }
+        } else {
+            return fromFirstPagePrint();
+        }
+
+        return pagination.toString();
+    }
+
+    private String paginateOfOddNumberOfPagesWithCutContent(VariablePage variablePage) {
+        StringBuilder pagination = new StringBuilder();
+        int halfOfPrintedPaginationLinks = variablePage.getShowPageNum() / 2 + 1;
+        if (variablePage.getPageNo() >= halfOfPrintedPaginationLinks && variablePage.getPageNo() + halfOfPrintedPaginationLinks < variablePage.getTotalPage()) {
+            int firstIndexOfPrintedPaginationLinks = variablePage.getPageNo() - halfOfPrintedPaginationLinks + 1;
+            fillPaginationList(pagination, variablePage, firstIndexOfPrintedPaginationLinks);
+        } else if (variablePage.getPageNo() <= halfOfPrintedPaginationLinks) { // from page 1
+            return fromFirstPagePrint();
+        } else {
+            return fromLastPagePrint();
+        }
+
+        return pagination.toString();
+    }
+
+    private void fillPaginationList(StringBuilder pagination, VariablePage variablePage, int firstIndex) {
+        for (int i = firstIndex; i < variablePage.getShowPageNum() + firstIndex; i++) {
+            if (variablePage.getPageNo() == i) { // if it is the current page: do not add connection URL
+                pagination.append(buildSpan(i, variablePage)).append(VariablePage.SPLIT);
+            } else {
+                pagination.append(buildA(variablePage, i)).append(VariablePage.SPLIT);
+            }
         }
     }
 
@@ -86,12 +91,17 @@ public class HtmlPage extends Page {
     }
 
     @Override
+    public String buildSpan(int num, VariablePage variablePage) {
+        return buildSpan(String.valueOf(num), variablePage);
+    }
+
+    @Override
     public String buildA(String text, String url) {
         return "<a href=\"" + url + "\">" + text + "</a>";
     }
 
     @Override
     public String buildA(VariablePage variablePage, int num) {
-        return ("<a href=\"" + variablePage.url + num + "\">" + num + "</a>");
+        return ("<a href=\"" + variablePage.getUrl() + num + "\">" + num + "</a>");
     }
 }

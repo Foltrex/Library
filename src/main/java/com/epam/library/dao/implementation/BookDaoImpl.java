@@ -24,7 +24,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
 
     private static final String SELECT_BOOKS_BY_TITLE = String.format("%s %s", SELECT_BOOKS, "WHERE title=?");
     private static final String SELECT_BOOKS_AUTHOR_ID = String.format("%s %s", SELECT_BOOKS, "WHERE author_id = ?");
-    private static final String SELECT_BOOKS_GENRE_ID = String.format("%s %s", SELECT_BOOKS, "WHERE genre)id = ?");
+    private static final String SELECT_BOOKS_GENRE_ID = String.format("%s %s", SELECT_BOOKS, "WHERE genre_id = ?");
 
     private static final String UPDATE_BOOK_STOCK_DEC = String.format(
             "UPDATE %s SET %s = %s - 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
@@ -32,7 +32,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
     private static final String UPDATE_BOOK_STOCK_INC = String.format(
             "UPDATE %s SET %s = %s + 1 WHERE id = ?;", Book.TABLE, Book.STOCK, Book.STOCK);
 
-    private static final String LIMIT = " LIMIT ?, ?";
+    private static final String LIMIT = " LIMIT ?";
+    private static final String OFFSET = " OFFSET ?";
 
 
     public BookDaoImpl(Connection connection) {
@@ -46,8 +47,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
 
     @Override
     public List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
-        String query = SELECT_BOOKS + LIMIT;
-        return executeQuery(query, startingPosition, recordsPerPage);
+        String query = SELECT_BOOKS + LIMIT + OFFSET;
+        return executeQuery(query, recordsPerPage, startingPosition);
     }
 
     @Override
@@ -91,17 +92,17 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
 
     @Override
     public List<Book> searchBooksFromPositionByAuthorId(Long id, int startingPosition, int recordsPerPage) throws DaoException {
-        return executeQuery(SELECT_BOOKS_AUTHOR_ID + LIMIT, startingPosition, recordsPerPage);
+        return executeQuery(SELECT_BOOKS_AUTHOR_ID + LIMIT + OFFSET, id, recordsPerPage, startingPosition);
     }
 
     @Override
     public List<Book> searchBooksFromPositionByGenreId(Long id, int startingPosition, int recordsPerPage) throws DaoException {
-        return executeQuery(SELECT_BOOKS_GENRE_ID + LIMIT, startingPosition, recordsPerPage);
+        return executeQuery(SELECT_BOOKS_GENRE_ID + LIMIT + OFFSET, id, recordsPerPage, startingPosition);
     }
 
     @Override
     public List<Book> searchBooksFromPositionByBookTitle(String title, int startingPosition, int recordsPerPage) throws DaoException {
-        return executeQuery(SELECT_BOOKS_BY_TITLE + LIMIT, startingPosition, recordsPerPage);
+        return executeQuery(SELECT_BOOKS_BY_TITLE + LIMIT + OFFSET, title, recordsPerPage, startingPosition);
     }
 
     @Override

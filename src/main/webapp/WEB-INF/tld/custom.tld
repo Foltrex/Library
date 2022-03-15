@@ -6,7 +6,7 @@
     <uri>customtags</uri>
     <tag>
         <name>htmlPage</name>
-        <tag-class>com.lss.common.tag.PageTag</tag-class>
+        <tag-class>com.epam.library.tag.pagination.PageTag</tag-class>
         <body-content>JSP</body-content>
         <description>htmlPage Tag</description>
         <attribute>

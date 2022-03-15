@@ -6,14 +6,15 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AbstractService;
+import com.epam.library.service.EntityService;
 import com.epam.library.service.GenreService;
 
 import java.util.List;
 
-public class GenreServiceImpl extends AbstractService implements GenreService {
+public class GenreServiceImpl extends AbstractService implements GenreService, EntityService {
 
     public GenreServiceImpl(DaoHelperFactory daoHelperFactory) {
-        super(daoHelperFactory, daoHelperFactory.create().createGenreDao());
+        super(daoHelperFactory);
     }
 
     @Override
@@ -36,6 +37,19 @@ public class GenreServiceImpl extends AbstractService implements GenreService {
             GenreDao dao = helper.createGenreDao();
             dao.saveGenre(genre);
             helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int calculateNumberOfRows() throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            GenreDao dao = helper.createGenreDao();
+            int numberOfRows = calculateNumberOfRows(dao);
+            helper.endTransaction();
+            return numberOfRows;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

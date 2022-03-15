@@ -8,6 +8,7 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -72,9 +73,14 @@ public class ConnectionPool {
         ProxyConnection proxyConnection = null;
         try {
             // if the pool is empty, then wait for at least one connection to become free
-            semaphore.acquire();
-            proxyConnection =  availableConnections.poll();
-            connectionsInUse.add(proxyConnection);
+            if (semaphore.tryAcquire(1, TimeUnit.MINUTES)) {
+                ProxyConnection connection = availableConnections.remove();
+                connectionsInUse.offer(connection);
+                return connection;
+            } else {
+                LOGGER.warn("Time limit exceeded");
+            }
+
         } catch (InterruptedException e) {
             LOGGER.error("Сonnection getting error", e);
         } finally {

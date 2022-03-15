@@ -2,23 +2,36 @@
 <%@taglib uri="customtags" prefix="page" %>
 
 <div class="pagination">
-    <page:htmlPage pageNo="${currentPage}" url="your_url" totalSum="${totalSum}" showPage="6" pageSize="4"/>
-    <!-- <c:if test="${currentPage gt 1}">
-        <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=1">&laquo;</a>
+    <c:choose>
+        <c:when test="${not empty bookTitle}">
+            <page:htmlPage pageNo="${pageNo}" url="/controller?command=search_book&bookTitle=${bookTitle}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+        </c:when>
+        <c:when test="${not empty genre}">
+            <page:htmlPage pageNo="${pageNo}" url="/controller?command=show_genre_books&genreId=${genre.id}&genreName=${genre.name}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+        </c:when>
+        <c:when test="${not empty author}">
+            <page:htmlPage pageNo="${pageNo}" url="/controller?command=show_author_books&authorId=${author.id}&authorName=${author.name}&authorSurname=${author.surname}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+        </c:when>
+        <c:otherwise>
+            <page:htmlPage pageNo="${pageNo}" url="/controller?command=show_books" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+        </c:otherwise>
+    </c:choose>
+    <!-- <c:if test="${pageNo gt 1}">
+        <a href="${pageContext.request.contextPath}/controller?command=show_books&pageNo=1">&laquo;</a>
     </c:if>
     
     <c:forEach begin="1" end="${numberOfPages}" var="i">
         <c:choose>
-            <c:when test="${currentPage eq i}">
-                <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=${i}" class="active">${i}</a>
+            <c:when test="${currentPage eq i}">`
+                <a href="${pageContext.request.contextPath}/controller?command=show_books&pageNo=${i}" class="active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=${i}">${i}</a>
+                <a href="${pageContext.request.contextPath}/controller?command=show_books&pageNo=${i}">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     
-    <c:if test="${currentPage lt numberOfPages}">
-        <a href="${pageContext.request.contextPath}/controller?command=show_books&currentPage=${numberOfPages}">&raquo;</a>
+    <c:if test="${pageNo lt numberOfPages}">
+        <a href="${pageContext.request.contextPath}/controller?command=show_books&pageNo=${numberOfPages}">&raquo;</a>
     </c:if>     -->
 </div>

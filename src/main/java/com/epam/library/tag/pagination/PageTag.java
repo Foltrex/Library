@@ -61,22 +61,23 @@ public class PageTag extends TagSupport {
             return TagSupport.SKIP_BODY; // do not display Pagination
         }
         JspWriter out = pageContext.getOut();
+
         try {
-            if (!url.contains(";jsessionid=")) {
-                if (!url.contains("?")) {
-                    url += ";jsessionid=" + pageContext.getSession().getId() + "?pageNo=";
-                } else {
-                    url = url.replaceFirst("\\?", ";jsessionid=" + pageContext.getSession().getId() + "?");
-                    if (!url.contains("pageNo=")) {
-                        url += "&pageNo=";
-                    }
-                }
+            if (!url.contains("pageNo")) {
+                url += (url.contains("?") ? "&": "?") + "pageNo=";
             }
 
             url = pageContext.getServletContext().getContextPath() + url;
             VariablePage variablePage = new VariablePage(showPage, url, pageNo, totalSum, pageSize);
             Page page = new HtmlPage(variablePage);
-            out.print("%s %s %s %s %s".formatted(page.getFirstNo(), page.getBackpageNum(), page.pagination(), page.getNextpageNum(), page.getLastNo()));
+            out.print(String.format("%s %s %s %s %s",
+                    page.getFirstNo(),
+                    page.getBackPageNum(),
+                    page.pagination(),
+                    page.getNextPageNum(),
+                    page.getLastNo())
+            );
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -91,7 +92,4 @@ public class PageTag extends TagSupport {
         pageSize = 10;
         super.release();
     }
-
-    @Serial
-    private static final long serialVersionUID = 1585192223772733630L;
 }

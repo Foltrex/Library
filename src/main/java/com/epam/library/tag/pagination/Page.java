@@ -9,22 +9,22 @@ public abstract class Page {
     }
 
     public int getStartIndex() {
-        return (getValidpageNum() - 1) * variablePage.pageSize;
+        return (getValidPageNum() - 1) * variablePage.getPageSize();
     }
 
-    public String getBackpageNum() {
-        if (variablePage.pageNo <= 1) {
-            return buildSpan("previous", variablePage);
+    public String getBackPageNum() {
+        if (variablePage.getPageNo() <= 1) {
+            return buildSpan("&#8249;", variablePage);
         } else {
-            return buildA("previous page", variablePage.getUrl() + (variablePage.pageNo - 1));
+            return buildA("&#8249;", variablePage.getUrl() + (variablePage.getPageNo() - 1));
         }
     }
 
-    public String getNextpageNum() {
-        if (variablePage.pageNo >= variablePage.totalPage) {
-            return buildSpan("next page", variablePage);
+    public String getNextPageNum() {
+        if (variablePage.getPageNo() >= variablePage.getTotalPage()) {
+            return buildSpan("&#8250;", variablePage);
         } else {
-            return buildA("next page", variablePage.getUrl() + (variablePage.pageNo + 1));
+            return buildA("&#8250;", variablePage.getUrl() + (variablePage.getPageNo() + 1));
         }
     }
 
@@ -32,27 +32,27 @@ public abstract class Page {
      *Calculate total pages
      */
     private void calculateTotalPage() {
-        if (variablePage.totalSum % variablePage.pageSize == 0) {
-            variablePage.totalPage = variablePage.totalSum / variablePage.pageSize;
+        if (variablePage.getTotalSum() % variablePage.getPageSize() == 0) {
+            variablePage.setTotalPage(variablePage.getTotalSum() / variablePage.getPageSize());
         } else {
-            variablePage.totalPage = variablePage.totalSum / variablePage.pageSize + 1;
+            variablePage.setTotalPage(variablePage.getTotalSum() / variablePage.getPageSize() + 1);
         }
 
-        if (variablePage.totalPage < variablePage.pageNo) {
-            variablePage.pageNo = variablePage.totalPage;
-        } else if (variablePage.pageNo < 1) {
-            variablePage.pageNo = 1;
+        if (variablePage.getTotalPage() < variablePage.getPageNo()) {
+            variablePage.setPageNo(variablePage.getTotalPage());
+        } else if (variablePage.getPageNo() < 1) {
+            variablePage.setPageNo(1);
         }
     }
 
     protected String displayAll() {
         StringBuilder sBuilder = new StringBuilder(10);
-        sBuilder.append(variablePage.split);
-        for (int i = 1; i <= variablePage.totalPage; i++) {
-            if (i == variablePage.pageNo) {
-                sBuilder.append(i).append(variablePage.split);
+        sBuilder.append(VariablePage.SPLIT);
+        for (int i = 1; i <= variablePage.getTotalPage(); i++) {
+            if (variablePage.getPageNo() == i) {
+                sBuilder.append(i).append(VariablePage.SPLIT);
             } else {
-                sBuilder.append(buildA(variablePage, i)).append(variablePage.split);
+                sBuilder.append(buildA(variablePage, i)).append(VariablePage.SPLIT);
             }
         }
         return sBuilder.toString();
@@ -70,11 +70,11 @@ public abstract class Page {
      */
     protected final String fromFirstPagePrint() {
         StringBuilder buffer = new StringBuilder(100);
-        for (int i = 1; i <= variablePage.showPageNum; i++) {
-            if (i == variablePage.pageNo) { // if it is the current page: do not add connection URL
-                buffer.append(i).append(variablePage.split);
+        for (int i = 1; i <= variablePage.getShowPageNum(); i++) {
+            if (i == variablePage.getPageNo()) { // if it is the current page: do not add connection URL
+                buffer.append(i).append(VariablePage.SPLIT);
             } else {
-                buffer.append(buildA(variablePage, i)).append(variablePage.split);
+                buffer.append(buildA(variablePage, i)).append(VariablePage.SPLIT);
             }
         }
         return buffer.toString();
@@ -86,12 +86,12 @@ public abstract class Page {
      */
     protected final String fromLastPagePrint() {
         StringBuilder buffer = new StringBuilder(100);
-        int startPage = variablePage.totalPage - (variablePage.showPageNum - 1);
-        for (int i = startPage; i <= variablePage.totalPage; i++) {
-            if (i == variablePage.pageNo) { // if it is the current page: do not add connection URL
-                buffer.append(i).append(variablePage.split);
+        int startPage = variablePage.getTotalPage() - (variablePage.getShowPageNum() - 1);
+        for (int i = startPage; i <= variablePage.getTotalPage(); i++) {
+            if (i == variablePage.getPageNo()) { // if it is the current page: do not add connection URL
+                buffer.append(i).append(VariablePage.SPLIT);
             } else {
-                buffer.append(buildA(variablePage, i)).append(variablePage.split);
+                buffer.append(buildA(variablePage, i)).append(VariablePage.SPLIT);
             }
         }
         return buffer.toString();
@@ -99,9 +99,9 @@ public abstract class Page {
 
     public String getFirstNo() {
         if (isExistsPagination()) {
-            return buildA("home page", variablePage.url + 1);
+            return buildA("&laquo;", variablePage.getUrl() + 1);
         } else {
-            return buildSpan("homepage", variablePage);
+            return buildSpan("&laquo;", variablePage);
         }
     }
 
@@ -110,25 +110,25 @@ public abstract class Page {
      *
      */
     private boolean isExistsPagination() {
-        return variablePage.totalSum > 1 && variablePage.totalPage > 1;
+        return variablePage.getTotalSum() > 1 && variablePage.getTotalPage() > 1;
     }
 
     public String getLastNo() {
         if (isExistsPagination()) {
-            return buildA("last page", variablePage.url + variablePage.totalPage);
+            return buildA("&raquo;", variablePage.getUrl() + variablePage.getTotalPage());
         } else {
-            return buildSpan("tail page", variablePage);
+            return buildSpan("&raquo;", variablePage);
         }
     }
 
-    protected int getValidpageNum() {
-        if (variablePage.totalPage < variablePage.pageNo) {
-            return variablePage.pageNo = variablePage.totalPage;
-        } else if (variablePage.pageNo < 1) {
-            return variablePage.pageNo = 1;
-        } else {
-            return variablePage.pageNo;
+    protected int getValidPageNum() {
+        if (variablePage.getTotalPage() < variablePage.getPageNo()) {
+            variablePage.setPageNo(variablePage.getTotalPage());
+        } else if (variablePage.getPageNo() < 1) {
+            variablePage.setPageNo(1);
         }
+
+        return variablePage.getPageNo();
     }
 
     public VariablePage getPageContant() {
@@ -137,17 +137,10 @@ public abstract class Page {
 
     public abstract String buildSpan(String text, VariablePage variablePage);
 
+    public abstract String buildSpan(int num, VariablePage variablePage);
+
     public abstract String buildA(String text, String url);
 
     public abstract String buildA(VariablePage variablePage, int num);
 
-    public String printModifyPageSize(int pageSize) {
-        StringBuilder builder = new StringBuilder(100);
-        builder.append("per page < input type = text 'id = PageSize' style = 'width: 20 px' maxlength='2' name='pageSize'");
-        if (pageSize > 0) {
-            builder.append(" value='").append(pageSize).append("' ");
-        }
-        builder.append("/ > bar");
-        return builder.toString();
-    }
 }

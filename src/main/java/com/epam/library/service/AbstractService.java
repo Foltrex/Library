@@ -15,15 +15,12 @@ import java.util.Optional;
 public abstract class AbstractService implements EntityService {
 
     protected final DaoHelperFactory daoHelperFactory;
-    private final EntityDao dao;
 
-    public AbstractService(DaoHelperFactory daoHelperFactory, EntityDao dao) {
+    public AbstractService(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
-        this.dao = dao;
     }
 
-    @Override
-    public int calculateNumberOfRows() throws ServiceException {
+    public int calculateNumberOfRows(EntityDao dao) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             int numberOfRows = dao.calculateNumberOfRows();
