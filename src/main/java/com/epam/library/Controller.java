@@ -42,6 +42,7 @@ public class Controller extends HttpServlet {
             dispatch(req, resp, result);
         } catch (Exception e) {
             LOGGER.warn(e);
+            // TODO: make more individual
             req.setAttribute("errorMessage", e.getMessage());
             dispatch(req, resp, CommandResult.forward(Page.ERROR.getName()));
         }

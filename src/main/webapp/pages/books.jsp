@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="customtags" prefix="ctg" %>
 <script src="https://kit.fontawesome.com/1f4939e33e.js" crossorigin="anonymous"></script>
 
 <c:if test="${sessionScope.locale == null}">
@@ -57,7 +58,22 @@
 
       <jsp:include page="../components/booksTable.jsp" />
 
-      <jsp:include page="../components/pagination.jsp" />
+      <div class="pagination">
+        <c:choose>
+            <c:when test="${not empty bookTitle}">
+                <ctg:page pageNo="${pageNo}" url="/controller?command=search_book&bookTitle=${bookTitle}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+            </c:when>
+            <c:when test="${not empty genre}">
+                <ctg:page pageNo="${pageNo}" url="/controller?command=show_genre_books&genreId=${genre.id}&genreName=${genre.name}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+            </c:when>
+            <c:when test="${not empty author}">
+                <ctg:page pageNo="${pageNo}" url="/controller?command=show_author_books&authorId=${author.id}&authorName=${author.name}&authorSurname=${author.surname}" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+            </c:when>
+            <c:otherwise>
+                <ctg:page pageNo="${pageNo}" url="/controller?command=show_books" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+            </c:otherwise>
+        </c:choose>
+      </div>
     </div>
 
     <!-- Footer -->

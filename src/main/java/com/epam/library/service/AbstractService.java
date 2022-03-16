@@ -20,7 +20,7 @@ public abstract class AbstractService implements EntityService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public int calculateNumberOfRows(EntityDao dao) throws ServiceException {
+    protected int calculateNumberOfRows(EntityDao dao) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             int numberOfRows = dao.calculateNumberOfRows();
