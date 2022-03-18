@@ -17,44 +17,6 @@ public class BookServiceImpl extends AbstractService implements BookService, Ent
         super(daoHelperFactory);
     }
 
-    @Override
-    public List<Book> searchBooksByTitle(String title) throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
-            SearchBookDao dao = helper.createSearchBookDao();
-            List<Book> books = dao.searchBooksByTitle(title);
-            helper.endTransaction();
-            return books;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public List<Book> searchBooksByAuthorId(Long id) throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
-            SearchBookDao dao = helper.createSearchBookDao();
-            List<Book> authorBooks = dao.searchBooksByAuthorId(id);
-            helper.endTransaction();
-            return authorBooks;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public List<Book> searchBooksByGenreId(Long id) throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-        helper.startTransaction();
-        SearchBookDao dao = helper.createSearchBookDao();
-        List<Book> genreBooks = dao.searchBooksByGenreId(id);
-        helper.endTransaction();
-        return genreBooks;
-    } catch (DaoException e) {
-        throw new ServiceException(e);
-    }
-    }
 
     @Override
     public List<Book> getBooks() throws ServiceException {
@@ -109,19 +71,6 @@ public class BookServiceImpl extends AbstractService implements BookService, Ent
     }
 
     @Override
-    public int calculateBooksNumber() throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
-            BookDao dao = helper.createBookDao();
-            int numberOfRows = dao.calculateBooksNumber();
-            helper.endTransaction();
-            return numberOfRows;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public List<Book> searchBooksFromPositionByAuthorId(Long id, int currentPage, int recordsPerPage) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
@@ -141,9 +90,9 @@ public class BookServiceImpl extends AbstractService implements BookService, Ent
             helper.startTransaction();
             SearchBookDao dao = helper.createSearchBookDao();
             int startingPosition = currentPage * recordsPerPage - recordsPerPage;
-            List<Book> authorBooks = dao.searchBooksFromPositionByGenreId(id, startingPosition, recordsPerPage);
+            List<Book> genreBooks = dao.searchBooksFromPositionByGenreId(id, startingPosition, recordsPerPage);
             helper.endTransaction();
-            return authorBooks;
+            return genreBooks;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

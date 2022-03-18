@@ -72,24 +72,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
         save(book);
     }
 
-    @Deprecated
-    @Override
-    public List<Book> searchBooksByAuthorId(long id) throws DaoException {
-        return executeQuery(SELECT_BOOKS_AUTHOR_ID, id);
-    }
-
-    @Override
-    @Deprecated
-    public List<Book> searchBooksByGenreId(Long id) throws DaoException {
-        return executeQuery(SELECT_BOOKS_GENRE_ID, id);
-    }
-
-    @Override
-    @Deprecated
-    public List<Book> searchBooksByTitle(String title) throws DaoException {
-        return executeQuery(SELECT_BOOKS_BY_TITLE, title);
-    }
-
     @Override
     public List<Book> searchBooksFromPositionByAuthorId(Long id, int startingPosition, int recordsPerPage) throws DaoException {
         return executeQuery(SELECT_BOOKS_AUTHOR_ID + LIMIT + OFFSET, id, recordsPerPage, startingPosition);
@@ -103,11 +85,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
     @Override
     public List<Book> searchBooksFromPositionByBookTitle(String title, int startingPosition, int recordsPerPage) throws DaoException {
         return executeQuery(SELECT_BOOKS_BY_TITLE + LIMIT + OFFSET, title, recordsPerPage, startingPosition);
-    }
-
-    @Override
-    public int calculateBooksNumber() throws DaoException {
-        return calculateNumberOfRows();
     }
 
     @Override

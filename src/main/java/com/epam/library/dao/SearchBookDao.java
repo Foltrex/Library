@@ -10,15 +10,6 @@ public interface SearchBookDao extends EntityDao {
 
     Optional<Book> searchBookById(long id) throws DaoException;
 
-    @Deprecated
-    List<Book> searchBooksByAuthorId(long id) throws DaoException;
-
-    @Deprecated
-    List<Book> searchBooksByGenreId(Long id) throws DaoException;
-
-    @Deprecated
-    List<Book> searchBooksByTitle(String title) throws DaoException;
-
     List<Book> searchBooksFromPositionByAuthorId(Long id, int startingPosition, int recordsPerPage) throws DaoException;
 
     List<Book> searchBooksFromPositionByGenreId(Long id, int startingPosition, int recordsPerPage) throws DaoException;

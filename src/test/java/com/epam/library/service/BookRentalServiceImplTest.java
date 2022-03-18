@@ -19,12 +19,12 @@ import static org.mockito.Mockito.times;
 
 public class BookRentalServiceImplTest {
 
-    private List<BookRental> bookRentals = Arrays.asList(
+    private final List<BookRental> bookRentals = Arrays.asList(
             new BookRental(1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.RETURNED),
             new BookRental(2L, User.createUserWithOnlyId(2L), Book.createBookWithOnlyId(2L), new Date(), new Date(), RentalStatus.RETURNED)
     );
 
-    
+
     @Test
     public void testGetBookRentalsShouldReturnBookRentalsWhenDaoIsCorrect() throws DaoException, ServiceException {
         // given

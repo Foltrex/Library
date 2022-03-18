@@ -11,8 +11,6 @@ public interface BookDao extends EntityDao {
 
     void saveBook(Book book) throws DaoException;
 
-    int calculateBooksNumber() throws DaoException;
-
     List<Book> getBooksFromPosition(int startingPosition, int recordsPerPage) throws DaoException;
 
     // make separate interface

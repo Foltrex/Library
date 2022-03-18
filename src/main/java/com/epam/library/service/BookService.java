@@ -8,11 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookService extends EntityService {
-    List<Book> searchBooksByTitle(String title) throws ServiceException;
-
-    List<Book> searchBooksByAuthorId(Long id) throws ServiceException;
-
-    List<Book> searchBooksByGenreId(Long id) throws ServiceException;
 
     List<Book> getBooks() throws ServiceException;
 
@@ -21,8 +16,6 @@ public interface BookService extends EntityService {
     void saveBook(Book book) throws ServiceException;
 
     List<Book> findPartOfBooks(int currentPage, int recordsPerPage) throws ServiceException;
-
-    int calculateBooksNumber() throws ServiceException;
 
     List<Book> searchBooksFromPositionByAuthorId(Long id, int startingPosition, int recordsPerPage) throws ServiceException;
 
