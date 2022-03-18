@@ -4,7 +4,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.io.Serial;
 
 public class PageTag extends TagSupport {
     private int pageNo;
