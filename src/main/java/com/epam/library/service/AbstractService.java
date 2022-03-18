@@ -21,11 +21,8 @@ public abstract class AbstractService implements EntityService {
     }
 
     protected int calculateNumberOfRows(EntityDao dao) throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
-            int numberOfRows = dao.calculateNumberOfRows();
-            helper.endTransaction();
-            return numberOfRows;
+        try {
+            return dao.calculateNumberOfRows();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
