@@ -15,10 +15,10 @@ import java.util.List;
 
 public class DeleteBookRentalCommand implements Command {
 
-    private final BookRentalService bookBorrowService;
+    private final BookRentalService bookRentalService;
 
-    public DeleteBookRentalCommand(BookRentalService bookBorrowService) {
-        this.bookBorrowService = bookBorrowService;
+    public DeleteBookRentalCommand(BookRentalService bookRentalService) {
+        this.bookRentalService = bookRentalService;
     }
 
 
@@ -26,14 +26,15 @@ public class DeleteBookRentalCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         Long bookId = Long.valueOf(req.getParameter("bookId"));
         Book book = Book.createBookWithOnlyId(bookId);
+
         Long bookRentalId = Long.valueOf(req.getParameter("bookRentalId"));
         String rentalStatusString =  req.getParameter("rentalStatus");
         RentalStatus status = RentalStatus.valueOfStatus(rentalStatusString);
 
         BookRental bookRental = new BookRental(bookRentalId, null, book, null, null, status);
 
-        bookBorrowService.deleteBookRental(bookRental);
-        List<BookRental> bookRentals = bookBorrowService.getBookRentals();
+        bookRentalService.deleteBookRental(bookRental);
+        List<BookRental> bookRentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", bookRentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }

@@ -13,15 +13,15 @@ public enum Role {
 
     private final String roleName;
 
-    Role(String role) {
-        this.roleName = role;
-    }
-
     private static final Map<String, Role> ELEMENTS = new HashMap<>();
     static {
         for (Role role: Role.values()) {
             ELEMENTS.put(role.roleName, role);
         }
+    }
+
+    Role(String role) {
+        this.roleName = role;
     }
 
     public static Role valueOfRoleName(String roleName) {

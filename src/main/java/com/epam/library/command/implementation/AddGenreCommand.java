@@ -2,6 +2,7 @@ package com.epam.library.command.implementation;
 
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
+import com.epam.library.command.Page;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -27,7 +28,7 @@ public class AddGenreCommand implements Command {
 
         List<Genre> genres = genreService.getGenres();
         req.setAttribute("genres", genres);
-        return CommandResult.forward(GENRES_PAGE);
+        return CommandResult.forward(Page.GENRES.getName());
     }
 
     private Genre extractGenreFromRequest(HttpServletRequest req) {

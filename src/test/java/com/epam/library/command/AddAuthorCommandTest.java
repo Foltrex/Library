@@ -25,7 +25,7 @@ public class AddAuthorCommandTest {
     );
 
     @Test
-    public void testExecuteShouldAddAuthorWhenAuthorIsGiven() throws Exception {
+    public void testExecuteShouldAddAuthorWhenAuthorIsGiven() throws ServiceException, PageCommandException {
         // given
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         when(request.getParameter("authorName")).thenReturn("Nikolay");

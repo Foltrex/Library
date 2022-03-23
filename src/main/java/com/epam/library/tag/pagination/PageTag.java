@@ -1,11 +1,16 @@
 package com.epam.library.tag.pagination;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class PageTag extends TagSupport {
+    private static final Logger LOGGER = LogManager.getLogger(PageTag.class);
+
     private int pageNo;
     private int pageSize = 10;
     private int totalSum;
@@ -78,8 +83,9 @@ public class PageTag extends TagSupport {
             );
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            LOGGER.warn(ex);
         }
+
         return super.doEndTag();
     }
 

@@ -50,7 +50,7 @@ public abstract class Page {
         sBuilder.append(VariablePage.SPLIT);
         for (int i = 1; i <= variablePage.getTotalPage(); i++) {
             if (variablePage.getPageNo() == i) {
-                sBuilder.append(i).append(VariablePage.SPLIT);
+                sBuilder.append(buildSpan(i, variablePage)).append(VariablePage.SPLIT);
             } else {
                 sBuilder.append(buildA(variablePage, i)).append(VariablePage.SPLIT);
             }

@@ -16,6 +16,8 @@ import java.util.List;
 
 public class AddBookCommand implements Command {
 
+    // TODO: rename to EditBookCommand
+
     private final AuthorService authorService;
     private final GenreService genreService;
 

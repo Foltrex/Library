@@ -15,7 +15,7 @@ public class CommandFactory {
 
         switch (commandName) {
             case LOGIN:
-                return new LoginCommand(new UserServiceImpl(factory));
+                return new LoginCommand(new UserServiceImpl(factory), new ReCaptchaChecker());
             case LOGOUT:
                 return new LogoutCommand();
             case CHANGE_LANGUAGE:

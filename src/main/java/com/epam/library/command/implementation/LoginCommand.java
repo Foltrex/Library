@@ -13,12 +13,12 @@ public class LoginCommand implements Command {
 
     private static final String MAIN_PAGE_COMMAND = CommandName.SHOW_BOOKS.getServletCommand("controller");
 
-    private final ReCaptchaChecker checker = new ReCaptchaChecker();
-
     private final UserService service;
+    private final ReCaptchaChecker checker;
 
-    public LoginCommand(UserService service) {
+    public LoginCommand(UserService service, ReCaptchaChecker checker) {
         this.service = service;
+        this.checker = checker;
     }
 
     @Override
