@@ -37,6 +37,7 @@ public class ChangeUserBlockingCommandTest {
         doNothing().when(service).changeUserBlocking(anyLong(), anyBoolean());
         when(service.getUsers(any(Role.class))).thenReturn(readers);
         doNothing().when(request).setAttribute(anyString(), anyList());
+        doNothing().when(request).setAttribute(anyString(), any(Role.class));
 
         ChangeUserBlockingCommand command = new ChangeUserBlockingCommand(service);
 
@@ -48,5 +49,6 @@ public class ChangeUserBlockingCommandTest {
         verify(service, times(1)).changeUserBlocking(anyLong(), anyBoolean());
         verify(service, times(1)).getUsers(any(Role.class));
         verify(request, times(1)).setAttribute(anyString(), anyList());
+        verify(request, times(1)).setAttribute(anyString(), any(Role.class));
     }
 }

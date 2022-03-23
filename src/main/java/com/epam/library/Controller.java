@@ -29,10 +29,6 @@ public class Controller extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        if (resp.isCommitted()) {
-            return;
-        }
-
         CommandFactory client = new CommandFactory();
         String commandLine = req.getParameter("command");
         Command command = client.defineCommand(commandLine);

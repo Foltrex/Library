@@ -24,7 +24,7 @@ public class ChangeUserBlockingCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         Long bannedUserId = Long.valueOf(req.getParameter("userId"));
-        Role bannedUserRole = Role.valueOf(req.getParameter("userRole"));
+        Role bannedUserRole = Role.valueOfRoleName(req.getParameter("userRole"));
         Boolean isBanned = Boolean.valueOf(req.getParameter("userBlocking"));
 
         adminService.changeUserBlocking(bannedUserId, isBanned);
