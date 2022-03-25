@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/CSS/errorPage.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/fonts.css" rel="stylesheet" type="text/css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> -->
     <!-- <script src="${pageContext.request.contextPath}/js/js-libraries/gsap/src/all.js"></script>
     <script src="${pageContext.request.contextPath}/js/gsap.min.js" defer></script> -->
     <script src="${pageContext.request.contextPath}/js/errorPage.js" defer></script>

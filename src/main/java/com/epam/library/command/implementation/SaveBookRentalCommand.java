@@ -21,17 +21,17 @@ public class SaveBookRentalCommand implements Command {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    private final BookRentalService bookBorrowService;
+    private final BookRentalService bookRentalService;
 
-    public SaveBookRentalCommand(BookRentalService bookBorrowService) {
-        this.bookBorrowService = bookBorrowService;
+    public SaveBookRentalCommand(BookRentalService bookRentalService) {
+        this.bookRentalService = bookRentalService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         BookRental bookRental = extractBookRentalFromRequest(req);
-        bookBorrowService.saveBookRental(bookRental);
-        List<BookRental> bookRentals = bookBorrowService.getBookRentals();
+        bookRentalService.saveBookRental(bookRental);
+        List<BookRental> bookRentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", bookRentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }

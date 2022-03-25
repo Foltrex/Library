@@ -25,6 +25,8 @@ public class ChangeUserBlockingCommandTest {
             new User(2L, "Goog", "Bye", "8877", "2222", "2222", Role.READER, false)
     );
 
+
+    // TODO: el was changed(test it)
     @Test
     public void testExecuteShouldChangeUserBlockingWhenUserIdIdGiven() throws ServiceException, PageCommandException {
         // given
@@ -49,6 +51,5 @@ public class ChangeUserBlockingCommandTest {
         verify(service, times(1)).changeUserBlocking(anyLong(), anyBoolean());
         verify(service, times(1)).getUsers(any(Role.class));
         verify(request, times(1)).setAttribute(anyString(), anyList());
-        verify(request, times(1)).setAttribute(anyString(), any(Role.class));
     }
 }

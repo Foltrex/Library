@@ -28,6 +28,8 @@ public class Controller extends HttpServlet {
         processRequest(req, resp);
     }
 
+    // TODO: write check for recommiting request
+
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         CommandFactory client = new CommandFactory();
         String commandLine = req.getParameter("command");
