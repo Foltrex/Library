@@ -13,16 +13,17 @@ import java.util.List;
 
 public class ShowBookRentalsCommand implements Command {
 
-    private final BookRentalService borrowService;
+    private final BookRentalService bookRentalService;
 
 
-    public ShowBookRentalsCommand(BookRentalService borrowService) {
-        this.borrowService = borrowService;
+    // TODO: create pagination
+    public ShowBookRentalsCommand(BookRentalService bookRentalService) {
+        this.bookRentalService = bookRentalService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        List<BookRental> rentals = borrowService.getBookRentals();
+        List<BookRental> rentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", rentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getName());
     }

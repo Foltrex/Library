@@ -32,7 +32,7 @@ public class ShowGenreBooksCommand implements Command {
         paginator.setPaginationParameters(req);
         req.setAttribute("books", genreBooks);
         req.setAttribute("genre", genre);
-        // TODO: make multipagination in books.jsp
+
         return CommandResult.forward(Page.BOOKS.getName());
     }
 

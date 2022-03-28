@@ -14,17 +14,17 @@ import java.util.Optional;
 
 public class ShowBookRentalDetailsCommand implements Command {
 
-    private final BookRentalService bookBorrowService;
+    private final BookRentalService bookRentalService;
 
-    public ShowBookRentalDetailsCommand(BookRentalService bookBorrowService) {
-        this.bookBorrowService = bookBorrowService;
+    public ShowBookRentalDetailsCommand(BookRentalService bookRentalService) {
+        this.bookRentalService = bookRentalService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         long id = Long.parseLong(req.getParameter("bookRentalId"));
 
-        Optional<BookRental> optionalBookRental = bookBorrowService.getBookRental(id);
+        Optional<BookRental> optionalBookRental = bookRentalService.getBookRental(id);
 
         CommandResult result;
         if (optionalBookRental.isPresent()) {

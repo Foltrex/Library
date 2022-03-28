@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ShowAuthorsCommand implements Command {
 
+    // TODO: make pagination
     private final AuthorService authorService;
 
     public ShowAuthorsCommand(AuthorService authorService) {

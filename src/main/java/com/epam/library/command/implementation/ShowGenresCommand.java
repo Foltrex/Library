@@ -14,6 +14,7 @@ import java.util.List;
 
 public class ShowGenresCommand implements Command {
 
+    // TODO: make pagination
     private final GenreService genreService;
 
     public ShowGenresCommand(GenreService genreService) {

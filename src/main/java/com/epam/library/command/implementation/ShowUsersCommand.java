@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ShowUsersCommand implements Command {
 
+    // TODO: make pagination
     private final AdminService adminService;
     private final Role showingUsersRole;
 
