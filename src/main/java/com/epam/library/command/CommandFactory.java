@@ -18,8 +18,6 @@ public class CommandFactory {
                 return new LoginCommand(new UserServiceImpl(factory), new ReCaptchaChecker());
             case LOGOUT:
                 return new LogoutCommand();
-            case CHANGE_LANGUAGE:
-                return new ChangeLocaleCommand();
             case SHOW_RENTALS:
                 return new ShowBookRentalsCommand(new BookRentalServiceImpl(factory));
             case SHOW_BOOK_RENTAL_DETAILS:

@@ -5,9 +5,6 @@
 <%@taglib uri="customtags" prefix="ctg" %>
 <script src="https://kit.fontawesome.com/1f4939e33e.js" crossorigin="anonymous"></script>
 
-<c:if test="${sessionScope.locale == null}">
-    <c:set var="locale" value="en_US" scope="session"/>
-</c:if>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 

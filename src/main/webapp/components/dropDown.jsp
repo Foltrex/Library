@@ -3,9 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:if test="${sessionScope.locale == null}">
-    <c:set var="locale" value="en_US" scope="session"/>
-</c:if>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
@@ -14,7 +11,7 @@
       <i class="fa fa-globe fa-lg"></i>
       <i class="fa fa-caret-down"></i>
     </button>
-    <form method="post" action="controller?command=change_language">
+    <form method="post" action="">
         <div class="dropdown-content">
             <ul>
                 <li>
@@ -28,6 +25,13 @@
                     <button class="ru lang" type="submit" name="lang" value="ru_RU">
                         <span class="lang-text">
                             <fmt:message key="label.lang.ru" />
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button class="by lang" type="submit" name="lang" value="by_BE">
+                        <span class="lang-text">
+                            <fmt:message key="label.lang.by" />
                         </span>
                     </button>
                 </li>

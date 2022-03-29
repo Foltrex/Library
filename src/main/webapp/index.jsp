@@ -1,9 +1,8 @@
-<%@page language="java" contentType="text/html"%>
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link href="${pageContext.request.contextPath}/CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>
         <link href="${pageContext.request.contextPath}/CSS/footer.css" rel="stylesheet" type="text/css"/>

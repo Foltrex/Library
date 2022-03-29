@@ -24,7 +24,6 @@ button {
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
   cursor: pointer;
 }
 
@@ -76,6 +75,10 @@ button {
 
 .ru {
   background-image: url('../images/flags/ru.png');
+}
+
+.by {
+  background-image: url('../images/flags/by.png');
 }
 
 .lang-text {

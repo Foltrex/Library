@@ -7,7 +7,6 @@ import java.util.Map;
 public enum CommandName {
     LOGIN("login"),
     LOGOUT("logout"),
-    CHANGE_LANGUAGE("change_language"),
     SHOW_RENTALS("show_rentals"),
     SHOW_BOOK_RENTAL_DETAILS("show_book_rental_details"),
     DELETE_RENTAL("delete_rental"),

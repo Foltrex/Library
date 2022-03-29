@@ -13,6 +13,8 @@ import com.epam.library.service.BookRentalService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+// TODO: write confiramtion form
+
 public class DeleteBookRentalCommand implements Command {
 
     private final BookRentalService bookRentalService;
