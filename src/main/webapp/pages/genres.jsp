@@ -9,6 +9,10 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><fmt:message key="page.genres.title"/></title>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon/favicon.ico">
+
     <link href="${pageContext.request.contextPath}/CSS/genresList.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/genres.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/header.css" rel="stylesheet" type="text/css"/>

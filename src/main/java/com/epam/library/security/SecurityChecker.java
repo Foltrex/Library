@@ -3,19 +3,17 @@ package com.epam.library.security;
 import com.epam.library.command.CommandName;
 import com.epam.library.command.Page;
 import com.epam.library.entity.Role;
-import com.epam.library.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SecurityChecker {
 
-    private static final String PNG_EXTENSION = ".png";
-    private static final String CSS_EXTENSION = ".css";
-    private static final String JS_EXTENSION = ".js";
+    private final List<String> fileExtensions = Arrays.asList(".png", ".css", ".js", ".ico");
 
     private static final String PAGE_REGEX = "(?<=(library))/(\\w+\\.jsp)?$";
 
@@ -51,6 +49,14 @@ public class SecurityChecker {
 
     private boolean isUserHasPermissionToFile(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        return requestURI.endsWith(PNG_EXTENSION) || requestURI.endsWith(CSS_EXTENSION) || requestURI.endsWith(JS_EXTENSION);
+
+        boolean isEndWithExtension = false;
+        ListIterator<String> listIterator = fileExtensions.listIterator();
+        while (listIterator.hasNext() && !isEndWithExtension) {
+            String fileExtension = listIterator.next();
+            isEndWithExtension = requestURI.endsWith(fileExtension);
+        }
+
+        return isEndWithExtension;
     }
 }

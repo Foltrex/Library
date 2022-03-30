@@ -10,6 +10,10 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><fmt:message key="page.errorPage.title"/></title>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon/favicon.ico">
+
     <link href="${pageContext.request.contextPath}/CSS/errorPage.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/fonts.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>

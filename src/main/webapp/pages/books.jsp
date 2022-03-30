@@ -11,6 +11,10 @@
 <html lang="${sessionScope.locale}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><fmt:message key="page.books.title"/></title>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon/favicon.ico">
+
     <link href="${pageContext.request.contextPath}/CSS/searchBar.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/booksTable.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/books.css" rel="stylesheet" type="text/css"/>

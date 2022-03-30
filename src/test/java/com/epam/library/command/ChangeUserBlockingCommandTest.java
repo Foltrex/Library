@@ -24,7 +24,6 @@ public class ChangeUserBlockingCommandTest {
     );
 
 
-    // TODO: el was changed(test it)
     @Test
     public void testExecuteShouldChangeUserBlockingWhenUserIdIdGiven() throws ServiceException, PageCommandException {
         // given
