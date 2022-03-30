@@ -20,7 +20,9 @@ public class SecurityFilter implements Filter {
         HttpSession session = request.getSession();
         Role userRole = (Role) session.getAttribute("userRole");
 
-        if (SECURITY_CHECKER.isUserHasPermissionToContent(request, userRole) || SECURITY_CHECKER.isLoginPage(request)) {
+        if (SECURITY_CHECKER.isUserHasPermissionToContent(request, userRole)
+                || SECURITY_CHECKER.isLoginPage(request) || SECURITY_CHECKER.isSignUpPage(request)) {
+
             chain.doFilter(req, resp);
         } else {
             ServletContext servletContext = request.getServletContext();

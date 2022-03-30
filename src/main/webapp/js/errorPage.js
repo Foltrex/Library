@@ -1,5 +1,3 @@
-import { gsap } from gsap;
-
 gsap.set("svg", { visibility: "visible" });
 gsap.to("#headStripe", {
   y: 0.5,

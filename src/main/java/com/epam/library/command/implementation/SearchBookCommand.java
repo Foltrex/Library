@@ -12,6 +12,7 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+// TODO: make autocomplete
 public class SearchBookCommand implements Command {
 
     private final BookService bookService;

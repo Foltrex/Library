@@ -19,6 +19,18 @@ public class UserServiceImpl extends AbstractService implements UserService, Ent
     }
 
     @Override
+    public void signUp(User user) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            dao.saveUser(user);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Optional<User> login(String login, String password) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

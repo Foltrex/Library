@@ -7,6 +7,7 @@ import java.util.Map;
 public enum CommandName {
     LOGIN("login"),
     LOGOUT("logout"),
+    SAVE_USER("save_user"),
     SHOW_RENTALS("show_rentals"),
     SHOW_BOOK_RENTAL_DETAILS("show_book_rental_details"),
     DELETE_RENTAL("delete_rental"),
@@ -25,7 +26,8 @@ public enum CommandName {
     SHOW_AUTHOR_BOOKS("show_author_books"),
     SHOW_GENRES("show_genres"),
     ADD_GENRE("add_genre"),
-    SHOW_GENRE_BOOKS("show_genre_books");
+    SHOW_GENRE_BOOKS("show_genre_books"),
+    SHOW_ABOUT_PAGE("show_about_page");
 
     private final String name;
 

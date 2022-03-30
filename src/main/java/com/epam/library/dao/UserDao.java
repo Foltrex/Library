@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface UserDao extends EntityDao {
     Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException;
 
+    void saveUser(User user) throws DaoException;
+
     void updateUserBlockingById(Long id, Boolean isBanned) throws DaoException;
 }

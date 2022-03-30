@@ -8,23 +8,28 @@
 <link href="CSS/loginForm.css" rel="stylesheet" type="text/css"/>
 <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
 
-<form action="controller?command=login" method="post" class="login-form">
-    <div class="imgcontainer">
-      <img src="images/avatars/man.png" alt="Avatar" class="avatar">
-    </div>
-  
-    <div class="container">
-      <label for="login"><b><fmt:message key="login.form.login.label"/></b></label>
-      <input type="text" placeholder="<fmt:message key="login.form.login.placeholder"/>" name="login" required>
-  
-      <label for="password"><b><fmt:message key="login.form.password.label"/></b></label>
-      <input type="password" placeholder="<fmt:message key="login.form.password.placeholder"/>" name="password" required>
+<div class="login-form">
+    <form action="controller?command=login" method="post">
+        <div class="imgcontainer">
+          <img src="images/avatars/man.png" alt="Avatar" class="avatar">
+        </div>
 
-      <p class="g-recaptcha" data-sitekey="6LdNP18eAAAAAKI8QhlDTo39vBa1FULfmpT_Kef7"></p>
-    
-      <button type="submit"><fmt:message key="login.form.button.login"/></button>
+        <div class="container">
+          <label for="login"><b><fmt:message key="login.form.login.label"/></b></label>
+          <input type="text" placeholder="<fmt:message key="login.form.login.placeholder"/>" name="login" required>
 
-      <p class="errorLoginMessage">${errorLoginPassMessage}</p>
-    </div>
-  
-  </form>
+          <label for="password"><b><fmt:message key="login.form.password.label"/></b></label>
+          <input type="password" placeholder="<fmt:message key="login.form.password.placeholder"/>" name="password" required>
+
+          <p class="g-recaptcha" data-sitekey="6LdNP18eAAAAAKI8QhlDTo39vBa1FULfmpT_Kef7"></p>
+
+          <button type="submit"><fmt:message key="login.form.button.login"/></button>
+
+          <p class="errorLoginMessage">${errorLoginPassMessage}</p>
+        </div>
+    </form>
+
+    <button class="signup-button" onclick="document.getElementById('id01').style.display='block'">
+      <fmt:message key="login.form.button.create.account"/>
+    </button>
+</div>

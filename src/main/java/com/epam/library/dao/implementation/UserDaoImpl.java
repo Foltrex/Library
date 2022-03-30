@@ -33,6 +33,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
     }
 
     @Override
+    public void saveUser(User user) throws DaoException {
+        save(user);
+    }
+
+    @Override
     public void updateUserBlockingById(Long id, Boolean isBanned) throws DaoException {
         executeUpdate(UPDATE_USER_BLOCKING, isBanned, id);
     }

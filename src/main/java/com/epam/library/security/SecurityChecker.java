@@ -13,27 +13,25 @@ import java.util.regex.Pattern;
 
 public class SecurityChecker {
 
-    private final List<String> fileExtensions = Arrays.asList(".png", ".css", ".js", ".ico");
+    private final List<String> fileExtensions = Arrays.asList(".png", ".css", ".js", ".ico", ".svg");
 
-    private static final String PAGE_REGEX = "(?<=(library))/(\\w+\\.jsp)?$";
+    private static final String PAGE_REGEX = "(?<=(library))/(\\w+/)?(\\w+\\.jsp)?$";
 
     public boolean isLoginPage(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
 
-        Pattern pattern = Pattern.compile(PAGE_REGEX);
-        Matcher matcher = pattern.matcher(requestURI);
-        String pageSuffix = matcher.find() ? matcher.group() : null;
-        String loginPage = Page.LOGIN.getName();
+        return isCurrentPageEqualTo(request, Page.LOGIN) || requestURI.equals("/library/")
+                || isCurrentCommandEqualTo(request, CommandName.LOGIN);
+    }
 
-        String commandLine = request.getParameter("command");
-        CommandName command = CommandName.valueOfName(commandLine);
-
-        return loginPage.equals(pageSuffix) || requestURI.equals("/library/") || CommandName.LOGIN.equals(command);
+    public boolean isSignUpPage(HttpServletRequest request) {
+        return isCurrentPageEqualTo(request, Page.SIGNUP) || isCurrentCommandEqualTo(request, CommandName.SIGNUP);
     }
 
     public boolean isUserHasPermissionToContent(HttpServletRequest request, Role userRole) {
         return isUserHasPermissionToFile(request) || isUserHasPermissionToCommand(request, userRole);
     }
+
 
     private boolean isUserHasPermissionToCommand(HttpServletRequest request, Role userRole) {
         String commandLine = request.getParameter("command");
@@ -58,5 +56,23 @@ public class SecurityChecker {
         }
 
         return isEndWithExtension;
+    }
+
+    private boolean isCurrentPageEqualTo(HttpServletRequest request, Page page) {
+        String requestURI = request.getRequestURI();
+
+        Pattern pattern = Pattern.compile(PAGE_REGEX);
+        Matcher matcher = pattern.matcher(requestURI);
+        String pageSuffix = matcher.find() ? matcher.group() : null;
+        String pageName = page.getName();
+
+        return pageName.equals(pageSuffix);
+    }
+
+    private boolean isCurrentCommandEqualTo(HttpServletRequest request, CommandName commandName) {
+        String commandLine = request.getParameter("command");
+        CommandName command = CommandName.valueOfName(commandLine);
+
+        return commandName.equals(command);
     }
 }

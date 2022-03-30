@@ -18,11 +18,13 @@
         <link href="${pageContext.request.contextPath}/CSS/dropDown.css" rel="stylesheet" type="text/css"/>
         <script src="${pageContext.request.contextPath}/js/layout.js"></script>
         <script src="${pageContext.request.contextPath}/js/changeLang.js"></script>
+        <script src="${pageContext.request.contextPath}/js/signUpForm.js"></script>
     </head>
     <body>
         <jsp:include page="components/header.jsp" />
 
         <jsp:include page="components/loginForm.jsp" />
+        <jsp:include page="components/signUpForm.jsp" />
         
         <jsp:include page="components/footer.jsp" />
     </body>

@@ -10,7 +10,8 @@ public enum Page {
     LIBRARIANS("/pages/librarians.jsp"),
     AUTHORS("/pages/authors.jsp"),
     GENRES("/pages/genres.jsp"),
-    BOOKS("/pages/books.jsp");
+    BOOKS("/pages/books.jsp"),
+    ABOUT("/pages/about.jsp");
 
     private final String name;
 
