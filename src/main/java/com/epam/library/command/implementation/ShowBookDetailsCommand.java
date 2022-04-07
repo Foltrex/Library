@@ -45,10 +45,10 @@ public class ShowBookDetailsCommand implements Command {
             req.setAttribute("book", book);
             req.setAttribute("authors", authors);
             req.setAttribute("genres", genres);
-            result = CommandResult.forward(Page.BOOK_DETAILS.getName());
+            result = CommandResult.forward(Page.BOOK_DETAILS.getPath());
         } else {
             req.setAttribute("errorMessage", "Book doesn't found");
-            result = CommandResult.forward(Page.ERROR.getName());
+            result = CommandResult.forward(Page.ERROR.getPath());
         }
 
         return result;

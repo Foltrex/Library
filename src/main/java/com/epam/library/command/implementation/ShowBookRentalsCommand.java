@@ -25,6 +25,6 @@ public class ShowBookRentalsCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         List<BookRental> rentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", rentals);
-        return CommandResult.forward(Page.BOOK_RENTALS.getName());
+        return CommandResult.forward(Page.BOOK_RENTALS.getPath());
     }
 }

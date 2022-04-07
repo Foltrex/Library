@@ -1,24 +1,12 @@
 package com.epam.library.security;
 
-import com.epam.library.command.Command;
-import com.epam.library.command.CommandName;
 import com.epam.library.entity.Role;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.mockito.Mockito.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class SecurityCheckerTest {
@@ -38,7 +26,7 @@ public class SecurityCheckerTest {
         when(request.getParameter("command")).thenReturn("not_login_command");
 
         // when
-        boolean isLoginPage = checker.isLoginPage(request);
+        boolean isLoginPage = checker.isAuthorizationPage(request);
 
         // then
         Assert.assertTrue(isLoginPage);
@@ -53,7 +41,7 @@ public class SecurityCheckerTest {
         when(request.getParameter("command")).thenReturn(LOGIN_COMMAND);
 
         // when
-        boolean isLoginCommand = checker.isLoginPage(request);
+        boolean isLoginCommand = checker.isAuthorizationPage(request);
 
         // then
         Assert.assertTrue(isLoginCommand);
@@ -67,7 +55,7 @@ public class SecurityCheckerTest {
         when(request.getParameter("command")).thenReturn("not_login_command");
 
         // when
-        boolean isLoginPage = checker.isLoginPage(request);
+        boolean isLoginPage = checker.isAuthorizationPage(request);
 
         // then
         Assert.assertTrue(isLoginPage);

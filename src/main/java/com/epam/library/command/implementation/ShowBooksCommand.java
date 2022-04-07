@@ -28,6 +28,6 @@ public class ShowBooksCommand implements Command {
         List<Book> books = bookService.findPartOfBooks(currentPage, paginator.getRecordsPerPage());
         paginator.setPaginationParameters(req);
         req.setAttribute("books", books);
-        return CommandResult.forward(Page.BOOKS.getName());
+        return CommandResult.forward(Page.BOOKS.getPath());
     }
 }

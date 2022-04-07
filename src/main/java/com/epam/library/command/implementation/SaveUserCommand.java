@@ -28,6 +28,7 @@ public class SaveUserCommand implements Command {
     }
 
     // TODO: finish  with this, test, validator, dao and localization of this page
+    // TODO: users don't save
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         User user = extractUserFromRequest(req);
@@ -38,22 +39,24 @@ public class SaveUserCommand implements Command {
             userService.signUp(user);
 
             Optional<User> optionalUser = userService.login(user.getLogin(), user.getPassword());
+            User registeredUser = optionalUser.get();
 
             HttpSession httpSession = req.getSession();
-            User registeredUser = optionalUser.get();
             httpSession.setAttribute("userId", registeredUser.getId());
             httpSession.setAttribute("userRole", registeredUser.getRole());
             result = CommandResult.redirect(req.getContextPath() + MAIN_PAGE_COMMAND);
         } else {
             req.setAttribute("error-message", "Passwords are difference");
-            result = CommandResult.forward(Page.LOGIN.getName());
+            // TODO: make redirection
+            result = CommandResult.forward(Page.LOGIN.getPath());
         }
 
         return result;
     }
 
     private User extractUserFromRequest(HttpServletRequest req) {
-        Long userId = Long.valueOf(req.getParameter("id"));
+        String userIdParam = req.getParameter("id");
+        Long userId = userIdParam != null && !userIdParam.isEmpty() ? Long.valueOf(userIdParam) : null;
         String userName = req.getParameter("name");
         String userSurname = req.getParameter("surname");
         String userPhoneNumber = req.getParameter("phone_number");

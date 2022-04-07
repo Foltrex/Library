@@ -36,6 +36,6 @@ public class SearchBookCommand implements Command {
         paginator.setPaginationParameters(req);
         req.setAttribute("books", books);
         req.setAttribute("bookTitle", title);
-        return CommandResult.forward(Page.BOOKS.getName());
+        return CommandResult.forward(Page.BOOKS.getPath());
     }
 }

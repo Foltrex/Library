@@ -34,7 +34,7 @@ public class SaveBookCommand implements Command {
         paginator.setPaginationParameters(req);
         req.setAttribute("books", books);
 
-        return CommandResult.forward(Page.BOOKS.getName());
+        return CommandResult.forward(Page.BOOKS.getPath());
     }
 
     private Book extractBookFromRequest(HttpServletRequest req) {

@@ -8,8 +8,14 @@
     </c:if>
 
     <div class="logo">
-        <a href="${pageContext.request.contextPath}/controller?command=show_books">Library</a>
+        <c:if test="${ not empty userId }">
+            <a href="${pageContext.request.contextPath}/controller?command=show_books">Library</a>
+        </c:if>
+        <c:if test="${ empty userId }">
+            <span>Library</span>
+        </c:if>
     </div>
+
 
     <div class="menu">
         <c:if test="${ not empty userId }">

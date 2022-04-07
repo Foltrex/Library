@@ -32,7 +32,7 @@ public class ShowAuthorBooksCommand implements Command {
         req.setAttribute("books", authorBooks);
         req.setAttribute("author", author);
 
-        return CommandResult.forward(Page.BOOKS.getName());
+        return CommandResult.forward(Page.BOOKS.getPath());
     }
 
     private Author extractAuthorFromRequest(HttpServletRequest req) {

@@ -61,7 +61,7 @@ public class CommandFactory {
             case SHOW_GENRE_BOOKS:
                 return new ShowGenreBooksCommand(new BookServiceImpl(factory));
             case SHOW_ABOUT_PAGE:
-                return new ShowPageCommand(Page.ABOUT.getName());
+                return new ShowPageCommand(Page.ABOUT.getPath());
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

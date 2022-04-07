@@ -15,17 +15,13 @@ public class SecurityChecker {
 
     private final List<String> fileExtensions = Arrays.asList(".png", ".css", ".js", ".ico", ".svg");
 
-    private static final String PAGE_REGEX = "(?<=(library))/(\\w+/)?(\\w+\\.jsp)?$";
+    private static final String PAGE_REGEX = "(?<=(library))/(\\w+\\.jsp)?$";
 
-    public boolean isLoginPage(HttpServletRequest request) {
+    public boolean isAuthorizationPage(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
 
         return isCurrentPageEqualTo(request, Page.LOGIN) || requestURI.equals("/library/")
-                || isCurrentCommandEqualTo(request, CommandName.LOGIN);
-    }
-
-    public boolean isSignUpPage(HttpServletRequest request) {
-        return isCurrentPageEqualTo(request, Page.SIGNUP) || isCurrentCommandEqualTo(request, CommandName.SIGNUP);
+                || isCurrentCommandEqualTo(request, CommandName.LOGIN) || isCurrentCommandEqualTo(request, CommandName.SAVE_USER);
     }
 
     public boolean isUserHasPermissionToContent(HttpServletRequest request, Role userRole) {
@@ -64,7 +60,7 @@ public class SecurityChecker {
         Pattern pattern = Pattern.compile(PAGE_REGEX);
         Matcher matcher = pattern.matcher(requestURI);
         String pageSuffix = matcher.find() ? matcher.group() : null;
-        String pageName = page.getName();
+        String pageName = page.getPath();
 
         return pageName.equals(pageSuffix);
     }

@@ -4,7 +4,6 @@ import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
 import com.epam.library.entity.Author;
-import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -33,6 +32,6 @@ public class AddBookCommand implements Command {
         req.setAttribute("authors", authors);
         req.setAttribute("genres", genres);
 
-        return CommandResult.forward(Page.BOOK_DETAILS.getName());
+        return CommandResult.forward(Page.BOOK_DETAILS.getPath());
     }
 }

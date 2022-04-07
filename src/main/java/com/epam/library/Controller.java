@@ -4,7 +4,6 @@ import com.epam.library.command.Command;
 import com.epam.library.command.CommandFactory;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
-import com.epam.library.connection.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +41,7 @@ public class Controller extends HttpServlet {
             LOGGER.warn(e);
             // TODO: make more individual
             req.setAttribute("errorMessage", e.getMessage());
-            dispatch(req, resp, CommandResult.forward(Page.ERROR.getName()));
+            dispatch(req, resp, CommandResult.forward(Page.ERROR.getPath()));
         }
     }
 

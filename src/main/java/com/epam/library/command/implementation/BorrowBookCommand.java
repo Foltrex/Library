@@ -29,7 +29,7 @@ public class BorrowBookCommand implements Command {
 
         List<BookRental> rentals = service.getBookRentals();
         req.setAttribute("rentals", rentals);
-        return CommandResult.forward(Page.BOOK_RENTALS.getName());
+        return CommandResult.forward(Page.BOOK_RENTALS.getPath());
     }
 
     private BookRental extractBookRentalFromRequest(HttpServletRequest req) {

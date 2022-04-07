@@ -11,7 +11,7 @@ import java.io.IOException;
 public class SecurityFilter implements Filter {
     private static final String ERROR_PAGE = "/pages/errorPage.jsp";
 
-    private static final SecurityChecker SECURITY_CHECKER = new SecurityChecker();
+    private final SecurityChecker securityChecker = new SecurityChecker();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
@@ -20,9 +20,7 @@ public class SecurityFilter implements Filter {
         HttpSession session = request.getSession();
         Role userRole = (Role) session.getAttribute("userRole");
 
-        if (SECURITY_CHECKER.isUserHasPermissionToContent(request, userRole)
-                || SECURITY_CHECKER.isLoginPage(request) || SECURITY_CHECKER.isSignUpPage(request)) {
-
+        if (securityChecker.isUserHasPermissionToContent(request, userRole) || securityChecker.isAuthorizationPage(request)) {
             chain.doFilter(req, resp);
         } else {
             ServletContext servletContext = request.getServletContext();

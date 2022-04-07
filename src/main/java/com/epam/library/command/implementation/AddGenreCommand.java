@@ -28,7 +28,7 @@ public class AddGenreCommand implements Command {
 
         List<Genre> genres = genreService.getGenres();
         req.setAttribute("genres", genres);
-        return CommandResult.forward(Page.GENRES.getName());
+        return CommandResult.forward(Page.GENRES.getPath());
     }
 
     private Genre extractGenreFromRequest(HttpServletRequest req) {

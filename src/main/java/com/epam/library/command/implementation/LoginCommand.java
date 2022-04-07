@@ -39,10 +39,10 @@ public class LoginCommand implements Command {
             result = CommandResult.redirect(request.getContextPath() + MAIN_PAGE_COMMAND);
         } else if (user.isPresent() && user.get().isBanned()) {
             request.setAttribute("errorLoginPassMessage", "You was banned by admin");
-            result = CommandResult.forward(Page.LOGIN.getName());
+            result = CommandResult.forward(Page.LOGIN.getPath());
         } else {
             request.setAttribute("errorLoginPassMessage", "Invalid credentials or you're a robot");
-            result = CommandResult.forward(Page.LOGIN.getName());
+            result = CommandResult.forward(Page.LOGIN.getPath());
         }
 
         return result;

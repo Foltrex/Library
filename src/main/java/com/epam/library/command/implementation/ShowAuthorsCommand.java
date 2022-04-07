@@ -24,6 +24,6 @@ public class ShowAuthorsCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         List<Author> authors = authorService.getAuthors();
         req.setAttribute("authors", authors);
-        return CommandResult.forward(Page.AUTHORS.getName());
+        return CommandResult.forward(Page.AUTHORS.getPath());
     }
 }

@@ -38,6 +38,6 @@ public class DeleteBookRentalCommand implements Command {
         bookRentalService.deleteBookRental(bookRental);
         List<BookRental> bookRentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", bookRentals);
-        return CommandResult.forward(Page.BOOK_RENTALS.getName());
+        return CommandResult.forward(Page.BOOK_RENTALS.getPath());
     }
 }

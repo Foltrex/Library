@@ -33,7 +33,7 @@ public class SaveBookRentalCommand implements Command {
         bookRentalService.saveBookRental(bookRental);
         List<BookRental> bookRentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", bookRentals);
-        return CommandResult.forward(Page.BOOK_RENTALS.getName());
+        return CommandResult.forward(Page.BOOK_RENTALS.getPath());
     }
 
     private BookRental extractBookRentalFromRequest(HttpServletRequest req) throws PageCommandException {

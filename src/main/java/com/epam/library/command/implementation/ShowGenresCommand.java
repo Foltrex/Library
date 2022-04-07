@@ -3,7 +3,6 @@ package com.epam.library.command.implementation;
 import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
-import com.epam.library.entity.Author;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
@@ -25,6 +24,6 @@ public class ShowGenresCommand implements Command {
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         List<Genre> genres = genreService.getGenres();
         req.setAttribute("genres", genres);
-        return CommandResult.forward(Page.GENRES.getName());
+        return CommandResult.forward(Page.GENRES.getPath());
     }
 }

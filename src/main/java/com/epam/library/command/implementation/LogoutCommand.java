@@ -13,6 +13,6 @@ public class LogoutCommand implements Command {
     public CommandResult execute(HttpServletRequest req) {
         HttpSession session = req.getSession();
         session.invalidate();
-        return CommandResult.forward(Page.LOGIN.getName());
+        return CommandResult.forward(Page.LOGIN.getPath());
     }
 }

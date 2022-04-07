@@ -31,10 +31,10 @@ public class ShowBookRentalDetailsCommand implements Command {
             BookRental bookRental = optionalBookRental.get();
             req.setAttribute("bookRental", bookRental);
             req.setAttribute("rentalStatuses", RentalStatus.values());
-            result = CommandResult.forward(Page.RENTAL_DETAILS.getName());
+            result = CommandResult.forward(Page.RENTAL_DETAILS.getPath());
         } else {
             req.setAttribute("errorMessage", "Book Rentals doesn't found");
-            result = CommandResult.forward(Page.ERROR.getName());
+            result = CommandResult.forward(Page.ERROR.getPath());
         }
 
         return result;

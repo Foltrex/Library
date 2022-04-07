@@ -26,7 +26,7 @@ public class AddAuthorCommand implements Command {
 
         List<Author> authors = authorService.getAuthors();
         req.setAttribute("authors", authors);
-        return CommandResult.forward(Page.AUTHORS.getName());
+        return CommandResult.forward(Page.AUTHORS.getPath());
     }
 
     private Author extractAuthorFromRequest(HttpServletRequest req) {

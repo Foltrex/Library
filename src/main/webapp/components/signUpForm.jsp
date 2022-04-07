@@ -9,7 +9,7 @@
 
 <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="controller?command=save_user">
+    <form class="modal-content" action="controller?command=save_user" method="post">
       <div class="sign-up-container">
 
         <h1>Sign Up</h1>
@@ -33,7 +33,7 @@
         <label for="password-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="password-repeat" required>
 
-        <p class="error-message">${errorLoginPassMessage}</p>
+        <p class="error-message">${error-message}</p>
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>

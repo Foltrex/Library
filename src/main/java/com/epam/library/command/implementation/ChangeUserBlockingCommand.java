@@ -34,9 +34,9 @@ public class ChangeUserBlockingCommand implements Command {
 
         switch (bannedUserRole) {
             case LIBRARIAN:
-                return CommandResult.forward(Page.LIBRARIANS.getName());
+                return CommandResult.forward(Page.LIBRARIANS.getPath());
             case READER:
-                return CommandResult.forward(Page.READERS.getName());
+                return CommandResult.forward(Page.READERS.getPath());
             default:
                 throw new PageCommandException("Wrong role to show");
         }

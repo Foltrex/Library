@@ -4,7 +4,6 @@ import com.epam.library.command.Command;
 import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
 import com.epam.library.command.Paginator;
-import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
@@ -33,7 +32,7 @@ public class ShowGenreBooksCommand implements Command {
         req.setAttribute("books", genreBooks);
         req.setAttribute("genre", genre);
 
-        return CommandResult.forward(Page.BOOKS.getName());
+        return CommandResult.forward(Page.BOOKS.getPath());
     }
 
     private Genre extractGenreFromRequest(HttpServletRequest req) {
