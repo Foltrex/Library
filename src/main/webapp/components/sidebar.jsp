@@ -63,15 +63,6 @@
           </div>
         </li>
       </c:if>
-
-      <c:if test="${userRole.roleName == 'reader'}">
-        <li>
-            <a href="${pageContext.request.contextPath}/controller?command=show_page&page=about">
-                <span class="icon"><i class="fa-solid fa-question"></i></span>
-                <span class="text"><fmt:message key="sidebar.about"/></span>
-            </a>
-        </li>
-      </c:if>
     </ul>
   </div>
 </div>
