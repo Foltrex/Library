@@ -5,7 +5,10 @@
     <c:forEach var="author" items="${authors}">
       <li>
         <p>
-            <form method="post" action="${pageContext.request.contextPath}/controller?command=show_author_books">
+          <!-- ${pageContext.request.contextPath}/ -->
+            <form method="post" action="controller">
+                <input type="hidden" name="command" value="show_author_books">
+
                 <input type="hidden" name="authorId" value="${author.id}" />
                 <input type="hidden" name="authorName" value="${author.name}" />
                 <input type="hidden" name="authorSurname" value="${author.surname}" />

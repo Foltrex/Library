@@ -21,6 +21,8 @@ public class BookRentalDaoImpl extends AbstractDao<BookRental> implements BookRe
             "INNER JOIN users ON user_id = users.id",
             "INNER JOIN books ON book_id = books.id");
 
+    private static final String SELECT_ORDERS_BY_USER_ID = String.format("%s WHERE user_id = ?", SELECT_ORDERS);
+
 
     public BookRentalDaoImpl(Connection connection) {
         super(connection, new BookRentalRowMapper(), BookRental.TABLE);
@@ -42,6 +44,11 @@ public class BookRentalDaoImpl extends AbstractDao<BookRental> implements BookRe
     @Override
     public List<BookRental> getBooksRentals() throws DaoException {
         return executeQuery(SELECT_ORDERS);
+    }
+
+    @Override
+    public List<BookRental> getBooksRentalsForUser(long id) throws DaoException {
+        return executeQuery(SELECT_ORDERS_BY_USER_ID, id);
     }
 
     @Override

@@ -10,6 +10,8 @@ public interface BookRentalDao extends EntityDao {
 
     List<BookRental> getBooksRentals() throws DaoException;
 
+    List<BookRental> getBooksRentalsForUser(long id) throws DaoException;
+
     void deleteBookRental(long id) throws DaoException;
 
     void saveBookRental(BookRental bookRental) throws DaoException;

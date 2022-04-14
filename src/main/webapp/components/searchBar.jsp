@@ -3,7 +3,8 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<form method="post" class="bookSearch" action="controller?command=search_book">
+<form method="get" class="bookSearch" action="controller">
+    <input type="hidden" name="command" value="search_book">
     <input type="text" placeholder="<fmt:message key="books.searchbar"/>..." name="bookTitle">
     <button type="submit"><i class="fa fa-search"></i></button>
 </form>

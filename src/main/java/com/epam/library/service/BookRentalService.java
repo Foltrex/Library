@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface BookRentalService extends EntityService {
     List<BookRental> getBookRentals() throws ServiceException;
 
+    List<BookRental> getBookRentalsForUser(long id) throws ServiceException;
+
     Optional<BookRental> getBookRental(long id) throws ServiceException;
 
     void saveBookRental(BookRental bookRental) throws ServiceException;

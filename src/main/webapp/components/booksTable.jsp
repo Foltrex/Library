@@ -18,7 +18,8 @@
             </form>
           </c:if>
           <c:if test="${ userRole.roleName == 'admin'}">
-            <form method="post" action="controller?command=show_book_details">
+            <form method="get" action="controller">
+              <input type="hidden" name="command" value="show_book_details">
               <input type="hidden" name="id" value="${book.id}">
               <button class="icon" type="submit"><i style="font-size:24px" class="fa">&#9998;</i></button>
             </form>

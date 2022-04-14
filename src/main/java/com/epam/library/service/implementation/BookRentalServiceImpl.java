@@ -33,6 +33,19 @@ public class BookRentalServiceImpl extends AbstractService implements BookRental
     }
 
     @Override
+    public List<BookRental> getBookRentalsForUser(long id) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            BookRentalDao dao = helper.createBookRentalDao();
+            List<BookRental> booksRentals = dao.getBooksRentalsForUser(id);
+            helper.endTransaction();
+            return booksRentals;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Optional<BookRental> getBookRental(long id) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

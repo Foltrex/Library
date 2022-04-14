@@ -19,7 +19,8 @@
 
     <div class="menu">
         <c:if test="${ not empty userId }">
-            <form action="controller?command=logout" class="logout-form" method="post">
+            <form  method="get" action="controller" class="logout-form">
+                <input type="hidden" name="command" value="logout"/>
                 <button class="logout-button">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>

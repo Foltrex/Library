@@ -5,7 +5,9 @@
     <c:forEach var="genre" items="${genres}">
       <li>
         <p>
-            <form method="post" action="${pageContext.request.contextPath}/controller?command=show_genre_books">
+          <!-- ${pageContext.request.contextPath}/ -->
+            <form method="get" action="controller">
+                <input type="hidden" name="command" value="show_genre_books" />
                 <input type="hidden" name="genreId" value="${genre.id}" />
                 <input type="hidden" name="genreName" value="${genre.name}" />
                 <button type="submit" class="link-button">${genre.name}</button>

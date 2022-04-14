@@ -24,9 +24,9 @@
               <td>${rental.returnDate}</td>
               <td>${rental.rentalStatus.statusName}</td>
               <td>
-                <c:if test="${ userRole.roleName == 'librarian' && not empty rental.rentalStatus && rental.rentalStatus.statusName != 'returned' }">
-                  <!-- rename and change method -->
-                  <form method="post" action="controller?command=show_book_rental_details">
+                <c:if test="${ userRole.roleName == 'librarian' }">
+                  <form method="get" action="controller">
+                      <input type="hidden" name="command" value="show_book_rental_details">
                       <input type="hidden" name="bookRentalId" value="${rental.id}">
                       <input type="hidden" name="bookId" value="${rental.rentedBook.id}">
                       <button type="submit"><i style="font-size:24px" class="fa">&#9998;</i></button>
