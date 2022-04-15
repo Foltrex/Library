@@ -39,7 +39,6 @@ public class BorrowBookCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(2)).getParameter(anyString());
         verify(service, times(1)).saveBookRental(any(BookRental.class));
         verify(service, times(1)).getBookRentals();
         verify(request, times(1)).setAttribute(anyString(), anyList());

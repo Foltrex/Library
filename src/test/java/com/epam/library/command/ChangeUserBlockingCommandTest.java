@@ -30,7 +30,7 @@ public class ChangeUserBlockingCommandTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getParameter("userId")).thenReturn("1");
         when(request.getParameter("userRole")).thenReturn("reader");
-        when(request.getParameter("userBlocking")).thenReturn("0");
+        when(request.getParameter("userIsBanned")).thenReturn("0");
 
         AdminService service = mock(AdminService.class);
         doNothing().when(service).changeUserBlocking(anyLong(), anyBoolean());
@@ -44,7 +44,6 @@ public class ChangeUserBlockingCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(3)).getParameter(anyString());
         verify(service, times(1)).changeUserBlocking(anyLong(), anyBoolean());
         verify(service, times(1)).getUsers(any(Role.class));
         verify(request, times(1)).setAttribute(anyString(), anyList());

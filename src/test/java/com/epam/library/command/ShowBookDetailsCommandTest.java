@@ -37,7 +37,7 @@ public class ShowBookDetailsCommandTest {
     @Test
     public void testExecuteShouldShowBookDetailsWhenBookIdIsGiven() throws ServiceException, PageCommandException {
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getParameter("id")).thenReturn("1");
+        when(request.getParameter("bookId")).thenReturn("1");
 
         BookService bookService = mock(BookService.class);
         AuthorService authorService = mock(AuthorService.class);
@@ -56,7 +56,6 @@ public class ShowBookDetailsCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(1)).getParameter(anyString());
         verify(bookService, times(1)).searchBookById(anyLong());
         verify(authorService, times(1)).getAuthors();
         verify(genreService, times(1)).getGenres();

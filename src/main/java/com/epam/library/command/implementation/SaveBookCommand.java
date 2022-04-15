@@ -9,12 +9,16 @@ import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.RequestExtractor;
+import com.epam.library.extractor.implementation.BookRequestExtractor;
 import com.epam.library.service.BookService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class SaveBookCommand implements Command {
+
+    private final RequestExtractor<Book> requestExtractor = new BookRequestExtractor();
 
     private final BookService service;
     private final Paginator paginator;
@@ -26,7 +30,7 @@ public class SaveBookCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        Book book = extractBookFromRequest(req);
+        Book book = requestExtractor.extract(req);
         service.saveBook(book);
 
         int currentPage = paginator.findPageNo(req);
@@ -35,18 +39,5 @@ public class SaveBookCommand implements Command {
         req.setAttribute("books", books);
 
         return CommandResult.forward(Page.BOOKS.getPath());
-    }
-
-    private Book extractBookFromRequest(HttpServletRequest req) {
-        String bookIdParam = req.getParameter("bookId");
-        Long bookId = bookIdParam != null && !bookIdParam.isEmpty() ? Long.valueOf(bookIdParam) : null;
-        String bookTitle = req.getParameter("bookTitle");
-        Long bookAuthorId = Long.valueOf(req.getParameter("bookAuthor"));
-        int bookStock = Integer.parseInt(req.getParameter("bookStock"));
-        Long bookGenreId = Long.valueOf(req.getParameter("bookGenre"));
-
-        Author partiallyInitializedAuthor = Author.createAuthorWithOnlyIDField(bookAuthorId);
-        Genre partiallyInitializedGenre = Genre.createGenreWithOnlyIDField(bookGenreId);
-        return new Book(bookId, bookTitle, partiallyInitializedAuthor, bookStock, partiallyInitializedGenre);
     }
 }

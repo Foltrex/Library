@@ -8,12 +8,17 @@ import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.RequestExtractor;
+import com.epam.library.extractor.implementation.AuthorRequestExtractor;
 import com.epam.library.service.BookService;
+import org.checkerframework.checker.units.qual.A;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ShowAuthorBooksCommand implements Command {
+
+    private final RequestExtractor<Author> requestExtractor = new AuthorRequestExtractor();
 
     private final BookService bookService;
     private final Paginator paginator;
@@ -25,7 +30,7 @@ public class ShowAuthorBooksCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        Author author = extractAuthorFromRequest(req);
+        Author author = requestExtractor.extract(req);
         int currentPage = paginator.findPageNo(req);
         List<Book> authorBooks = bookService.searchBooksFromPositionByAuthorId(author.getId(), currentPage, paginator.getRecordsPerPage());
         paginator.setPaginationParameters(req);
@@ -33,12 +38,5 @@ public class ShowAuthorBooksCommand implements Command {
         req.setAttribute("author", author);
 
         return CommandResult.forward(Page.BOOKS.getPath());
-    }
-
-    private Author extractAuthorFromRequest(HttpServletRequest req) {
-        Long authorId = Long.valueOf(req.getParameter("authorId"));
-        String authorName = req.getParameter("authorName");
-        String authorSurname = req.getParameter("authorSurname");
-        return new Author(authorId, authorName, authorSurname);
     }
 }

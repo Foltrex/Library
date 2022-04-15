@@ -34,7 +34,7 @@
           <label for="borrowDate"><fmt:message key="rental.details.form.label.borrow.date"/>:</label>
         </div>
         <div class="col-75">
-          <input type="date" id="rental-date-id" name="borrowDate" value="${bookRental.borrowDate}" required pattern="\d{4}-\d{2}-\d{2}">
+          <input type="date" id="rental-date-id" name="bookRentalBorrowDate" value="${bookRental.borrowDate}" required pattern="\d{4}-\d{2}-\d{2}">
         </div>
       </div>
 
@@ -44,7 +44,7 @@
             <label for="returnDate"><fmt:message key="rental.details.form.label.return.date"/>:</label>
           </div>
           <div class="col-75">
-            <input type="date" id="return-date-id" name="returnDate" value="${bookRental.returnDate}" required pattern="\d{4}-\d{2}-\d{2}">
+            <input type="date" id="return-date-id" name="bookRentalReturnDate" value="${bookRental.returnDate}" required pattern="\d{4}-\d{2}-\d{2}">
           </div>
       </div>
 
@@ -53,7 +53,7 @@
           <label for="rentalStatus"><fmt:message key="rental.details.form.label.status"/>:</label>
         </div>
         <div class="col-75">
-          <select id="rental-status-id" name="rentalStatus">
+          <select id="rental-status-id" name="bookRentalRentalStatus">
               <c:forEach var="rentalStatus" items="${rentalStatuses}">
                   <c:if test="${rentalStatus.statusName == bookRental.rentalStatus.statusName}">
                     <option value="${rentalStatus.statusName}" selected>${rentalStatus.statusName}</option>
@@ -76,7 +76,7 @@
       <form method="post" action="controller?command=delete_rental">
         <input type="hidden" name="bookRentalId" value="${bookRental.id}">
         <input type="hidden" name="bookId" value="${bookRental.rentedBook.id}">
-        <input type="hidden" name="rentalStatus" value="${bookRental.rentalStatus.statusName}">
+        <input type="hidden" name="bookRentalRentalStatus" value="${bookRental.rentalStatus.statusName}">
         <input type="submit" value="<fmt:message key="rental.details.form.input.delete"/>">
       </form>
     </div>

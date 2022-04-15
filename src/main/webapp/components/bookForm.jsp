@@ -26,7 +26,7 @@
         <label for="bookAuthor"><fmt:message key="book.details.form.label.author"/>:</label>
       </div>
       <div class="col-75">
-        <select id="author" name="bookAuthor">
+        <select id="author" name="authorId">
             <c:forEach var="author" items="${authors}">
               <c:choose>
                 <c:when test="${ not empty book && not empty book.author && not empty book.author.id  && author.id == book.author.id }">
@@ -56,7 +56,7 @@
           <label for="bookGenre"><fmt:message key="book.details.form.label.genre"/>:</label>
         </div>
         <div class="col-75">
-          <select id="genre" name="bookGenre">
+          <select id="genre" name="genreId">
               <c:forEach var="genre" items="${genres}">
                 <c:choose>
                   <c:when test="${ not empty book && not empty book.genre && genre.id == book.genre.id}">

@@ -43,7 +43,6 @@ public class ShowAuthorBooksCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(7)).getParameter(anyString());
         verify(service, times(1)).searchBooksFromPositionByAuthorId(anyLong(), anyInt(), anyInt());
         verify(request, times(3)).setAttribute(anyString(), anyInt());
         verify(request, times(1)).setAttribute(anyString(), anyList());

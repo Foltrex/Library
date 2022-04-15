@@ -38,7 +38,6 @@ public class ShowBookRentalDetailsCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(1)).getParameter(anyString());
         verify(request, times(2)).setAttribute(anyString(), any());
         verify(service, times(1)).getBookRental(anyLong());
     }

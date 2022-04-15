@@ -29,9 +29,9 @@ public class SaveBookCommandTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getParameter("bookId")).thenReturn("2");
         when(request.getParameter("bookTitle")).thenReturn("Book Name");
-        when(request.getParameter("bookAuthor")).thenReturn("1");
+        when(request.getParameter("authorId")).thenReturn("1");
         when(request.getParameter("bookStock")).thenReturn("3");
-        when(request.getParameter("bookGenre")).thenReturn("2");
+        when(request.getParameter("genreId")).thenReturn("2");
 
         BookService service = mock(BookService.class);
         doNothing().when(service).saveBook(any(Book.class));
@@ -44,7 +44,6 @@ public class SaveBookCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(7)).getParameter(anyString());
         verify(service, times(1)).saveBook(any(Book.class));
         verify(service, times(1)).findPartOfBooks(anyInt(), anyInt());
         verify(request, times(1)).setAttribute(anyString(), anyList());

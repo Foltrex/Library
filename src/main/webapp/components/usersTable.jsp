@@ -26,7 +26,7 @@
                 <td>
                   <form method="post" action="controller?command=change_user_blocking">
                       <input type="hidden" name="userId" value="${user.id}">
-                      <input type="hidden" name="userBlocking" value="${ not user.banned }">
+                      <input type="hidden" name="userIsBanned" value="${ not user.banned }">
                       <input type="hidden" name="userRole" value="${user.role.roleName}">
                       <button type="submit">
                         <c:if test="${user.banned}">

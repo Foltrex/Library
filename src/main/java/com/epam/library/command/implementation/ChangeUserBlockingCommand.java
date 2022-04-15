@@ -9,6 +9,7 @@ import com.epam.library.command.CommandResult;
 import com.epam.library.command.Page;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 import com.epam.library.service.AdminService;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
@@ -23,9 +24,9 @@ public class ChangeUserBlockingCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        Long bannedUserId = Long.valueOf(req.getParameter("userId"));
-        Role bannedUserRole = Role.valueOfRoleName(req.getParameter("userRole"));
-        Boolean isBanned = Boolean.valueOf(req.getParameter("userBlocking"));
+        Long bannedUserId = Long.valueOf(req.getParameter(UserRequestParameterName.ID.getName()));
+        Role bannedUserRole = Role.valueOfRoleName(req.getParameter(UserRequestParameterName.ROLE.getName()));
+        Boolean isBanned = Boolean.valueOf(req.getParameter(UserRequestParameterName.IS_BANNED.getName()));
 
         adminService.changeUserBlocking(bannedUserId, isBanned);
 

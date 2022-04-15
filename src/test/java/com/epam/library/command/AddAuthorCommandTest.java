@@ -42,7 +42,6 @@ public class AddAuthorCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(2)).getParameter(anyString());
         verify(service, times(1)).saveAuthor(any(Author.class));
         verify(service, times(1)).getAuthors();
         verify(request, times(1)).setAttribute(anyString(), anyList());

@@ -7,6 +7,7 @@ import com.epam.library.command.Paginator;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.parameter.name.BookRequestParameterName;
 import com.epam.library.service.BookService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class SearchBookCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        String title = req.getParameter("bookTitle");
+        String title = req.getParameter(BookRequestParameterName.TITLE.getName());
         int currentPage = paginator.findPageNo(req);
         List<Book> books;
         if (title != null && !title.isEmpty()) {

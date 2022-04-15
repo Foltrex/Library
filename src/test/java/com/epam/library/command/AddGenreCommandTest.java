@@ -45,7 +45,6 @@ public class AddGenreCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(1)).getParameter(anyString());
         verify(service, times(1)).saveGenre(any(Genre.class));
         verify(service, times(1)).getGenres();
         verify(request, times(1)).setAttribute(anyString(), anyList());

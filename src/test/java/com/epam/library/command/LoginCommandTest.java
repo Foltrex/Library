@@ -23,8 +23,8 @@ public class LoginCommandTest {
     public void testExecuteShouldLoginUserWhenLoginAndPasswordIsCorrect() throws ServiceException, PageCommandException {
         // given
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getParameter("login")).thenReturn("1111");
-        when(request.getParameter("password")).thenReturn("1111");
+        when(request.getParameter("userLogin")).thenReturn("1111");
+        when(request.getParameter("userPassword")).thenReturn("1111");
         when(request.getParameter("g-recaptcha-response")).thenReturn("98sydf9h");
 
         Optional<User> optionalUser = Optional.of(registeredUser);
@@ -45,7 +45,6 @@ public class LoginCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(3)).getParameter(anyString());
         verify(service, times(1)).login(anyString(), anyString());
         verify(checker, times(1)).verify(anyString());
         verify(request, times(1)).getSession();
@@ -56,8 +55,8 @@ public class LoginCommandTest {
     public void testExecuteShouldNotAuthorizeUserWhenLoginAndPasswordIsWrong() throws ServiceException, PageCommandException {
         // given
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getParameter("login")).thenReturn("wrongLogin");
-        when(request.getParameter("password")).thenReturn("wrongPassword");
+        when(request.getParameter("userLogin")).thenReturn("wrongLogin");
+        when(request.getParameter("userPassword")).thenReturn("wrongPassword");
         when(request.getParameter("g-recaptcha-response")).thenReturn("98sydf9h");
 
         Optional<User> optionalUser = Optional.of(bannedUser);

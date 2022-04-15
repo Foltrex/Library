@@ -38,7 +38,6 @@ public class ShowBooksCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(4)).getParameter(anyString());
         verify(request, times(3)).setAttribute(anyString(), anyInt());
         verify(request, times(1)).setAttribute(anyString(), anyList());
     }

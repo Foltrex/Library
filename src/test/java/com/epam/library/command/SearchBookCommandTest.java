@@ -42,7 +42,6 @@ public class SearchBookCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(5)).getParameter(anyString());
         verify(bookService, times(1)).searchBooksFromPositionByBookTitle(anyString(), anyInt(), anyInt());
         verify(bookService, times(1)).calculateNumberOfRows();
         verify(request, times(3)).setAttribute(anyString(), anyInt());

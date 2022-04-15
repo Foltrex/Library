@@ -9,6 +9,8 @@ import com.epam.library.entity.RentalStatus;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.RequestExtractor;
+import com.epam.library.extractor.implementation.BookRentalRequestExtractor;
 import com.epam.library.service.BookRentalService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class SaveBookRentalCommand implements Command {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private final RequestExtractor<BookRental> requestExtractor = new BookRentalRequestExtractor();
 
     private final BookRentalService bookRentalService;
 
@@ -29,39 +31,11 @@ public class SaveBookRentalCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        BookRental bookRental = extractBookRentalFromRequest(req);
+        BookRental bookRental = requestExtractor.extract(req);
         bookRentalService.saveBookRental(bookRental);
         List<BookRental> bookRentals = bookRentalService.getBookRentals();
         req.setAttribute("rentals", bookRentals);
         return CommandResult.forward(Page.BOOK_RENTALS.getPath());
     }
 
-    private BookRental extractBookRentalFromRequest(HttpServletRequest req) throws PageCommandException {
-        Long id = Long.valueOf(req.getParameter("bookRentalId"));
-
-        Long userId = Long.valueOf(req.getParameter("userId"));
-        User user = User.createUserWithOnlyId(userId);
-
-        Long bookId = Long.valueOf(req.getParameter("bookId"));
-        Book book = Book.createBookWithOnlyId(bookId);
-
-        Date borrowDate;
-        Date returnDate;
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-
-            String borrowDateString = req.getParameter("borrowDate");
-            borrowDate = dateFormat.parse(borrowDateString);
-
-            String returnDateString = req.getParameter("returnDate");
-            returnDate = dateFormat.parse(returnDateString);
-        } catch (ParseException e) {
-            throw new PageCommandException("Uncorrect date format", e);
-        }
-
-        String rentalStatusString =  req.getParameter("rentalStatus");
-        RentalStatus status = RentalStatus.valueOfStatus(rentalStatusString);
-
-        return new BookRental(id, user, book, borrowDate, returnDate, status);
-    }
 }

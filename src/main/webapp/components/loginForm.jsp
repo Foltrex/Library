@@ -6,7 +6,14 @@
 <fmt:setBundle basename="locale"/>
 
 <link href="CSS/loginForm.css" rel="stylesheet" type="text/css"/>
-<script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+<script src='https://www.google.com/recaptcha/api.js?hl=
+<c:if test="${sessionScope.locale != null}">
+  ${sessionScope.locale}'>
+</c:if>
+<c:if test="${sessionScope.locale == null}">
+  en_US'>
+</c:if>
+</script>
 
 <div class="login-form">
     <form action="controller?command=login" method="post">
@@ -16,10 +23,10 @@
 
         <div class="container">
           <label for="login"><b><fmt:message key="login.form.login.label"/></b></label>
-          <input type="text" placeholder="<fmt:message key="login.form.login.placeholder"/>" name="login" required>
+          <input type="text" placeholder="<fmt:message key="login.form.login.placeholder"/>" name="userLogin" required>
 
           <label for="password"><b><fmt:message key="login.form.password.label"/></b></label>
-          <input type="password" placeholder="<fmt:message key="login.form.password.placeholder"/>" name="password" required>
+          <input type="password" placeholder="<fmt:message key="login.form.password.placeholder"/>" name="userPassword" required>
 
           <p class="g-recaptcha" data-sitekey="6LdNP18eAAAAAKI8QhlDTo39vBa1FULfmpT_Kef7"></p>
 

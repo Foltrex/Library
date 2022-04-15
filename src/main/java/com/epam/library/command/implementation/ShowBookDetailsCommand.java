@@ -8,6 +8,7 @@ import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.parameter.name.BookRequestParameterName;
 import com.epam.library.service.AuthorService;
 import com.epam.library.service.BookService;
 import com.epam.library.service.GenreService;
@@ -30,7 +31,7 @@ public class ShowBookDetailsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        long id = Long.parseLong(req.getParameter("id"));
+        long id = Long.parseLong(req.getParameter(BookRequestParameterName.ID.getName()));
 
         Optional<Book> optionalBook = bookService.searchBookById(id);
 

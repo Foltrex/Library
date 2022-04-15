@@ -7,6 +7,9 @@ import com.epam.library.command.Page;
 import com.epam.library.entity.*;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.extractor.RequestExtractor;
+import com.epam.library.extractor.implementation.UserRentalRequestExtractor;
+import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 import com.epam.library.service.UserService;
 import com.epam.library.validator.UserValidator;
 
@@ -18,6 +21,8 @@ import java.util.Optional;
 public class SaveUserCommand implements Command {
     private static final String MAIN_PAGE_COMMAND = CommandName.SHOW_BOOKS.getServletCommand("controller");
 
+    private final RequestExtractor<User> requestExtractor = new UserRentalRequestExtractor();
+
     private final UserService userService;
 
     private final UserValidator validator;
@@ -28,41 +33,21 @@ public class SaveUserCommand implements Command {
     }
 
     // TODO: finish  with this, test, validator, dao and localization of this page
-    // TODO: users don't save
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        User user = extractUserFromRequest(req);
-        String secondEnteredPassword = req.getParameter("password-repeat");
+        User user = requestExtractor.extract(req);
 
-        CommandResult result;
-        if (validator.isPasswordCoincidental(user.getPassword(), secondEnteredPassword)) {
-            userService.signUp(user);
+        userService.signUp(user);
 
-            Optional<User> optionalUser = userService.login(user.getLogin(), user.getPassword());
-            User registeredUser = optionalUser.get();
+        Optional<User> optionalUser = userService.login(user.getLogin(), user.getPassword());
+        User registeredUser = optionalUser.get();
 
-            HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("userId", registeredUser.getId());
-            httpSession.setAttribute("userRole", registeredUser.getRole());
-            result = CommandResult.redirect(req.getContextPath() + MAIN_PAGE_COMMAND);
-        } else {
-            req.setAttribute("error-message", "Passwords are difference");
-            // TODO: make redirection
-            result = CommandResult.forward(Page.LOGIN.getPath());
-        }
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute(UserRequestParameterName.ID.getName(), registeredUser.getId());
+        httpSession.setAttribute(UserRequestParameterName.ROLE.getName(), registeredUser.getRole());
+
+        CommandResult result = CommandResult.redirect(req.getContextPath() + MAIN_PAGE_COMMAND);
 
         return result;
-    }
-
-    private User extractUserFromRequest(HttpServletRequest req) {
-        String userIdParam = req.getParameter("id");
-        Long userId = userIdParam != null && !userIdParam.isEmpty() ? Long.valueOf(userIdParam) : null;
-        String userName = req.getParameter("name");
-        String userSurname = req.getParameter("surname");
-        String userPhoneNumber = req.getParameter("phone_number");
-        String userLogin = req.getParameter("login");
-        String userPassword = req.getParameter("password");
-
-        return new User(userId, userName, userSurname, userPhoneNumber, userLogin, userPassword, Role.READER, false);
     }
 }

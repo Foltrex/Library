@@ -41,7 +41,6 @@ public class ShowGenreBooksCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(6)).getParameter(anyString());
         verify(bookService, times(1)).searchBooksFromPositionByGenreId(anyLong(), anyInt(), anyInt());
         verify(request, times(3)).setAttribute(anyString(), anyInt());
         verify(request, times(1)).setAttribute(anyString(), anyList());

@@ -32,9 +32,9 @@ public class SaveBookRentalCommandTest {
         when(request.getParameter("bookRentalId")).thenReturn("2");
         when(request.getParameter("userId")).thenReturn("2");
         when(request.getParameter("bookId")).thenReturn("2");
-        when(request.getParameter("borrowDate")).thenReturn("2022-01-01");
-        when(request.getParameter("returnDate")).thenReturn("2022-02-01");
-        when(request.getParameter("rentalStatus")).thenReturn("issued for subscription");
+        when(request.getParameter("bookRentalBorrowDate")).thenReturn("2022-01-01");
+        when(request.getParameter("bookRentalReturnDate")).thenReturn("2022-02-01");
+        when(request.getParameter("bookRentalRentalStatus")).thenReturn("issued for subscription");
 
         BookRentalService bookRentalService = mock(BookRentalService.class);
         doNothing().when(bookRentalService).saveBookRental(any(BookRental.class));
@@ -48,7 +48,6 @@ public class SaveBookRentalCommandTest {
         CommandResult commandResult = command.execute(request);
 
         // then
-        verify(request, times(6)).getParameter(anyString());
         verify(bookRentalService, times(1)).saveBookRental(any(BookRental.class));
         verify(bookRentalService, times(1)).getBookRentals();
         verify(request, times(1)).setAttribute(anyString(), anyList());

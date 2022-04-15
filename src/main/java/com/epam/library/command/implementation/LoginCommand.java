@@ -3,6 +3,7 @@ package com.epam.library.command.implementation;
 import com.epam.library.command.*;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.entity.User;
+import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 import com.epam.library.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +24,8 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request) throws ServiceException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(UserRequestParameterName.LOGIN.getName());
+        String password = request.getParameter(UserRequestParameterName.PASSWORD.getName());
         String gReCaptchaResponse = request.getParameter("g-recaptcha-response");
 
         Optional<User> user = service.login(login, password);

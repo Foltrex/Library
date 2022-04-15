@@ -8,7 +8,9 @@
 <div class="rentalsTable">
     <table>
       <tr>
-        <th><fmt:message key="rentals.user.login"/></th>
+        <c:if test="${ userRole.roleName != 'reader' }">
+          <th><fmt:message key="rentals.user.login"/></th>
+        </c:if>
         <th><fmt:message key="rentals.rented.book"/></th>
         <th><fmt:message key="rentals.borrow.date"/></th>
         <th><fmt:message key="rentals.return.date"/></th>
@@ -18,7 +20,9 @@
 
       <c:forEach var="rental" items="${rentals}">
           <tr>
-              <td>${rental.user.login}</td>
+              <c:if test="${ userRole.roleName != 'reader' }">
+                <td>${rental.user.login}</td>
+              </c:if>
               <td>${rental.rentedBook.title}</td>
               <td>${rental.borrowDate}</td>
               <td>${rental.returnDate}</td>
