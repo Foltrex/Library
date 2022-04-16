@@ -23,7 +23,7 @@
 
     <div class="row">
       <div class="col-25">
-        <label for="bookAuthor"><fmt:message key="book.details.form.label.author"/>:</label>
+        <label for="authorId"><fmt:message key="book.details.form.label.author"/>:</label>
       </div>
       <div class="col-75">
         <select id="author" name="authorId">
@@ -53,7 +53,7 @@
 
     <div class="row">
         <div class="col-25">
-          <label for="bookGenre"><fmt:message key="book.details.form.label.genre"/>:</label>
+          <label for="genreId"><fmt:message key="book.details.form.label.genre"/>:</label>
         </div>
         <div class="col-75">
           <select id="genre" name="genreId">

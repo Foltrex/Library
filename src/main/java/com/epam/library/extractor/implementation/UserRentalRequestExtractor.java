@@ -2,16 +2,17 @@ package com.epam.library.extractor.implementation;
 
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
+import com.epam.library.extractor.AbstractRequestExtractor;
 import com.epam.library.extractor.RequestExtractor;
 import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class UserRentalRequestExtractor implements RequestExtractor<User> {
+public class UserRentalRequestExtractor extends AbstractRequestExtractor<User> {
     @Override
     public User extract(HttpServletRequest request) {
         String userIdString = request.getParameter(UserRequestParameterName.ID.getName());
-        Long userId = (userIdString != null) ? Long.valueOf(userIdString) : null;
+        Long userId = super.isParsable(userIdString) ? Long.valueOf(userIdString) : null;
         String userName = request.getParameter(UserRequestParameterName.NAME.getName());
         String userSurname = request.getParameter(UserRequestParameterName.SURNAME.getName());
         String userPhoneNumber = request.getParameter(UserRequestParameterName.PHONE_NUMBER.getName());
