@@ -26,6 +26,7 @@
     <script src="${pageContext.request.contextPath}/js/layout.js"></script>
     <script src="${pageContext.request.contextPath}/js/changeLang.js"></script>
     <script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
+    <script src="${pageContext.request.contextPath}/js/searchBar.js"></script>
 </head>
   <body>
     <div class="wrapper hover_collapse">

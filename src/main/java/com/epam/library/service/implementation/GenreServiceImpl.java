@@ -31,6 +31,20 @@ public class GenreServiceImpl extends AbstractService implements GenreService, E
     }
 
     @Override
+    public List<Genre> findPartOfGenres(int currentPage, int recordsPerPage) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            GenreDao dao = helper.createGenreDao();
+            int startingPosition = currentPage * recordsPerPage - recordsPerPage;
+            List<Genre> genres = dao.getGenresFromPosition(startingPosition, recordsPerPage);
+            helper.endTransaction();
+            return genres;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void saveGenre(Genre genre) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

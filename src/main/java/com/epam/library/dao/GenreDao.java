@@ -10,5 +10,7 @@ public interface GenreDao extends EntityDao {
 
     List<Genre> getGenres() throws DaoException;
 
+    List<Genre> getGenresFromPosition(int startingPosition, int recordsPerPage) throws DaoException;
+
     void saveGenre(Genre genre) throws DaoException;
 }

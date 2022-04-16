@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="customtags" prefix="ctg" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -49,7 +50,13 @@
           </form>
         </div>
       </c:if>
+
       <jsp:include page="../components/genresList.jsp" />
+
+      <div class="pagination">
+        <ctg:page pageNo="${pageNo}" url="/controller?command=show_genres" totalSum="${totalSum}" showPage="6" pageSize="${recordsPerPage}"/>
+      </div>
+
     </div>
 
 

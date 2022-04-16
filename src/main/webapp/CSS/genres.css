@@ -19,7 +19,7 @@ body {
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  position: fixed;
+  position: absolute;
   top: 109px;
   left: 90px;
   width: 280px;
@@ -28,7 +28,7 @@ body {
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 97px;
   left: 77px;
   border: 3px solid #f1f1f1;

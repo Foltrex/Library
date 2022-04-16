@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao {
 
+    private static final String SELECT_ALL_FROM_POSITION = "SELECT * FROM genres LIMIT ? OFFSET ?";
+
     public GenreDaoImpl(Connection connection) {
         super(connection, new GenreRowMapper(), Genre.TABLE);
     }
@@ -28,6 +30,11 @@ public class GenreDaoImpl extends AbstractDao<Genre> implements GenreDao {
     @Override
     public List<Genre> getGenres() throws DaoException {
         return getAll();
+    }
+
+    @Override
+    public List<Genre> getGenresFromPosition(int startingPosition, int recordsPerPage) throws DaoException {
+        return executeQuery(SELECT_ALL_FROM_POSITION, recordsPerPage, startingPosition);
     }
 
     @Override

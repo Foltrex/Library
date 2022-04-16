@@ -11,6 +11,7 @@ public interface GenreService extends EntityService {
 
     List<Genre> getGenres() throws ServiceException;
 
-    void saveGenre(Genre genre) throws ServiceException;
+    List<Genre> findPartOfGenres(int currentPage, int recordsPerPage) throws ServiceException;
 
+    void saveGenre(Genre genre) throws ServiceException;
 }

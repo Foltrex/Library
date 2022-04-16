@@ -24,7 +24,7 @@ public class ShowGenresCommandTest {
     public void testExecuteShouldShowGenresWhenTheyExist() throws ServiceException, PageCommandException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         GenreService genreService = mock(GenreService.class);
-        when(genreService.getGenres()).thenReturn(genres);
+        when(genreService.findPartOfGenres(anyInt(), anyInt())).thenReturn(genres);
         doNothing().when(request).setAttribute(anyString(), anyList());
 
         ShowGenresCommand command = new ShowGenresCommand(genreService);
@@ -34,6 +34,6 @@ public class ShowGenresCommandTest {
 
         // then
         verify(request, times(1)).setAttribute(anyString(), anyList());
-        verify(genreService, times(1)).getGenres();
+        verify(genreService, times(1)).findPartOfGenres(anyInt(), anyInt());
     }
 }

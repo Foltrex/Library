@@ -15,11 +15,13 @@ import java.util.List;
 public class ShowBooksCommand implements Command {
 
     private final BookService bookService;
+
     private final Paginator paginator;
+    private static final int RECORDS_PER_PAGE = 4;
 
     public ShowBooksCommand(BookService bookService) {
         this.bookService = bookService;
-        this.paginator = new Paginator(bookService, 4);
+        this.paginator = new Paginator(bookService, RECORDS_PER_PAGE);
     }
 
     @Override
@@ -27,7 +29,28 @@ public class ShowBooksCommand implements Command {
         int currentPage = paginator.findPageNo(req);
         List<Book> books = bookService.findPartOfBooks(currentPage, paginator.getRecordsPerPage());
         paginator.setPaginationParameters(req);
+
+        // for search bar autocomplete
+        List<Book> allBooks = bookService.getBooks();
+        String bookTitlesString = parseTitleOfAllBooksInListToString(allBooks);
+
         req.setAttribute("books", books);
+        req.setAttribute("bookTitles", bookTitlesString);
         return CommandResult.forward(Page.BOOKS.getPath());
+    }
+
+    private String parseTitleOfAllBooksInListToString(List<Book> books) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < books.size(); ++i) {
+            Book book = books.get(i);
+
+            if (i != books.size() - 1) {
+                stringBuilder.append(book.getTitle()).append("|");
+            } else {
+                stringBuilder.append(book.getTitle());
+            }
+        }
+
+        return stringBuilder.toString();
     }
 }

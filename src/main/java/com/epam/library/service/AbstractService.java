@@ -10,6 +10,7 @@ import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.EntityService;
 
+import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractService implements EntityService {

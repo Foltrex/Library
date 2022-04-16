@@ -1,6 +1,7 @@
 .pagination {
     display: inline-block;
     margin-top: 20px;
+    margin-bottom: 70px;
   }
   
   .pagination a, .pagination span {
