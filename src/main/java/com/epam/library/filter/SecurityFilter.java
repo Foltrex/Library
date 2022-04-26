@@ -1,5 +1,6 @@
 package com.epam.library.filter;
 
+import com.epam.library.command.Page;
 import com.epam.library.entity.Role;
 import com.epam.library.security.SecurityChecker;
 
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
-    private static final String ERROR_PAGE = "/pages/errorPage.jsp";
 
     private final SecurityChecker securityChecker = new SecurityChecker();
 
@@ -24,7 +24,7 @@ public class SecurityFilter implements Filter {
             chain.doFilter(req, resp);
         } else {
             ServletContext servletContext = request.getServletContext();
-            RequestDispatcher dispatcher = servletContext.getRequestDispatcher(ERROR_PAGE);
+            RequestDispatcher dispatcher = servletContext.getRequestDispatcher(Page.ERROR.getPath());
             dispatcher.forward(req, resp);
         }
     }

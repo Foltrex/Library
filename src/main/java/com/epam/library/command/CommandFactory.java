@@ -21,7 +21,7 @@ public class CommandFactory {
             case LOGOUT:
                 return new LogoutCommand();
             case SAVE_USER:
-                return new SaveUserCommand(new UserServiceImpl(factory), new InputDateValidatorImpl());
+                return new SaveUserCommand(new UserServiceImpl(factory));
             case SHOW_RENTALS:
                 return new ShowBookRentalsCommand(new BookRentalServiceImpl(factory));
             case SHOW_BOOK_RENTAL_DETAILS:

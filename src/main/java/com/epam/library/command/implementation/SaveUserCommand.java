@@ -23,11 +23,8 @@ public class SaveUserCommand implements Command {
 
     private final UserService userService;
 
-    private final InputDateValidatorImpl validator;
-
-    public SaveUserCommand(UserService userService, InputDateValidatorImpl validator) {
+    public SaveUserCommand(UserService userService) {
         this.userService = userService;
-        this.validator = validator;
     }
 
     @Override
@@ -43,8 +40,6 @@ public class SaveUserCommand implements Command {
         httpSession.setAttribute(UserRequestParameterName.ID.getName(), registeredUser.getId());
         httpSession.setAttribute(UserRequestParameterName.ROLE.getName(), registeredUser.getRole());
 
-        CommandResult result = CommandResult.redirect(req.getContextPath() + MAIN_PAGE_COMMAND);
-
-        return result;
+        return CommandResult.redirect(req.getContextPath() + MAIN_PAGE_COMMAND);
     }
 }

@@ -1,7 +1,8 @@
-package com.epam.library.mapper;
+package com.epam.library.mapper.implementation;
 
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
+import com.epam.library.mapper.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

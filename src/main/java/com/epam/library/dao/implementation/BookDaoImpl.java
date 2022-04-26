@@ -5,7 +5,7 @@ import com.epam.library.dao.BookDao;
 import com.epam.library.dao.SearchBookDao;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.DaoException;
-import com.epam.library.mapper.BookRowMapper;
+import com.epam.library.mapper.implementation.BookRowMapper;
 
 import java.sql.Connection;
 import java.util.LinkedHashMap;
@@ -90,7 +90,7 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao, SearchBoo
     @Override
     protected Map<String, Object> extractFields(Book item) {
         // ImmutableMap.of (...) is more beautiful :(
-        return new LinkedHashMap<String, Object>() {{
+        return new LinkedHashMap<>() {{
             put(Book.TITLE, item.getTitle());
             put(Book.AUTHOR_ID, item.getAuthor().getId());
             put(Book.STOCK, item.getStock());

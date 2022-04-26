@@ -6,7 +6,7 @@ import com.epam.library.dao.UserRoleDao;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
-import com.epam.library.mapper.UserRowMapper;
+import com.epam.library.mapper.implementation.UserRowMapper;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
