@@ -28,7 +28,7 @@
                       <input type="hidden" name="userId" value="${user.id}">
                       <input type="hidden" name="userIsBanned" value="${ not user.banned }">
                       <input type="hidden" name="userRole" value="${user.role.roleName}">
-                      <button type="submit">
+                      <button class="blocking-button" type="submit">
                         <c:if test="${user.banned}">
                           <i class="fa fa-lock" style="font-size:24px"></i>
                         </c:if>

@@ -14,5 +14,10 @@ table {
     text-align: left;
     padding: 8px;
   }
+
+  button.blocking-button {
+    background-color: inherit;
+    border: none;
+  }
   
   tr:nth-child(even){background-color: #f2f2f2}
