@@ -8,6 +8,8 @@ import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookRentalService;
+import com.epam.library.validator.InputDateValidator;
+import com.epam.library.validator.impl.InputDateValidatorImpl;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -40,9 +42,12 @@ public class SaveBookRentalCommandTest {
         doNothing().when(bookRentalService).saveBookRental(any(BookRental.class));
         when(bookRentalService.getBookRentals()).thenReturn(rentals);
 
+        InputDateValidatorImpl validator = mock(InputDateValidatorImpl.class);
+        when(validator.isDatesValid(any(Date.class), any(Date.class))).thenReturn(true);
+
         doNothing().when(request).setAttribute(anyString(), anyList());
 
-        SaveBookRentalCommand command = new SaveBookRentalCommand(bookRentalService);
+        SaveBookRentalCommand command = new SaveBookRentalCommand(bookRentalService, validator);
 
         // when
         CommandResult commandResult = command.execute(request);

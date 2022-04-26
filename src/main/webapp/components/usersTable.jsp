@@ -21,7 +21,7 @@
               <td>${user.surname}</td>
               <td>${user.phoneNumber}</td>
               <td>${user.login}</td>
-              <td>${user.role}</td>
+              <td><fmt:message key="${user.role.localizedStatusName}"/></td>
               <c:if test="${ userRole.roleName == 'admin'}">
                 <td>
                   <form method="post" action="controller?command=change_user_blocking">

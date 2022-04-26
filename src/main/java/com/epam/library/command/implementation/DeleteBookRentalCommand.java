@@ -8,8 +8,6 @@ import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.extractor.RequestExtractor;
-import com.epam.library.extractor.implementation.BookRentalRequestExtractor;
 import com.epam.library.extractor.parameter.name.BookRentalRequestParameterName;
 import com.epam.library.extractor.parameter.name.BookRequestParameterName;
 import com.epam.library.service.BookRentalService;

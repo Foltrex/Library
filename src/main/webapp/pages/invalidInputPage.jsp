@@ -16,23 +16,19 @@
 
     <link href="${pageContext.request.contextPath}/CSS/errorPage.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/fonts.css" rel="stylesheet" type="text/css"/>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> -->
-    <!-- <script src="${pageContext.request.contextPath}/js/js-libraries/gsap/src/all.js"></script>
-    <script src="${pageContext.request.contextPath}/js/gsap.min.js" defer></script> -->
-    <script src="${pageContext.request.contextPath}/js/errorPage.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/errorInputPage.js" defer></script>
 </head>
 <body>
     <main>
         <div class="container">
           <div class="row">
             <div class="col-md-6 align-self-center">
-              <img src = "images/svg/cosmonaut.svg"/>
+              <img src = "images/svg/gears.svg"/>
             </div>
             <div class="col-md-6 align-self-center">
-              <h1>404</h1>
-              <h2><fmt:message key="error.page.title" />.</h2>
-              <p><fmt:message key="error.page.text" />. ${errorMessage}
-              </p>
+              <h1>406</h1>
+              <h2><fmt:message key="invalid.input.page.title" />.</h2>
+              <p>${errorMessage}</p>
               <form method="post" 
                 <c:if test="${ not empty userId }">
                     action="controller?command=show_books">

@@ -3,7 +3,6 @@ package com.epam.library.extractor.implementation;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.extractor.AbstractRequestExtractor;
-import com.epam.library.extractor.RequestExtractor;
 import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;

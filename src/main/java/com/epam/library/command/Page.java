@@ -8,6 +8,7 @@ public enum Page {
     BOOK_DETAILS("bookDetails"),
     RENTAL_DETAILS("bookRentalDetails"),
     ERROR("errorPage"),
+    INPUT_ERROR("invalidInputPage"),
     BOOK_RENTALS("booksRentals"),
     READERS("readers"),
     LIBRARIANS("librarians"),
@@ -36,6 +37,4 @@ public enum Page {
     public String getPath() {
         return ( !name.equals(LOGIN.name) ) ? String.format("/pages/%s.jsp", name) : String.format("/%s.jsp", name);
     }
-
-    // here was some method like getPath
 }

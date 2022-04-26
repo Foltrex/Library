@@ -10,6 +10,7 @@ public enum RentalStatus {
 
     private static final String SPACE = " ";
     private static final String UNDERSCORE = "_";
+    private static final String DOT = ".";
 
     RentalStatus(String statusName) {
         this.statusName = statusName;
@@ -22,5 +23,10 @@ public enum RentalStatus {
 
     public String getStatusName() {
         return statusName;
+    }
+
+    public String getLocalizedStatusName() {
+        String roleFormattedString = statusName.toLowerCase().replaceAll(SPACE, DOT);
+        return String.format("rental.status.%s", roleFormattedString);
     }
 }

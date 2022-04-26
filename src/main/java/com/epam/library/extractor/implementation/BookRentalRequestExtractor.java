@@ -1,9 +1,7 @@
 package com.epam.library.extractor.implementation;
 
-import com.epam.library.Controller;
 import com.epam.library.entity.*;
 import com.epam.library.extractor.AbstractRequestExtractor;
-import com.epam.library.extractor.RequestExtractor;
 import com.epam.library.extractor.parameter.name.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -3,6 +3,17 @@
     margin-right: 20px;
 }
 
+.rental-button {
+  cursor: pointer;
+  font-size: 23px;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;

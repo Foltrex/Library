@@ -14,7 +14,8 @@ body {
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-  background-color: #555;
+  background: #4caf4f;
+  border-radius: 5px;
   color: white;
   padding: 16px 20px;
   border: none;
@@ -68,6 +69,7 @@ body {
   width: 100%;
   margin-bottom:10px;
   opacity: 0.8;
+  border-radius: 5px;
 }
 
 /* Add a red background color to the cancel button */

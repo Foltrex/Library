@@ -37,7 +37,7 @@ public class LoginCommand implements Command {
             User registeredUser = user.get();
             httpSession.setAttribute("userId", registeredUser.getId());
             httpSession.setAttribute("userRole", registeredUser.getRole());
-            result = CommandResult.redirect(request.getContextPath() + MAIN_PAGE_COMMAND);
+            result = CommandResult.redirect(MAIN_PAGE_COMMAND);
         } else if (user.isPresent() && user.get().isBanned()) {
             request.setAttribute("errorLoginPassMessage", "You was banned by admin");
             result = CommandResult.forward(Page.LOGIN.getPath());

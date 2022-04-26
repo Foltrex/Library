@@ -24,16 +24,16 @@
                 <td>${rental.user.login}</td>
               </c:if>
               <td>${rental.rentedBook.title}</td>
-              <td>${rental.borrowDate}</td>
-              <td>${rental.returnDate}</td>
-              <td>${rental.rentalStatus.statusName}</td>
+              <td><fmt:formatDate value="${rental.borrowDate}" /></td>
+              <td><fmt:formatDate value="${rental.returnDate}" /></td>
+              <td><fmt:message key="${rental.rentalStatus.localizedStatusName}"/></td>
               <td>
                 <c:if test="${ userRole.roleName == 'librarian' }">
                   <form method="get" action="controller">
                       <input type="hidden" name="command" value="show_book_rental_details">
                       <input type="hidden" name="bookRentalId" value="${rental.id}">
                       <input type="hidden" name="bookId" value="${rental.rentedBook.id}">
-                      <button type="submit"><i style="font-size:24px" class="fa">&#9998;</i></button>
+                      <button type="submit" class="rental-button"><i style="font-size:24px" class="fa">&#9998;</i></button>
                   </form>
                 </c:if>
               </td>

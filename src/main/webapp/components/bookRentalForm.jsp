@@ -56,10 +56,10 @@
           <select id="rental-status-id" name="bookRentalRentalStatus">
               <c:forEach var="rentalStatus" items="${rentalStatuses}">
                   <c:if test="${rentalStatus.statusName == bookRental.rentalStatus.statusName}">
-                    <option value="${rentalStatus.statusName}" selected>${rentalStatus.statusName}</option>
+                    <option value="${rentalStatus.statusName}" selected><fmt:message key="${rentalStatus.localizedStatusName}"/></option>
                   </c:if>
                   <c:if test="${ rentalStatus.statusName != bookRental.rentalStatus.statusName }">
-                    <option value="${rentalStatus.statusName}">${rentalStatus.statusName}</option>
+                    <option value="${rentalStatus.statusName}"><fmt:message key="${rentalStatus.localizedStatusName}"/></option>
                   </c:if>
               </c:forEach>
           </select>

@@ -7,6 +7,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
+import com.epam.library.validator.impl.InputStockValidatorImpl;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -36,9 +37,12 @@ public class SaveBookCommandTest {
         BookService service = mock(BookService.class);
         doNothing().when(service).saveBook(any(Book.class));
 
+        InputStockValidatorImpl validator = mock(InputStockValidatorImpl.class);
+        when(validator.isStockValid(anyInt())).thenReturn(true);
+
         doNothing().when(request).setAttribute(anyString(), anyList());
 
-        SaveBookCommand command = new SaveBookCommand(service);
+        SaveBookCommand command = new SaveBookCommand(service, validator);
 
         // when
         CommandResult commandResult = command.execute(request);

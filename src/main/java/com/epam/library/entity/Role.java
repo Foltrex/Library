@@ -13,6 +13,9 @@ public enum Role {
 
     private final String roleName;
 
+    private static final String SPACE = " ";
+    private static final String DOT = ".";
+
     private static final Map<String, Role> ELEMENTS = new HashMap<>();
     static {
         for (Role role: Role.values()) {
@@ -30,5 +33,10 @@ public enum Role {
 
     public String getRoleName() {
         return roleName;
+    }
+
+    public String getLocalizedStatusName() {
+        String roleFormattedString = roleName.toLowerCase().replaceAll(SPACE, DOT);
+        return String.format("role.%s", roleFormattedString);
     }
 }

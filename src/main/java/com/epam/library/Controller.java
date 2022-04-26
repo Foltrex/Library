@@ -27,8 +27,6 @@ public class Controller extends HttpServlet {
         processRequest(req, resp);
     }
 
-    // TODO: write check for recommiting request
-
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         CommandFactory client = new CommandFactory();
         String commandLine = req.getParameter("command");
@@ -39,7 +37,6 @@ public class Controller extends HttpServlet {
             dispatch(req, resp, result);
         } catch (Exception e) {
             LOGGER.warn(e);
-            // TODO: make more individual
             req.setAttribute("errorMessage", e.getMessage());
             dispatch(req, resp, CommandResult.forward(Page.ERROR.getPath()));
         }
@@ -51,7 +48,7 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(req, resp);
         } else {
-            resp.sendRedirect(page);
+            resp.sendRedirect(req.getContextPath() + page);
         }
     }
 }

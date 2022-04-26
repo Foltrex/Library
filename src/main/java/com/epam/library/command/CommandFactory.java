@@ -4,7 +4,8 @@ import com.epam.library.command.implementation.*;
 import com.epam.library.dao.DaoHelperFactory;
 import com.epam.library.entity.Role;
 import com.epam.library.service.implementation.*;
-import com.epam.library.validator.UserValidator;
+import com.epam.library.validator.impl.InputDateValidatorImpl;
+import com.epam.library.validator.impl.InputStockValidatorImpl;
 
 public class CommandFactory {
 
@@ -20,7 +21,7 @@ public class CommandFactory {
             case LOGOUT:
                 return new LogoutCommand();
             case SAVE_USER:
-                return new SaveUserCommand(new UserServiceImpl(factory), new UserValidator());
+                return new SaveUserCommand(new UserServiceImpl(factory), new InputDateValidatorImpl());
             case SHOW_RENTALS:
                 return new ShowBookRentalsCommand(new BookRentalServiceImpl(factory));
             case SHOW_BOOK_RENTAL_DETAILS:
@@ -28,7 +29,7 @@ public class CommandFactory {
             case DELETE_RENTAL:
                 return new DeleteBookRentalCommand(new BookRentalServiceImpl(factory));
             case SAVE_RENTAL:
-                return new SaveBookRentalCommand(new BookRentalServiceImpl(factory));
+                return new SaveBookRentalCommand(new BookRentalServiceImpl(factory), new InputDateValidatorImpl());
             case SHOW_BOOK_DETAILS:
                 return new ShowBookDetailsCommand
                         (new BookServiceImpl(factory), new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
@@ -39,7 +40,7 @@ public class CommandFactory {
             case SEARCH_BOOK:
                 return new SearchBookCommand(new BookServiceImpl(factory));
             case SAVE_BOOK:
-                return new SaveBookCommand(new BookServiceImpl(factory));
+                return new SaveBookCommand(new BookServiceImpl(factory), new InputStockValidatorImpl());
             case ADD_BOOK:
                 return new AddBookCommand(new AuthorServiceImpl(factory), new GenreServiceImpl(factory));
             case CHANGE_USER_BLOCKING:
