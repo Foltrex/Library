@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ShowBookRentalsCommand;
+import com.epam.library.command.impl.ShowBookRentalsCommand;
 import com.epam.library.entity.*;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;

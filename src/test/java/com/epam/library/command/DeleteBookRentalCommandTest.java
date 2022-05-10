@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.DeleteBookRentalCommand;
+import com.epam.library.command.impl.DeleteBookRentalCommand;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;
@@ -8,7 +8,6 @@ import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookRentalService;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 

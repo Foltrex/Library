@@ -1,11 +1,10 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.BorrowBookCommand;
+import com.epam.library.command.impl.BorrowBookCommand;
 import com.epam.library.entity.*;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookRentalService;
-import com.epam.library.service.implementation.BookRentalServiceImpl;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 

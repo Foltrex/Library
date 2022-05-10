@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ChangeUserBlockingCommand;
+import com.epam.library.command.impl.ChangeUserBlockingCommand;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;

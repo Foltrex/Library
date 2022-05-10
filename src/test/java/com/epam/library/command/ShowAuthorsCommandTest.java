@@ -1,11 +1,10 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ShowAuthorsCommand;
+import com.epam.library.command.impl.ShowAuthorsCommand;
 import com.epam.library.entity.Author;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AuthorService;
-import com.epam.library.service.implementation.AuthorServiceImpl;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;

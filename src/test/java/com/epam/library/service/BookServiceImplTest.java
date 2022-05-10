@@ -3,12 +3,10 @@ package com.epam.library.service;
 import com.epam.library.dao.*;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
-import com.epam.library.entity.BookRental;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.implementation.BookRentalServiceImpl;
-import com.epam.library.service.implementation.BookServiceImpl;
+import com.epam.library.service.impl.BookServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

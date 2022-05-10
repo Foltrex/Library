@@ -1,9 +1,9 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.*;
+import com.epam.library.command.impl.*;
 import com.epam.library.dao.DaoHelperFactory;
 import com.epam.library.entity.Role;
-import com.epam.library.service.implementation.*;
+import com.epam.library.service.impl.*;
 import com.epam.library.validator.impl.InputDateValidatorImpl;
 import com.epam.library.validator.impl.InputStockValidatorImpl;
 

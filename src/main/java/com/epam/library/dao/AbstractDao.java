@@ -108,6 +108,8 @@ public abstract class AbstractDao<T extends Identifable> implements Dao<T>, Enti
                 );
     }
 
+
+    // TODO: move to DaoHelper
     private String generateUpdateQuery(Collection<String> fields, Long id) {
         String updatePrefix = String.format("UPDATE %s SET ", table);
         String updateSuffix = String.format(" WHERE id=%d;", id);

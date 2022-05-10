@@ -1,7 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ShowBookRentalDetailsCommand;
-import com.epam.library.dao.BookDaoImplTest;
+import com.epam.library.command.impl.ShowBookRentalDetailsCommand;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.BookRental;
 import com.epam.library.entity.RentalStatus;

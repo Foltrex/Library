@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ShowBookDetailsCommand;
+import com.epam.library.command.impl.ShowBookDetailsCommand;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
@@ -9,7 +9,6 @@ import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AuthorService;
 import com.epam.library.service.BookService;
 import com.epam.library.service.GenreService;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;

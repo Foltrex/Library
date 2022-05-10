@@ -1,12 +1,9 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.AddAuthorCommand;
-import com.epam.library.command.implementation.AddGenreCommand;
-import com.epam.library.entity.Author;
+import com.epam.library.command.impl.AddGenreCommand;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.AuthorService;
 import com.epam.library.service.GenreService;
 import org.junit.Test;
 import org.mockito.Mockito;

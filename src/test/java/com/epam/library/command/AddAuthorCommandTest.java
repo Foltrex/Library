@@ -1,15 +1,12 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.AddAuthorCommand;
+import com.epam.library.command.impl.AddAuthorCommand;
 import com.epam.library.entity.Author;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AuthorService;
-import com.epam.library.service.implementation.AuthorServiceImpl;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;

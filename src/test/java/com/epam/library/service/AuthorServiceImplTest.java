@@ -3,12 +3,10 @@ package com.epam.library.service;
 import com.epam.library.dao.AuthorDao;
 import com.epam.library.dao.DaoHelper;
 import com.epam.library.dao.DaoHelperFactory;
-import com.epam.library.dao.UserRoleDao;
 import com.epam.library.entity.Author;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.implementation.AuthorServiceImpl;
-import org.checkerframework.checker.units.qual.A;
+import com.epam.library.service.impl.AuthorServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

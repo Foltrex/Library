@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.SaveBookCommand;
+import com.epam.library.command.impl.SaveBookCommand;
 import com.epam.library.entity.Author;
 import com.epam.library.entity.Book;
 import com.epam.library.entity.Genre;
@@ -13,7 +13,6 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

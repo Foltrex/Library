@@ -1,6 +1,6 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.ShowGenresCommand;
+import com.epam.library.command.impl.ShowGenresCommand;
 import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;

@@ -1,18 +1,12 @@
 package com.epam.library.command;
 
-import com.epam.library.command.implementation.LoginCommand;
-import com.epam.library.command.implementation.LogoutCommand;
-import com.epam.library.entity.Role;
-import com.epam.library.entity.User;
-import com.epam.library.service.UserService;
+import com.epam.library.command.impl.LogoutCommand;
 import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 

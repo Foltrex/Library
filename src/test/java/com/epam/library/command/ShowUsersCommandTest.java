@@ -3,7 +3,7 @@ package com.epam.library.command;
 import java.util.Arrays;
 import java.util.List;
 
-import com.epam.library.command.implementation.ShowUsersCommand;
+import com.epam.library.command.impl.ShowUsersCommand;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;

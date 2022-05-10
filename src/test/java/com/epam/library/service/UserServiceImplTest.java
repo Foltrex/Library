@@ -4,14 +4,10 @@ import com.epam.library.dao.*;
 import com.epam.library.entity.*;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.implementation.AuthorServiceImpl;
-import com.epam.library.service.implementation.BookRentalServiceImpl;
-import com.epam.library.service.implementation.UserServiceImpl;
+import com.epam.library.service.impl.UserServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;

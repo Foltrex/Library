@@ -4,8 +4,7 @@ import com.epam.library.dao.*;
 import com.epam.library.entity.*;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
-import com.epam.library.service.implementation.AuthorServiceImpl;
-import com.epam.library.service.implementation.BookRentalServiceImpl;
+import com.epam.library.service.impl.BookRentalServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
