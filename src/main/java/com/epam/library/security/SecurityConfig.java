@@ -51,21 +51,11 @@ public class SecurityConfig {
     }
 
     public static SecurityConfig getInstance() {
-        SecurityConfig localInstance = instance;
-        if (localInstance == null) {
-            LOCK.lock();
-            localInstance = instance;
-            try {
-                if (localInstance == null) {
-                    localInstance = new SecurityConfig();
-                    instance = localInstance;
-                }
-            } finally {
-                LOCK.unlock();
-            }
+        if (instance == null) {
+            instance = new SecurityConfig();
         }
 
-        return localInstance;
+        return instance;
     }
 
     public List<CommandName> getAllowedCommandsForRole(Role role) {

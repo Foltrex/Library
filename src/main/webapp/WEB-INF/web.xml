@@ -50,6 +50,11 @@
     <url-pattern>/controller</url-pattern>
   </servlet-mapping>
 
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
+
   <jsp-config>
     <taglib>
       <taglib-uri>customtags</taglib-uri>
