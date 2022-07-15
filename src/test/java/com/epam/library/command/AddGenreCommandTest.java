@@ -5,6 +5,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.GenreService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 public class AddGenreCommandTest {
 
-    private final List<Genre> genres = Arrays.asList(
+    private final List<Genre> genres = ImmutableList.of(
             new Genre(1L, "Russian Classic"),
             new Genre(2L, "Horror")
     );

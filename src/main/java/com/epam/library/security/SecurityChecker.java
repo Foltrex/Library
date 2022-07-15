@@ -11,6 +11,7 @@ import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/** Performs security function of the app */
 public class SecurityChecker {
 
     private final List<String> fileExtensions = Arrays.asList(".png", ".css", ".js", ".ico", ".svg");

@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/** Stores allowed pages for every role */
 public class SecurityConfig {
     private static SecurityConfig instance;
     private static final Lock LOCK = new ReentrantLock();

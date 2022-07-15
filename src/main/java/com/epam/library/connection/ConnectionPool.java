@@ -82,7 +82,7 @@ public class ConnectionPool {
             }
 
         } catch (InterruptedException e) {
-            LOGGER.error("Сonnection getting error", e);
+            LOGGER.error("Connection getting error", e);
         } finally {
             connectionsLock.unlock();
         }

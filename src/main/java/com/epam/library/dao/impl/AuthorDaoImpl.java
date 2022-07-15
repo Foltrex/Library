@@ -5,6 +5,7 @@ import com.epam.library.dao.AuthorDao;
 import com.epam.library.entity.Author;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.impl.AuthorRowMapper;
+import com.google.common.collect.ImmutableMap;
 
 import java.sql.Connection;
 import java.util.LinkedHashMap;
@@ -19,11 +20,10 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
 
     @Override
     protected Map<String, Object> extractFields(Author item) {
-        // ImmutableMap.of (...) is more beautiful :(
-        return new LinkedHashMap<>() {{
-            put(Author.NAME, item.getName());
-            put(Author.SURNAME, item.getSurname());
-        }};
+        return ImmutableMap.of(
+                Author.NAME, item.getName(),
+                Author.SURNAME, item.getSurname()
+        );
     }
 
     @Override

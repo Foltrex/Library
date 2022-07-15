@@ -5,6 +5,7 @@ import com.epam.library.entity.Author;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AuthorService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 public class AddAuthorCommandTest {
 
-    private final List<Author> authors = Arrays.asList(
+    private final List<Author> authors = ImmutableList.of(
             new Author(1L, "Alex", "Pushkin"),
             new Author(2L, "Nikolay", "Nosov")
     );

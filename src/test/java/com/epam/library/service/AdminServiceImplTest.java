@@ -9,6 +9,7 @@ import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.impl.AdminServiceImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +20,27 @@ import java.util.List;
 
 public class AdminServiceImplTest {
 
-    private final List<User> readers = Arrays.asList(
-            new User(1L, "Dmitriy", "Reznov", "+796002485317", "Vorkuta", "Nova6", Role.READER, false),
-            new User(2L, "David", "Mayson", "+15052347502", "agent", "CIA", Role.READER, false)
+    private final List<User> readers = ImmutableList.of(
+            User.builder()
+                    .id(1L)
+                    .name("Dmitriy")
+                    .surname("Reznov")
+                    .phoneNumber("+796002485317")
+                    .login("Vorkuta")
+                    .password("Nova6")
+                    .role(Role.READER)
+                    .isBanned(false)
+                    .build(),
+            User.builder()
+                    .id(2L)
+                    .name("David")
+                    .surname("Mayson")
+                    .phoneNumber("+15052347502")
+                    .login("agent")
+                    .password("CIA")
+                    .role(Role.READER)
+                    .isBanned(false)
+                    .build()
     );
 
 

@@ -13,6 +13,7 @@ import com.epam.library.service.BookRentalService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/** Forwards to book rental page, where you can update book rental  */
 public class ShowBookRentalDetailsCommand implements Command {
 
     private final BookRentalService bookRentalService;

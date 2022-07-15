@@ -6,6 +6,7 @@ import com.epam.library.extractor.parameter.name.AuthorRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** Extracts {@link com.epam.library.entity.Author} object from request */
 public class AuthorRequestExtractor extends AbstractRequestExtractor<Author> {
 
     @Override

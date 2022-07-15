@@ -6,6 +6,7 @@ import com.epam.library.extractor.parameter.name.GenreRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** Extract {@link com.epam.library.entity.Genre} object from request */
 public class GenreRentalRequestExtractor extends AbstractRequestExtractor<Genre> {
     @Override
     public Genre extract(HttpServletRequest request) {

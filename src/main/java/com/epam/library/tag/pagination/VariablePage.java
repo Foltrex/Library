@@ -3,30 +3,23 @@ package com.epam.library.tag.pagination;
 public class VariablePage {
     public static final String SPLIT = " ";
 
-    /**
-     *Show page number
-     */
-    private int showPageNum = 10;
-    /**
-     *Connection URL
-     */
-    private String url = null;
-    /**
-     *Current page number
-     */
-    private int pageNo = 1;
-    /**
-     *Total page number
-     */
+    /** Shows page number */
+    private int showPageNum;
+
+    /** Connection URL */
+    private String url;
+
+    /** Current page number */
+    private int pageNo;
+
+    /** Total page number */
     private int totalPage = 1;
-    /**
-     *Total number of articles
-     */
-    private int totalSum = 0;
-    /**
-     *Number of items per page
-     */
-    private int pageSize = 10;
+
+    /** Total number of articles */
+    private int totalSum;
+
+    /** Number of items per page */
+    private int pageSize;
 
     public VariablePage(int showPageNum, String url, int pageNo, int totalSum, int pageSize) {
         this.showPageNum = showPageNum;

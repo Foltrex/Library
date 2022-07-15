@@ -1,11 +1,18 @@
 package com.epam.library.entity;
 
+import lombok.Builder;
+import lombok.Value;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book extends Entity {
+@Value
+@Builder
+public class Book implements Identifable, Serializable {
 
     public static final String TABLE = "books";
 
+    public static final String ID = "id";
     public static final String TITLE = "title";
     public static final String AUTHOR_ID = "author_id";
     public static final String AUTHOR_NAME = "author_name";
@@ -14,13 +21,14 @@ public class Book extends Entity {
     public static final String GENRE_ID = "genre_id";
     public static final String GENRE_NAME = "genre_name";
 
-    private String title;
-    private Author author;
-    private int stock;
-    private Genre genre;
+    Long id;
+    String title;
+    Author author;
+    int stock;
+    Genre genre;
 
     public Book(Long id, String title, Author author, int stock, Genre genre) {
-        super(id);
+        this.id = id;
         this.title = title;
         this.author = author;
         this.stock = stock;
@@ -33,71 +41,5 @@ public class Book extends Entity {
 
     public static Book createBookWithIDAndTitle(Long id, String title) {
         return new Book(id, title, null, 0, null);
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Book)) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        Book book = (Book) o;
-        return stock == book.stock &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(genre, book.genre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), title, author, stock, genre);
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author=" + author +
-                ", stock=" + stock +
-                ", genre=" + genre +
-                '}';
     }
 }

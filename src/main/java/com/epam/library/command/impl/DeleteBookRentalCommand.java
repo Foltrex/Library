@@ -15,8 +15,7 @@ import com.epam.library.service.BookRentalService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-// TODO: write confiramtion form
-
+/** Delete book rental from DB */
 public class DeleteBookRentalCommand implements Command {
 
     private final BookRentalService bookRentalService;
@@ -35,7 +34,11 @@ public class DeleteBookRentalCommand implements Command {
         String rentalStatusString =  req.getParameter(BookRentalRequestParameterName.RENTAL_STATUS.getName());
         RentalStatus status = RentalStatus.valueOfStatus(rentalStatusString);
 
-        BookRental bookRental = new BookRental(bookRentalId, null, book, null, null, status);
+        BookRental bookRental = BookRental.builder()
+                .id(bookRentalId)
+                .rentedBook(book)
+                .rentalStatus(status)
+                .build();
 
         bookRentalService.deleteBookRental(bookRental);
         List<BookRental> bookRentals = bookRentalService.getBookRentals();

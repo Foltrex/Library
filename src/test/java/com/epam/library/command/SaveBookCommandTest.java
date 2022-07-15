@@ -8,6 +8,7 @@ import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
 import com.epam.library.validator.impl.InputStockValidatorImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -18,9 +19,21 @@ import java.util.List;
 
 public class SaveBookCommandTest {
 
-    private final List<Book> books = Arrays.asList(
-            new Book(1L, "A", Author.createAuthorWithOnlyIDField(1L), 3, Genre.createGenreWithOnlyIDField(2L)),
-            new Book(2L, "Book Name", Author.createAuthorWithOnlyIDField(1L), 3, Genre.createGenreWithOnlyIDField(2L))
+    private final List<Book> books = ImmutableList.of(
+            Book.builder()
+                    .id(1L)
+                    .title("A")
+                    .author(Author.builder().id(1L).build())
+                    .stock(3)
+                    .genre(Genre.builder().id(2L).build())
+                    .build(),
+            Book.builder()
+                    .id(2L)
+                    .title("Book Name")
+                    .author(Author.builder().id(1L).build())
+                    .stock(3)
+                    .genre(Genre.builder().id(2L).build())
+                    .build()
     );
 
     @Test

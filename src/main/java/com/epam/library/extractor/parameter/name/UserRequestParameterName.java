@@ -1,5 +1,6 @@
 package com.epam.library.extractor.parameter.name;
 
+/** Request parameters associated with the {@link com.epam.library.entity.User} */
 public enum UserRequestParameterName {
     ID("userId"),
     NAME("userName"),

@@ -16,8 +16,27 @@ import java.util.Optional;
 
 public class LoginCommandTest {
 
-    private final User registeredUser = new User(1L, "Ali", "Baba", "1234", "admin", "admin", Role.LIBRARIAN, false);
-    private final User bannedUser = new User(2L, "Muhamed", "Ali", "3294", "reader", "reader", Role.READER, true);
+    private final User registeredUser = User.builder()
+            .id(1L)
+            .name("Ali")
+            .surname("Baba")
+            .phoneNumber("1234")
+            .login("admin")
+            .password("admin")
+            .role(Role.LIBRARIAN)
+            .isBanned(false)
+            .build();
+
+    private final User bannedUser = User.builder()
+            .id(2L)
+            .name("Muhamed")
+            .surname("Ali")
+            .phoneNumber("3294")
+            .login("reader")
+            .password("reader")
+            .role(Role.READER)
+            .isBanned(true)
+            .build();
 
     @Test
     public void testExecuteShouldLoginUserWhenLoginAndPasswordIsCorrect() throws ServiceException, PageCommandException {

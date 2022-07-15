@@ -12,6 +12,7 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Shows paginated books */
 public class ShowBooksCommand implements Command {
 
     private final BookService bookService;

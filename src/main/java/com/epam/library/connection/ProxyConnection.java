@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/** Proxy class that delegates all work to the Connection object, except for the close method that returns
+ *  the connection to the {@link com.epam.library.connection.ConnectionPool} class
+ */
 public class ProxyConnection implements Connection {
 
     private final Connection connection;

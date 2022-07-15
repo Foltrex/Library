@@ -7,6 +7,9 @@ import com.epam.library.exception.DaoException;
 
 import java.sql.SQLException;
 
+/** Helps to perform transaction, creates dao object and returns connection to
+ * {@link com.epam.library.connection.ConnectionPool}
+ */
 public class DaoHelper implements AutoCloseable {
 
     private final ProxyConnection connection;

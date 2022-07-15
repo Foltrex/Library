@@ -7,6 +7,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.impl.BookServiceImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +20,21 @@ import static org.mockito.Mockito.times;
 
 public class BookServiceImplTest {
 
-    private final List<Book> books = Arrays.asList(
-            new Book(1L, "Effective Programming", Author.createAuthorWithOnlyIDField(2L), 2, Genre.createGenreWithOnlyIDField(2L)),
-            new Book(2L, "Java Puzzlers" , Author.createAuthorWithOnlyIDField(2L), 1, Genre.createGenreWithOnlyIDField(2L))
+    private final List<Book> books = ImmutableList.of(
+            Book.builder()
+                    .id(1L)
+                    .title("Effective Programming")
+                    .author(Author.builder().id(2L).build())
+                    .stock(2)
+                    .genre(Genre.builder().id(2L).build())
+                    .build(),
+            Book.builder()
+                    .id(2L)
+                    .title("Java Puzzlers")
+                    .author(Author.builder().id(2L).build())
+                    .stock(1)
+                    .genre(Genre.builder().id(2L).build())
+                    .build()
     );
 
     @Test
@@ -60,8 +73,13 @@ public class BookServiceImplTest {
         DaoHelper helper = mock(DaoHelper.class);
         SearchBookDao dao = mock(SearchBookDao.class);
         Optional<Book> book = Optional.of(
-                new Book(1L, "Parallel Programming in C++", Author.createAuthorWithOnlyIDField(1L),
-                        1, Genre.createGenreWithOnlyIDField(1L))
+                Book.builder()
+                        .id(1L)
+                        .title("Parallel Programming in C++")
+                        .author(Author.builder().id(1L).build())
+                        .stock(1)
+                        .genre(Genre.builder().id(1L).build())
+                        .build()
         );
 
 
@@ -93,7 +111,13 @@ public class BookServiceImplTest {
         DaoHelperFactory daoHelperFactory = mock(DaoHelperFactory.class);
         DaoHelper helper = mock(DaoHelper.class);
         BookDao dao = mock(BookDao.class);
-        Book book =  new Book(1L, "Parallel Programming in C++", Author.createAuthorWithOnlyIDField(1L), 1, Genre.createGenreWithOnlyIDField(1L));
+        Book book =  Book.builder()
+                .id(1L)
+                .title("Parallel Programming in C++")
+                .author(Author.builder().id(1L).build())
+                .stock(1)
+                .genre(Genre.builder().id(1L).build())
+                .build();
 
 
         when(daoHelperFactory.create()).thenReturn(helper);

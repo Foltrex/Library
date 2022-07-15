@@ -5,6 +5,7 @@ import com.epam.library.entity.Author;
 import com.epam.library.entity.Genre;
 import com.epam.library.service.AuthorService;
 import com.epam.library.service.GenreService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -19,12 +20,12 @@ import static org.mockito.Mockito.*;
 
 public class AddBookCommandTest {
 
-    private final List<Author> authors = Arrays.asList(
+    private final List<Author> authors = ImmutableList.of(
             new Author(1L, "Alex", "Pushkin"),
             new Author(2L, "Nikolay", "Nosov")
     );
 
-    private final List<Genre> genres = Arrays.asList(
+    private final List<Genre> genres = ImmutableList.of(
             new Genre(1L, "Russian Classic"),
             new Genre(2L, "Horror")
     );

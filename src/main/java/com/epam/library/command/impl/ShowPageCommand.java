@@ -7,6 +7,7 @@ import com.epam.library.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** Redirect to static page without data from DB */
 public class ShowPageCommand implements Command {
 
     private final String page;

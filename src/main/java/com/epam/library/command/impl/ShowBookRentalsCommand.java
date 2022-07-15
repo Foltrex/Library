@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/** Shows all book rentals */
 public class ShowBookRentalsCommand implements Command {
 
     private final BookRentalService bookRentalService;
 
-
-    // TODO: create pagination
     public ShowBookRentalsCommand(BookRentalService bookRentalService) {
         this.bookRentalService = bookRentalService;
     }

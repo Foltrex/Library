@@ -19,7 +19,14 @@ import java.util.Optional;
 public class ShowBookRentalDetailsCommandTest {
 
     private final Optional<BookRental> optionalBookRental = Optional.of(
-            new BookRental(1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.WAITING_FOR_ISSUANCE)
+            BookRental.builder()
+                    .id(1L)
+                    .user(User.builder().id(1L).build())
+                    .rentedBook(Book.builder().id(1L).build())
+                    .borrowDate(new Date())
+                    .returnDate(new Date())
+                    .rentalStatus(RentalStatus.WAITING_FOR_ISSUANCE)
+                    .build()
     );
 
     @Test

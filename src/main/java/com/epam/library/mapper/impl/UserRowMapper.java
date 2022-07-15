@@ -7,6 +7,7 @@ import com.epam.library.mapper.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Maps result set to {@link com.epam.library.entity.User} */
 public class UserRowMapper implements RowMapper<User> {
     @Override
     public User map(ResultSet resultSet) throws SQLException {
@@ -22,6 +23,15 @@ public class UserRowMapper implements RowMapper<User> {
 
         boolean isBanned = resultSet.getBoolean(User.IS_BANNED);
 
-        return new User(id, name, surname, phoneNumber, login, password, role, isBanned);
+        return User.builder()
+                .id(id)
+                .name(name)
+                .surname(surname)
+                .phoneNumber(phoneNumber)
+                .login(login)
+                .password(password)
+                .role(role)
+                .isBanned(isBanned)
+                .build();
     }
 }

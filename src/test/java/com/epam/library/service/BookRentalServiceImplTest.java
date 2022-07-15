@@ -5,6 +5,7 @@ import com.epam.library.entity.*;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.impl.BookRentalServiceImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,9 +19,24 @@ import static org.mockito.Mockito.times;
 
 public class BookRentalServiceImplTest {
 
-    private final List<BookRental> bookRentals = Arrays.asList(
-            new BookRental(1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.RETURNED),
-            new BookRental(2L, User.createUserWithOnlyId(2L), Book.createBookWithOnlyId(2L), new Date(), new Date(), RentalStatus.RETURNED)
+    private final List<BookRental> bookRentals = ImmutableList.of(
+            BookRental.builder()
+                    .id(1L)
+                    .user(User.builder().id(1L).build())
+                    .rentedBook(Book.builder().id(1L).build())
+                    .borrowDate(new Date())
+                    .returnDate(new Date())
+                    .rentalStatus(RentalStatus.RETURNED)
+                    .build(),
+
+            BookRental.builder()
+                    .id(2L)
+                    .user(User.builder().id(2L).build())
+                    .rentedBook(Book.builder().id(2L).build())
+                    .borrowDate(new Date())
+                    .returnDate(new Date())
+                    .rentalStatus(RentalStatus.RETURNED)
+                    .build()
     );
 
 
@@ -59,9 +75,15 @@ public class BookRentalServiceImplTest {
         DaoHelperFactory daoHelperFactory = mock(DaoHelperFactory.class);
         DaoHelper helper = mock(DaoHelper.class);
         BookRentalDao dao = mock(BookRentalDao.class);
-        BookRental bookRental = new BookRental(
-                1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.RETURNED
-        );
+        BookRental bookRental = BookRental.builder()
+                .id(1L)
+                .user(User.builder().id(1L).build())
+                .rentedBook(Book.builder().id(1L).build())
+                .borrowDate(new Date())
+                .returnDate(new Date())
+                .rentalStatus(RentalStatus.RETURNED)
+                .build();
+
         Optional<BookRental> optionalBookRental = Optional.of(bookRental);
 
         when(daoHelperFactory.create()).thenReturn(helper);
@@ -93,9 +115,15 @@ public class BookRentalServiceImplTest {
         DaoHelper helper = mock(DaoHelper.class);
         BookRentalDao bookRentalDao = mock(BookRentalDao.class);
         BookDao bookDao = mock(BookDao.class);
-        BookRental bookRental = new BookRental(
-                1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.RETURNED
-        );
+        BookRental bookRental = BookRental.builder()
+                .id(1L)
+                .user(User.builder().id(1L).build())
+                .rentedBook(Book.builder().id(1L).build())
+                .borrowDate(new Date())
+                .returnDate(new Date())
+                .rentalStatus(RentalStatus.RETURNED)
+                .build();
+
 
         when(daoHelperFactory.create()).thenReturn(helper);
         doNothing().when(helper).startTransaction();
@@ -128,9 +156,15 @@ public class BookRentalServiceImplTest {
         DaoHelper helper = mock(DaoHelper.class);
         BookRentalDao bookRentalDao = mock(BookRentalDao.class);
         BookDao bookDao = mock(BookDao.class);
-        BookRental bookRental = new BookRental(
-                1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.ISSUED_FOR_SUBSCRIPTION
-        );
+        BookRental bookRental = BookRental.builder()
+                .id(1L)
+                .user(User.builder().id(1L).build())
+                .rentedBook(Book.builder().id(1L).build())
+                .borrowDate(new Date())
+                .returnDate(new Date())
+                .rentalStatus(RentalStatus.ISSUED_FOR_SUBSCRIPTION)
+                .build();
+
 
         when(daoHelperFactory.create()).thenReturn(helper);
         doNothing().when(helper).startTransaction();
@@ -163,9 +197,15 @@ public class BookRentalServiceImplTest {
         DaoHelper helper = mock(DaoHelper.class);
         BookRentalDao bookRentalDao = mock(BookRentalDao.class);
         BookDao bookDao = mock(BookDao.class);
-        BookRental bookRental = new BookRental(
-                1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.ISSUED_FOR_SUBSCRIPTION
-        );
+        BookRental bookRental = BookRental.builder()
+                .id(1L)
+                .user(User.builder().id(1L).build())
+                .rentedBook(Book.builder().id(1L).build())
+                .borrowDate(new Date())
+                .returnDate(new Date())
+                .rentalStatus(RentalStatus.ISSUED_FOR_SUBSCRIPTION)
+                .build();
+
 
         when(daoHelperFactory.create()).thenReturn(helper);
         doNothing().when(helper).startTransaction();
@@ -198,9 +238,14 @@ public class BookRentalServiceImplTest {
         DaoHelper helper = mock(DaoHelper.class);
         BookRentalDao bookRentalDao = mock(BookRentalDao.class);
         BookDao bookDao = mock(BookDao.class);
-        BookRental bookRental = new BookRental(
-                1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), new Date(), new Date(), RentalStatus.RETURNED
-        );
+        BookRental bookRental = BookRental.builder()
+                .id(1L)
+                .user(User.builder().id(1L).build())
+                .rentedBook(Book.builder().id(1L).build())
+                .borrowDate(new Date())
+                .returnDate(new Date())
+                .rentalStatus(RentalStatus.RETURNED)
+                .build();
 
         when(daoHelperFactory.create()).thenReturn(helper);
         doNothing().when(helper).startTransaction();

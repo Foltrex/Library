@@ -13,6 +13,8 @@ import com.epam.library.service.GenreService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+
+/** Saves new genre in DB */
 public class AddGenreCommand implements Command {
 
     private final RequestExtractor<Genre> requestExtractor = new GenreRentalRequestExtractor();

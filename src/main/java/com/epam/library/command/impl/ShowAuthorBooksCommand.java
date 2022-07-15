@@ -15,6 +15,7 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Shows all books for this author */
 public class ShowAuthorBooksCommand implements Command {
 
     private final RequestExtractor<Author> requestExtractor = new AuthorRequestExtractor();

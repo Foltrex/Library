@@ -7,6 +7,7 @@ import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.impl.UserRowMapper;
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
@@ -52,15 +53,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, UserRoleD
 
     @Override
     protected Map<String, Object> extractFields(User item) {
-        // ImmutableMap.of (...) is more beautiful :(
-        return new LinkedHashMap<>() {{
-           put(User.NAME, item.getName());
-           put(User.SURNAME, item.getSurname());
-           put(User.PHONE_NUMBER, item.getPhoneNumber());
-           put(User.LOGIN, item.getLogin());
-           put(User.PASSWORD, DigestUtils.md5Hex(item.getPassword()));
-           put(User.ROLE, item.getRole().getRoleName());
-           put(User.IS_BANNED, item.isBanned());
-        }};
+        return ImmutableMap.of(
+                User.NAME, item.getName(),
+                User.SURNAME, item.getSurname(),
+                User.PHONE_NUMBER, item.getPhoneNumber(),
+                User.LOGIN, item.getLogin(),
+                User.PASSWORD, DigestUtils.md5Hex(item.getPassword()),
+                User.ROLE, item.getRole().getRoleName(),
+                User.IS_BANNED, item.isBanned()
+        );
     }
 }

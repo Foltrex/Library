@@ -1,5 +1,6 @@
 package com.epam.library.tag.pagination;
 
+/**  Class for pagination tag */
 public abstract class Page {
     protected VariablePage variablePage;
 
@@ -28,9 +29,7 @@ public abstract class Page {
         }
     }
 
-    /**
-     *Calculate total pages
-     */
+    /** Calculates total pages */
     private void calculateTotalPage() {
         if (variablePage.getTotalSum() % variablePage.getPageSize() == 0) {
             variablePage.setTotalPage(variablePage.getTotalSum() / variablePage.getPageSize());
@@ -58,16 +57,10 @@ public abstract class Page {
         return sBuilder.toString();
     }
 
-    /**
-     *Abstract pagination method
-     *
-     */
+    /** Pagination method */
     public abstract String pagination();
 
-    /**
-     *Print from the first page
-     *
-     */
+    /** Prints from the first page */
     protected final String fromFirstPagePrint() {
         StringBuilder buffer = new StringBuilder(100);
         for (int i = 1; i <= variablePage.getShowPageNum(); i++) {
@@ -80,10 +73,7 @@ public abstract class Page {
         return buffer.toString();
     }
 
-    /**
-     *Start printing from the last page
-     *
-     */
+    /** Starts printing from the last page */
     protected final String fromLastPagePrint() {
         StringBuilder buffer = new StringBuilder(100);
         int startPage = variablePage.getTotalPage() - (variablePage.getShowPageNum() - 1);
@@ -105,10 +95,7 @@ public abstract class Page {
         }
     }
 
-    /**
-     *Determine whether there is paging
-     *
-     */
+    /** Determines whether there is paging */
     private boolean isExistsPagination() {
         return variablePage.getTotalSum() > 1 && variablePage.getTotalPage() > 1;
     }

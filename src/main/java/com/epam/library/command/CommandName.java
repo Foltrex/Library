@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+/** All existing command in app, which passes to request */
 public enum CommandName {
     LOGIN("login"),
     LOGOUT("logout"),

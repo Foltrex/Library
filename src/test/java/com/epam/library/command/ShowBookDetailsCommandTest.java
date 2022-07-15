@@ -9,6 +9,7 @@ import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AuthorService;
 import com.epam.library.service.BookService;
 import com.epam.library.service.GenreService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -20,17 +21,23 @@ import java.util.Optional;
 
 public class ShowBookDetailsCommandTest {
 
-    private List<Author> authors = Arrays.asList(
+    private final List<Author> authors = ImmutableList.of(
             new Author(1L, "Alex", "Pushkin"),
             new Author(2L, "Leo", "Tolstoy")
     );
 
-    private final List<Genre> genres = Arrays.asList(
+    private final List<Genre> genres = ImmutableList.of(
             new Genre(1L, "Russian Classic")
     );
 
     private final Optional<Book> optionalBook = Optional.of(
-            new Book(1L, "War and Peace", new Author(2L, "Leo", "Tolstoy"), 2, new Genre(1L, "Russian Classic"))
+            Book.builder()
+                    .id(1L)
+                    .title("War and Peace")
+                    .author(new Author(2L, "Leo", "Tolstoy"))
+                    .stock(2)
+                    .genre(new Genre(1L, "Russian Classic"))
+                    .build()
     );
 
     @Test

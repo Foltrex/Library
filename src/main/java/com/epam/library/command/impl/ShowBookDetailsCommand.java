@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/** Forwards to book details page, where you can update book) */
 public class ShowBookDetailsCommand implements Command {
 
     private final BookService bookService;

@@ -11,9 +11,9 @@ import com.epam.library.service.AuthorService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Shows all existing authors in DB */
 public class ShowAuthorsCommand implements Command {
 
-    // TODO: make pagination
     private final AuthorService authorService;
 
     public ShowAuthorsCommand(AuthorService authorService) {

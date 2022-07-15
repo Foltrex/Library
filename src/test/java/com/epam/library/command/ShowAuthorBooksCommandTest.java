@@ -7,6 +7,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,21 @@ import java.util.List;
 
 public class ShowAuthorBooksCommandTest {
 
-    private final List<Book> authorBooks = Arrays.asList(
-            new Book(1L, "War and Piece", Author.createAuthorWithOnlyIDField(1L), 2, Genre.createGenreWithOnlyIDField(1L)),
-            new Book(2L, "Anna Karenina", Author.createAuthorWithOnlyIDField(1L),  3, Genre.createGenreWithOnlyIDField(1L))
+    private final List<Book> authorBooks = ImmutableList.of(
+            Book.builder()
+                    .id(1L)
+                    .title("War and Piece")
+                    .author(Author.builder().id(1L).build())
+                    .stock(2)
+                    .genre(Genre.builder().id(1L).build())
+                    .build(),
+            Book.builder()
+                    .id(2L)
+                    .title("Anna Karenina")
+                    .author(Author.builder().id(1L).build())
+                    .stock(3)
+                    .genre(Genre.builder().id(1L).build())
+                    .build()
     );
 
     @Test

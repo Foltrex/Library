@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Maps result set to {@link com.epam.library.entity.BookRental} */
 public class BookRentalRowMapper implements RowMapper<BookRental> {
     @Override
     public BookRental map(ResultSet resultSet) throws SQLException {
@@ -17,11 +18,17 @@ public class BookRentalRowMapper implements RowMapper<BookRental> {
 
         Long userId = resultSet.getLong(BookRental.USER_ID);
         String userLogin = resultSet.getString(BookRental.USER_LOGIN);
-        User userWithIdAndLogin = User.createUserWithIDAndLogin(userId, userLogin);
+        User userWithIdAndLogin = User.builder()
+                .id(userId)
+                .login(userLogin)
+                .build();
 
         Long bookId = resultSet.getLong(BookRental.BOOK_ID);
         String bookTitle = resultSet.getString(BookRental.BOOK_TITLE);
-        Book bookWithIdAndTitle = Book.createBookWithIDAndTitle(bookId, bookTitle);
+        Book bookWithIdAndTitle = Book.builder()
+                .id(bookId)
+                .title(bookTitle)
+                .build();
 
         Date borrowDate = resultSet.getDate(BookRental.BORROW_DATE);
         Date returnDate = resultSet.getDate(BookRental.RETURN_DATE);
@@ -29,6 +36,13 @@ public class BookRentalRowMapper implements RowMapper<BookRental> {
         String statusString = resultSet.getString(BookRental.STATUS);
         RentalStatus status = RentalStatus.valueOfStatus(statusString);
 
-        return new BookRental(id, userWithIdAndLogin, bookWithIdAndTitle, borrowDate, returnDate, status);
+        return BookRental.builder()
+                .id(id)
+                .user(userWithIdAndLogin)
+                .rentedBook(bookWithIdAndTitle)
+                .borrowDate(borrowDate)
+                .returnDate(returnDate)
+                .rentalStatus(status)
+                .build();
     }
 }

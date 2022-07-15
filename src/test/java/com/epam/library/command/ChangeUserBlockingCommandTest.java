@@ -6,6 +6,7 @@ import com.epam.library.entity.User;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.AdminService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -18,9 +19,28 @@ import static org.mockito.Mockito.when;
 
 public class ChangeUserBlockingCommandTest {
 
-    private final List<User> readers = Arrays.asList(
-            new User(1L, "Hel", "Lo", "7788", "1111", "1111", Role.READER, false),
-            new User(2L, "Goog", "Bye", "8877", "2222", "2222", Role.READER, false)
+    private final List<User> readers = ImmutableList.of(
+            User.builder()
+                    .id(1L)
+                    .name("Hel")
+                    .surname("Lo")
+                    .phoneNumber("7788")
+                    .login("1111")
+                    .password("1111")
+                    .role(Role.READER)
+                    .isBanned(false)
+                    .build(),
+
+            User.builder()
+                    .id(2L)
+                    .name("Goog")
+                    .surname("Bye")
+                    .phoneNumber("8877")
+                    .login("2222")
+                    .password("2222")
+                    .role(Role.READER)
+                    .isBanned(false)
+                    .build()
     );
 
 

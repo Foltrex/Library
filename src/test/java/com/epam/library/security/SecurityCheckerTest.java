@@ -102,29 +102,4 @@ public class SecurityCheckerTest {
 
         Assert.assertTrue(isUserHasPermissionToContent);
     }
-
-    /*
-    @Test
-    public void testIsUserHasPermissionToContentShouldReturnTrueWhenUserHasRights() {
-        // given
-        Role role = Role.LIBRARIAN;
-        List<CommandName>  allowedCommandForUser = Arrays.asList(CommandName.LOGIN, CommandName.SHOW_BOOKS);
-        SecurityConfig config = SecurityConfig.getInstance();
-
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        PowerMockito.spy(SecurityConfig.class);
-
-        when(request.getRequestURI()).thenReturn("some_context/unknown");
-        when(request.getParameter("command")).thenReturn(CommandName.SHOW_BOOKS.getCommandName());
-        //PowerMockito.when(SecurityConfig.getInstance()).thenReturn(config);
-        when(config.getAllowedCommandsForRole(any(Role.class))).thenReturn(allowedCommandForUser);
-        when(allowedCommandForUser.contains(any())).thenReturn(true);
-
-        // when
-        boolean isUserHasPermissionToContent = checker.isUserHasPermissionToContent(request, role);
-
-        // then
-        Assert.assertTrue(isUserHasPermissionToContent);
-    }
-    */
 }

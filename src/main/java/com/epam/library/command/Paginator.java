@@ -8,6 +8,7 @@ import com.epam.library.service.EntityService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/** Perform pagination */
 public class Paginator {
 
     public static final String TOTAL_SUM = "totalSum";
@@ -22,6 +23,7 @@ public class Paginator {
         this.recordsPerPage = recordsPerPage;
     }
 
+    /** Sets pageNo, pageSize and total amount of records for request */
     public void setPaginationParameters(HttpServletRequest req) throws ServiceException {
         int pageNo = findPageNo(req);
         int totalSum = service.calculateNumberOfRows();
@@ -31,6 +33,7 @@ public class Paginator {
         req.setAttribute(PAGE_NO, pageNo);
     }
 
+    /** Extract page number parameter from request or set default value for this parameter */
     public int findPageNo(HttpServletRequest req) {
         int currentPage;
         if (req.getParameter(PAGE_NO) != null) {
@@ -42,6 +45,11 @@ public class Paginator {
         return currentPage;
     }
 
+    /**
+     * Returns records per page
+     *
+     * @return current page size
+     * */
     public int getRecordsPerPage() {
         return recordsPerPage;
     }

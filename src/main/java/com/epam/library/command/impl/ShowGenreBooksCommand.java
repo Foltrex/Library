@@ -15,6 +15,7 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Shows all books with certain genre */
 public class ShowGenreBooksCommand implements Command {
 
     private final RequestExtractor<Genre> requestExtractor = new GenreRentalRequestExtractor();

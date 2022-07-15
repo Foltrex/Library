@@ -3,6 +3,7 @@ package com.epam.library.command;
 import java.util.HashMap;
 import java.util.Map;
 
+/** All existing pages in app */
 public enum Page {
     LOGIN("index"),
     BOOK_DETAILS("bookDetails"),

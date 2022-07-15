@@ -20,11 +20,14 @@ public class HtmlPage extends Page {
     }
 
     private String displayCompositeContent(VariablePage variablePage) {
-        if (variablePage.getPageNo() == 1) { // the current page is equal to the first page
+        if (variablePage.getPageNo() == 1) {
+            // the current page is equal to the first page
             return fromFirstPagePrint();
-        } else if (variablePage.getPageNo() == variablePage.getTotalPage()) { // the current page is equal to the last page
+        } else if (variablePage.getPageNo() == variablePage.getTotalPage()) {
+            // the current page is equal to the last page
             return fromLastPagePrint();
-        } else { // if the current page is not the first page or the last page
+        } else {
+            // if the current page is not the first page or the last page
             return displayCentralPages(variablePage);
         }
     }

@@ -7,6 +7,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,14 @@ import java.util.List;
 
 public class SearchBookCommandTest {
 
-    private final List<Book> books = Arrays.asList(
-            new Book(1L, "Witcher", Author.createAuthorWithOnlyIDField(2L), 2, Genre.createGenreWithOnlyIDField(1L))
+    private final List<Book> books = ImmutableList.of(
+            Book.builder()
+                    .id(1L)
+                    .title("Witcher")
+                    .author(Author.builder().id(2L).build())
+                    .stock(2)
+                    .genre(Genre.builder().id(1L).build())
+                    .build()
     );
 
     @Test

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/** Register new user in DB */
 public class SaveUserCommand implements Command {
     private static final String MAIN_PAGE_COMMAND = CommandName.SHOW_BOOKS.getServletCommand("controller");
 
@@ -33,7 +34,7 @@ public class SaveUserCommand implements Command {
         userService.signUp(user);
 
         Optional<User> optionalUser = userService.login(user.getLogin(), user.getPassword());
-        User registeredUser = optionalUser.get();
+        User registeredUser = optionalUser.orElseThrow(ServiceException::new);
 
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute(UserRequestParameterName.ID.getName(), registeredUser.getId());

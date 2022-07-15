@@ -7,6 +7,7 @@ import com.epam.library.extractor.parameter.name.UserRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** Extract {@link com.epam.library.entity.User} object from request */
 public class UserRentalRequestExtractor extends AbstractRequestExtractor<User> {
     @Override
     public User extract(HttpServletRequest request) {
@@ -24,6 +25,15 @@ public class UserRentalRequestExtractor extends AbstractRequestExtractor<User> {
         String userIsBannedString = request.getParameter(UserRequestParameterName.IS_BANNED.getName());
         boolean userIsBanned = Boolean.parseBoolean(userIsBannedString);
 
-        return new User(userId, userName, userSurname, userPhoneNumber, userLogin, userPassword, userRole, userIsBanned);
+        return User.builder()
+                .id(userId)
+                .name(userName)
+                .surname(userSurname)
+                .phoneNumber(userPhoneNumber)
+                .login(userLogin)
+                .password(userPassword)
+                .role(userRole)
+                .isBanned(userIsBanned)
+                .build();
     }
 }

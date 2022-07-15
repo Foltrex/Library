@@ -5,6 +5,7 @@ import com.epam.library.entity.Genre;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.impl.GenreServiceImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.times;
 
 public class GenreServiceImplTest {
 
-    private final List<Genre> genres = Arrays.asList(
+    private final List<Genre> genres = ImmutableList.of(
             new Genre(1L, "Web Design"),
             new Genre(2L, "Russian Classic")
     );

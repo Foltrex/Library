@@ -14,6 +14,7 @@ import com.epam.library.validator.InputDateValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Saves new/existing book rental in DB */
 public class SaveBookRentalCommand implements Command {
 
     private final RequestExtractor<BookRental> requestExtractor = new BookRentalRequestExtractor();

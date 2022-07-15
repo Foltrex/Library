@@ -5,6 +5,7 @@ import com.epam.library.entity.*;
 import com.epam.library.exception.PageCommandException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookRentalService;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -14,9 +15,20 @@ import java.util.List;
 
 public class BorrowBookCommandTest {
 
-    private final List<BookRental> rentals = Arrays.asList(
-            new BookRental(1L, User.createUserWithOnlyId(1L), Book.createBookWithOnlyId(1L), null, null, RentalStatus.RETURNED),
-            new BookRental(2L, User.createUserWithOnlyId(2L), Book.createBookWithOnlyId(2L), null, null, RentalStatus.ISSUED_FOR_SUBSCRIPTION)
+    private final List<BookRental> rentals = ImmutableList.of(
+            BookRental.builder()
+                    .id(1L)
+                    .user(User.builder().id(1L).build())
+                    .rentedBook(Book.builder().id(1L).build())
+                    .rentalStatus(RentalStatus.RETURNED)
+                    .build(),
+
+            BookRental.builder()
+                    .id(2L)
+                    .user(User.builder().id(2L).build())
+                    .rentedBook(Book.builder().id(2L).build())
+                    .rentalStatus(RentalStatus.ISSUED_FOR_SUBSCRIPTION)
+                    .build()
     );
 
 

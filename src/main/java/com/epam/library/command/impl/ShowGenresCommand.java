@@ -12,9 +12,9 @@ import com.epam.library.service.GenreService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Shows all genres */
 public class ShowGenresCommand implements Command {
 
-    // TODO: make pagination
     private final GenreService genreService;
 
     private final Paginator paginator;

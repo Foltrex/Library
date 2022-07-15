@@ -21,9 +21,17 @@ public class UserServiceImplTest {
         DaoHelperFactory daoHelperFactory = mock(DaoHelperFactory.class);
         DaoHelper helper = mock(DaoHelper.class);
         UserDao dao = mock(UserDao.class);
-        User user = new User(
-                1L, "Anna", "DeWitt", "+15556352794", "buker", "nightingale", Role.LIBRARIAN, false
-        );
+        User user = User.builder()
+                .id(1L)
+                .name("Anna")
+                .surname("DeWitt")
+                .phoneNumber("+15556352794")
+                .login("buker")
+                .password("nightingale")
+                .role(Role.LIBRARIAN)
+                .isBanned(false)
+                .build();
+
         Optional<User> optionalUser = Optional.of(user);
 
         when(daoHelperFactory.create()).thenReturn(helper);

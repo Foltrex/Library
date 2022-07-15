@@ -13,6 +13,7 @@ import com.epam.library.service.BookService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Searches book with certain title */
 public class SearchBookCommand implements Command {
 
     private final BookService bookService;

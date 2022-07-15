@@ -3,6 +3,7 @@ package com.epam.library.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
+/** Sets utf encoding */
 public class EncodingFilter implements Filter {
 
     private String encoding = "utf-8";

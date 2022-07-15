@@ -7,6 +7,7 @@ import com.epam.library.command.Page;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/** Logout user */
 public class LogoutCommand implements Command {
 
     @Override

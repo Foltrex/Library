@@ -6,6 +6,7 @@ import com.epam.library.mapper.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Maps result set to {@link com.epam.library.entity.Genre} */
 public class GenreRowMapper implements RowMapper<Genre> {
     @Override
     public Genre map(ResultSet resultSet) throws SQLException {

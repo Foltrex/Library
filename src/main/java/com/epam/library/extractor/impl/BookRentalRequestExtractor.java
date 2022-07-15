@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** Extracts {@link com.epam.library.entity.BookRental} rental object from request */
 public class BookRentalRequestExtractor extends AbstractRequestExtractor<BookRental> {
     private static final Logger LOGGER = LogManager.getLogger(BookRentalRequestExtractor.class);
 
@@ -20,36 +21,8 @@ public class BookRentalRequestExtractor extends AbstractRequestExtractor<BookRen
     public BookRental extract(HttpServletRequest request) {
         String bookRentalIdString = request.getParameter(BookRentalRequestParameterName.ID.getName());
         Long bookRentalId = super.isParsable(bookRentalIdString) ? Long.valueOf(bookRentalIdString) : null;
-
-        String bookRentalUserIdString = request.getParameter(UserRequestParameterName.ID.getName());
-        Long bookRentalUserId = super.isParsable(bookRentalUserIdString) ? Long.valueOf(bookRentalUserIdString) : null;
-        String bookRentalUserName = request.getParameter(UserRequestParameterName.NAME.getName());
-        String bookRentalUserSurname = request.getParameter(UserRequestParameterName.SURNAME.getName());
-        String bookRentalUserPhoneNumber = request.getParameter(UserRequestParameterName.PHONE_NUMBER.getName());
-        String bookRentalUserLogin = request.getParameter(UserRequestParameterName.LOGIN.getName());
-
-        String bookRentalUserRoleString = request.getParameter(UserRequestParameterName.ROLE.getName());
-        Role bookRentalUserRole = Role.valueOfRoleName(bookRentalUserRoleString);
-
-        String bookRentalUserIsBannedString = request.getParameter(UserRequestParameterName.IS_BANNED.getName());
-        boolean bookRentalUserIsBanned = Boolean.parseBoolean(bookRentalUserIsBannedString);
-
-        User bookRentalUser = new User(bookRentalUserId, bookRentalUserName, bookRentalUserSurname, bookRentalUserPhoneNumber,
-                bookRentalUserLogin, null, bookRentalUserRole, bookRentalUserIsBanned);
-
-        String bookRentalBookIdString = request.getParameter(BookRequestParameterName.ID.getName());
-        Long bookRentalBookId = super.isParsable(bookRentalBookIdString) ? Long.valueOf(bookRentalBookIdString) : null;
-        String bookRentalBookTitle = request.getParameter(BookRequestParameterName.TITLE.getName());
-        String bookRentalBookAuthorName = request.getParameter(AuthorRequestParameterName.NAME.getName());
-        String bookRentalBookAuthorSurname = request.getParameter(AuthorRequestParameterName.SURNAME.getName());
-        Author bookRentalBookAuthor = new Author(null, bookRentalBookAuthorName, bookRentalBookAuthorSurname);
-
-        String bookRentalBookStockString = request.getParameter(BookRequestParameterName.STOCK.getName());
-        int bookRentalBookStock = super.isParsable(bookRentalBookStockString) ? Integer.parseInt(bookRentalBookStockString) : 0;
-
-        String bookRentalBookGenreName = request.getParameter(GenreRequestParameterName.NAME.getName());
-        Genre bookRentalBookGenre = new Genre(null, bookRentalBookGenreName);
-        Book bookRentalBook = new Book(bookRentalBookId, bookRentalBookTitle, bookRentalBookAuthor, bookRentalBookStock, bookRentalBookGenre);
+        User bookRentalUser = extractBookRentalUser(request);
+        Book bookRentalBook = extractBookRentalBook(request);
 
         Date bookRentalBorrowDate = null;
         Date bookRentalReturnDate = null;
@@ -70,10 +43,79 @@ public class BookRentalRequestExtractor extends AbstractRequestExtractor<BookRen
                 ? RentalStatus.valueOfStatus(bookRentalRentalStatusString)
                 : RentalStatus.WAITING_FOR_ISSUANCE;
 
-        return new BookRental(bookRentalId, bookRentalUser, bookRentalBook, bookRentalBorrowDate, bookRentalReturnDate, bookRentalRentalStatus);
+        return BookRental.builder()
+                .id(bookRentalId)
+                .user(bookRentalUser)
+                .rentedBook(bookRentalBook)
+                .borrowDate(bookRentalBorrowDate)
+                .returnDate(bookRentalReturnDate)
+                .rentalStatus(bookRentalRentalStatus)
+                .build();
     }
 
-    // TODO: Builder
 
+    private Book extractBookRentalBook(HttpServletRequest request) {
+        String bookRentalBookIdString = request.getParameter(BookRequestParameterName.ID.getName());
+        Long bookRentalBookId = super.isParsable(bookRentalBookIdString) ? Long.valueOf(bookRentalBookIdString) : null;
 
+        String bookRentalBookTitle = request.getParameter(BookRequestParameterName.TITLE.getName());
+
+        Author bookRentalBookAuthor = extractBookRentalAuthor(request);
+
+        String bookRentalBookStockString = request.getParameter(BookRequestParameterName.STOCK.getName());
+        int bookRentalBookStock = super.isParsable(bookRentalBookStockString) ? Integer.parseInt(bookRentalBookStockString) : 0;
+
+        Genre bookRentalBookGenre = extractBookRentalGenre(request);
+
+        return Book.builder()
+                .id(bookRentalBookId)
+                .title(bookRentalBookTitle)
+                .author(bookRentalBookAuthor)
+                .stock(bookRentalBookStock)
+                .genre(bookRentalBookGenre)
+                .build();
+    }
+
+    private User extractBookRentalUser(HttpServletRequest request) {
+        String bookRentalUserIdString = request.getParameter(UserRequestParameterName.ID.getName());
+        Long bookRentalUserId = super.isParsable(bookRentalUserIdString) ? Long.valueOf(bookRentalUserIdString) : null;
+        String bookRentalUserName = request.getParameter(UserRequestParameterName.NAME.getName());
+        String bookRentalUserSurname = request.getParameter(UserRequestParameterName.SURNAME.getName());
+        String bookRentalUserPhoneNumber = request.getParameter(UserRequestParameterName.PHONE_NUMBER.getName());
+        String bookRentalUserLogin = request.getParameter(UserRequestParameterName.LOGIN.getName());
+
+        String bookRentalUserRoleString = request.getParameter(UserRequestParameterName.ROLE.getName());
+        Role bookRentalUserRole = Role.valueOfRoleName(bookRentalUserRoleString);
+
+        String bookRentalUserIsBannedString = request.getParameter(UserRequestParameterName.IS_BANNED.getName());
+        boolean bookRentalUserIsBanned = Boolean.parseBoolean(bookRentalUserIsBannedString);
+
+        return User.builder()
+                .id(bookRentalUserId)
+                .name(bookRentalUserName)
+                .surname(bookRentalUserSurname)
+                .phoneNumber(bookRentalUserPhoneNumber)
+                .login(bookRentalUserLogin)
+                .role(bookRentalUserRole)
+                .isBanned(bookRentalUserIsBanned)
+                .build();
+    }
+
+    private Author extractBookRentalAuthor(HttpServletRequest request) {
+        String bookRentalBookAuthorName = request.getParameter(AuthorRequestParameterName.NAME.getName());
+        String bookRentalBookAuthorSurname = request.getParameter(AuthorRequestParameterName.SURNAME.getName());
+
+        return Author.builder()
+                .name(bookRentalBookAuthorName)
+                .surname(bookRentalBookAuthorSurname)
+                .build();
+    }
+
+    private Genre extractBookRentalGenre(HttpServletRequest request) {
+        String bookRentalBookGenreName = request.getParameter(GenreRequestParameterName.NAME.getName());
+
+        return Genre.builder()
+                .name(bookRentalBookGenreName)
+                .build();
+    }
 }

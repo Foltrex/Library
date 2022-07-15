@@ -1,5 +1,6 @@
 package com.epam.library.command;
 
+/** Helps work with requests and pages */
 public class CommandResult {
 
     private final String page;

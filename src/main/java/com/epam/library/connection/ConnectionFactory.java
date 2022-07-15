@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+/** Proxy connection creator */
 public class ConnectionFactory {
 
     private static final String DATABASE_PROPERTIES = "/database.properties";

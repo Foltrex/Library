@@ -14,6 +14,7 @@ import com.epam.library.service.AdminService;
 import com.epam.library.entity.Role;
 import com.epam.library.entity.User;
 
+/** Blocks/Unblocks user */
 public class ChangeUserBlockingCommand implements Command {
 
     private final AdminService adminService;
@@ -33,14 +34,11 @@ public class ChangeUserBlockingCommand implements Command {
         List<User> users = adminService.getUsers(bannedUserRole);
         req.setAttribute("users", users);
 
-        switch (bannedUserRole) {
-            case LIBRARIAN:
-                return CommandResult.forward(Page.LIBRARIANS.getPath());
-            case READER:
-                return CommandResult.forward(Page.READERS.getPath());
-            default:
-                throw new PageCommandException("Wrong role to show");
-        }
+        return switch (bannedUserRole) {
+            case LIBRARIAN -> CommandResult.forward(Page.LIBRARIANS.getPath());
+            case READER -> CommandResult.forward(Page.READERS.getPath());
+            default -> throw new PageCommandException("Wrong role to show");
+        };
     }
     
 }

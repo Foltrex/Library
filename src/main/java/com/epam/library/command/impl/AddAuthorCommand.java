@@ -13,6 +13,7 @@ import com.epam.library.service.AuthorService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Saves new author in DB */
 public class AddAuthorCommand implements Command {
 
     private final RequestExtractor<Author> requestExtractor = new AuthorRequestExtractor();

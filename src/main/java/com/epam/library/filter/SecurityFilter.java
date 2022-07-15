@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/** Checks logged in user */
 public class SecurityFilter implements Filter {
 
     private final SecurityChecker securityChecker = new SecurityChecker();

@@ -13,6 +13,7 @@ import com.epam.library.service.GenreService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Forwards to the book details page to add a new book */
 public class AddBookCommand implements Command {
 
     private final AuthorService authorService;
@@ -25,7 +26,7 @@ public class AddBookCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
-        // for full list of authors and gernes
+        // for full list of authors and genres
         List<Author> authors = authorService.getAuthors();
         List<Genre> genres = genreService.getGenres();
 

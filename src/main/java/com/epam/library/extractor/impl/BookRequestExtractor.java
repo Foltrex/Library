@@ -10,6 +10,7 @@ import com.epam.library.extractor.parameter.name.GenreRequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** Extracts {@link com.epam.library.entity.Book} object from request */
 public class BookRequestExtractor extends AbstractRequestExtractor<Book> {
 
 
@@ -35,6 +36,12 @@ public class BookRequestExtractor extends AbstractRequestExtractor<Book> {
         String bookGenreName = request.getParameter(GenreRequestParameterName.NAME.getName());
         Genre bookGenre = new Genre(bookGenreId, bookGenreName);
 
-        return new Book(bookId, bookTitle, bookAuthor, bookStock, bookGenre);
+        return Book.builder()
+                .id(bookId)
+                .title(bookTitle)
+                .author(bookAuthor)
+                .stock(bookStock)
+                .genre(bookGenre)
+                .build();
     }
 }

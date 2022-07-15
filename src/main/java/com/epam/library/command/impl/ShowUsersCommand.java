@@ -14,9 +14,9 @@ import com.epam.library.service.AdminService;
 
 import java.util.List;
 
+/** Shows all users in app */
 public class ShowUsersCommand implements Command {
 
-    // TODO: make pagination
     private final AdminService adminService;
     private final Role showingUsersRole;
 
@@ -31,13 +31,10 @@ public class ShowUsersCommand implements Command {
         List<User> users = adminService.getUsers(showingUsersRole);
         req.setAttribute("users", users.toArray());
 
-        switch (showingUsersRole) {
-            case LIBRARIAN:
-                return CommandResult.forward(Page.LIBRARIANS.getPath());
-            case READER:
-                return CommandResult.forward(Page.READERS.getPath());
-            default:
-                throw new PageCommandException("Wrong role to show");
-        }
+        return switch (showingUsersRole) {
+            case LIBRARIAN -> CommandResult.forward(Page.LIBRARIANS.getPath());
+            case READER -> CommandResult.forward(Page.READERS.getPath());
+            default -> throw new PageCommandException("Wrong role to show");
+        };
     }
 }

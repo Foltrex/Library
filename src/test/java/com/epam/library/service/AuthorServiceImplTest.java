@@ -7,6 +7,7 @@ import com.epam.library.entity.Author;
 import com.epam.library.exception.DaoException;
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.impl.AuthorServiceImpl;
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.mock;
 
 public class AuthorServiceImplTest {
 
-    private final List<Author> authors = Arrays.asList(
+    private final List<Author> authors = ImmutableList.of(
             new Author(1L, "Alexander", "Pushkin"),
             new Author(2L, "Leo", "Tolstoy")
     );

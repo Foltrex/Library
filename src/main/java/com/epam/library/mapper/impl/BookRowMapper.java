@@ -8,6 +8,7 @@ import com.epam.library.mapper.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Maps result set to {@link com.epam.library.entity.Book} */
 public class BookRowMapper implements RowMapper<Book> {
 
     @Override
@@ -26,6 +27,12 @@ public class BookRowMapper implements RowMapper<Book> {
         String genreName = resultSet.getString(Book.GENRE_NAME);
         Genre genre = new Genre(genreId, genreName);
 
-        return new Book(id, title, author, stock, genre);
+        return Book.builder()
+                .id(id)
+                .title(title)
+                .author(author)
+                .stock(stock)
+                .genre(genre)
+                .build();
     }
 }

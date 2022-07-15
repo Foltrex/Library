@@ -15,6 +15,7 @@ import com.epam.library.validator.InputStockValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Saves new/existing book in DB */
 public class SaveBookCommand implements Command {
 
     private final RequestExtractor<Book> requestExtractor = new BookRequestExtractor();

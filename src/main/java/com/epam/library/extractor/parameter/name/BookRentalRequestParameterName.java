@@ -1,5 +1,7 @@
 package com.epam.library.extractor.parameter.name;
 
+
+/** Request parameters associated with the {@link com.epam.library.entity.BookRental} */
 public enum BookRentalRequestParameterName {
     ID("bookRentalId"),
     BORROW_DATE("bookRentalBorrowDate"),

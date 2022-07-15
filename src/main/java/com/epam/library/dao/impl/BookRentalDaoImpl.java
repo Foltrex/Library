@@ -5,6 +5,7 @@ import com.epam.library.dao.BookRentalDao;
 import com.epam.library.entity.BookRental;
 import com.epam.library.exception.DaoException;
 import com.epam.library.mapper.impl.BookRentalRowMapper;
+import com.google.common.collect.ImmutableMap;
 
 import java.sql.Connection;
 import java.util.LinkedHashMap;
@@ -31,14 +32,13 @@ public class BookRentalDaoImpl extends AbstractDao<BookRental> implements BookRe
 
     @Override
     protected Map<String, Object> extractFields(BookRental item) {
-        // ImmutableMap.of (...) is more beautiful :(
-        return new LinkedHashMap<>() {{
-            put(BookRental.USER_ID, item.getUser().getId());
-            put(BookRental.BOOK_ID, item.getRentedBook().getId());
-            put(BookRental.BORROW_DATE, item.getBorrowDate());
-            put(BookRental.RETURN_DATE, item.getReturnDate());
-            put(BookRental.STATUS, item.getRentalStatus().getStatusName());
-        }};
+        return ImmutableMap.of(
+                BookRental.USER_ID, item.getUser().getId(),
+                BookRental.BOOK_ID, item.getRentedBook().getId(),
+                BookRental.BORROW_DATE, item.getBorrowDate(),
+                BookRental.RETURN_DATE, item.getReturnDate(),
+                BookRental.STATUS, item.getRentalStatus().getStatusName()
+        );
     }
 
     @Override

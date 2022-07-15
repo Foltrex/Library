@@ -13,6 +13,7 @@ import com.epam.library.service.BookRentalService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/** Saves new book rental in DB */
 public class BorrowBookCommand implements Command {
 
     private final RequestExtractor<BookRental> requestExtractor = new BookRentalRequestExtractor();

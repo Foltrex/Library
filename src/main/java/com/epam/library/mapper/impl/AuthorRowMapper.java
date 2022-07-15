@@ -6,6 +6,7 @@ import com.epam.library.mapper.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Maps result set to {@link com.epam.library.entity.Author} */
 public class AuthorRowMapper implements RowMapper<Author> {
     @Override
     public Author map(ResultSet resultSet) throws SQLException {
