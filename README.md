@@ -33,7 +33,7 @@
   Библиотека. Читатель имеет возможность осуществлять поиск и заказ Книг в Каталоге. Библиотекарь выдает Читателю Книгу на абонемент или в читальный зал. Книга может присутствовать в Библиотеке в одном или нескольких экземплярах. Администратор управляет Библиотекарями, Читателями и Книгами.
 
 ## Documentation
-[JavaDoc](https://github.com/Foltrex/Library/blob/gh-pages/index.html)
+[JavaDoc](https://foltrex.github.io/Library/)
 
 ## Source Code
 [PullRequest](https://github.com/Foltrex/Library/pull/1)
