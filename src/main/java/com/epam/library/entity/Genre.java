@@ -22,8 +22,4 @@ public class Genre implements Identifable, Serializable {
         this.id = id;
         this.name = name;
     }
-
-    public static Genre createGenreWithOnlyIDField(Long id) {
-        return new Genre(id, null);
-    }
 }

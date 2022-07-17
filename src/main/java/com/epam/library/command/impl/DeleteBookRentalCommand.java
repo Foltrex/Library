@@ -28,7 +28,9 @@ public class DeleteBookRentalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req) throws ServiceException, PageCommandException {
         Long bookId = Long.valueOf(req.getParameter(BookRequestParameterName.ID.getName()));
-        Book book = Book.createBookWithOnlyId(bookId);
+        Book book = Book.builder()
+                .id(bookId)
+                .build();
 
         Long bookRentalId = Long.valueOf(req.getParameter(BookRentalRequestParameterName.ID.getName()));
         String rentalStatusString =  req.getParameter(BookRentalRequestParameterName.RENTAL_STATUS.getName());

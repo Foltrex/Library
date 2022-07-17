@@ -28,9 +28,4 @@ public class BookRental implements Identifable, Serializable {
     Date borrowDate;
     Date returnDate;
     RentalStatus rentalStatus;
-
-
-    public static BookRental borrow(User user, Book book) {
-        return new BookRental(null, user, book, null, null, RentalStatus.WAITING_FOR_ISSUANCE);
-    }
 }

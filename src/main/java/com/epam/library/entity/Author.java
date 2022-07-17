@@ -24,8 +24,4 @@ public class Author implements Identifable, Serializable {
         this.name = name;
         this.surname = surname;
     }
-
-    public static Author createAuthorWithOnlyIDField(Long id) {
-        return new Author(id, null, null);
-    }
 }

@@ -28,16 +28,4 @@ public class User implements Identifable, Serializable {
     String password;
     Role role;
     boolean isBanned;
-
-    public static User createUserWithOnlyId(Long id) {
-        return new User(id, null, null, null,
-                    null, null, Role.READER, false);
-    }
-
-
-    public static User createUserWithIDAndLogin(Long id, String login) {
-        return new User(id, null, null, null,
-                login, null, Role.READER, false);
-    }
-
 }
