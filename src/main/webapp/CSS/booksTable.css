@@ -1,0 +1,24 @@
+ol li {
+  border-bottom:1px solid #fff;
+  padding:5px;
+  margin:2px;
+}
+
+h2.title {
+  display: flex;
+}
+
+button.icon {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 23px;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: inherit;
+  font-family: inherit;
+}
+
+.booksList {
+  margin-top: 20px;
+}

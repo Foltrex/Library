@@ -1,0 +1,116 @@
+.hover_collapse .sidebar{
+	width: 70px;
+}
+
+.hover_collapse .sidebar ul li a .text{
+	display: none;
+}
+
+
+.sidebar{
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 260px;
+	height: 100%;
+	background: #042331;
+  z-index: 10;
+}
+
+.sidebar ul li a{
+	display: block;
+	padding: 16px 25px;
+	border-bottom: 1px solid #03374e;
+	color: #0e94d4;
+
+
+}
+
+.sidebar ul li a .icon,
+.sidebar ul li button .icon {
+	  font-size: 18px;
+    color: white;
+	  vertical-align: middle;
+}
+
+.sidebar ul li a .text,
+.sidebar ul li button .text {
+	margin-left: 19px;
+	color: #fff;
+  font-family: sans-serif;
+  font-size: 18px;
+	letter-spacing: 2px;
+}
+
+.sidebar ul li a:hover{
+	background: #0e94d4;
+	color: #fff;
+}
+
+
+* {
+  font-family: "Times New Roman", Times, serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Style the sidenav links and the dropdown button */
+.dropdown-btn {
+	padding: 16px 25px;
+  text-decoration: none;
+  font-size: 19px;
+  color: #fff;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.dropdown-btn:hover {
+  background: #0e94d4;
+  color: #fff;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+	background: #042331;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.sidebar ul li .dropdown-container {
+  display: none;
+  color: #fff;
+  padding-left: 8px;
+}
+
+.sidebar ul li .dropdown-container a {
+	border-bottom: 0;
+}
+
+.sidebar ul li .dropdown-container a .sub-element,
+.sidebar ul li .dropdown-container a .sub-element:hover {
+  margin-left: 39px;
+	color: #fff;
+  font-family: sans-serif;
+  font-size: 18px;
+	letter-spacing: 2px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+.hover_collapse .sidebar ul li button .text,
+.hover_collapse .sidebar ul li button .arrow {
+	display: none;
+}

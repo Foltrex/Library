@@ -1,0 +1,29 @@
+
+.books {
+	margin: 0 20px 0 90px;
+}
+
+.tool_panel {
+	align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+form.bookSearch {
+    margin-right: 10px;
+    width: 85%;
+}
+
+.add-book-button {
+    margin-left: 10px;
+    float: left;
+    padding: 3px;
+    background: #4caf4f;
+    color: white;
+    font-size: 17px;
+    border: 0px solid grey;
+    border-radius: 5px;
+    border-left: none;
+    cursor: pointer;
+}

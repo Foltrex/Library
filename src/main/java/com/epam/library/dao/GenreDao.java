@@ -1,0 +1,16 @@
+package com.epam.library.dao;
+
+import com.epam.library.entity.Author;
+import com.epam.library.entity.Genre;
+import com.epam.library.exception.DaoException;
+
+import java.util.List;
+
+public interface GenreDao extends EntityDao {
+
+    List<Genre> getGenres() throws DaoException;
+
+    List<Genre> getGenresFromPosition(int startingPosition, int recordsPerPage) throws DaoException;
+
+    void saveGenre(Genre genre) throws DaoException;
+}
